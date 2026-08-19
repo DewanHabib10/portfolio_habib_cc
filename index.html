@@ -1,0 +1,914 @@
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dewan Habib | Technical Community Strategist</title>
+    <meta name="description" content="Portfolio of Dewan Habib — technical community strategist, automation builder, and growth-focused developer.">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        :root {
+            --bg: #050816;
+            --bg-soft: #0b1220;
+            --panel: rgba(15, 23, 42, 0.78);
+            --panel-strong: rgba(15, 23, 42, 0.95);
+            --text: #e5eefb;
+            --muted: #9aa7bd;
+            --edge: rgba(148, 163, 184, 0.18);
+            --primary: #8b5cf6;
+            --secondary: #22d3ee;
+            --accent: #34d399;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            background:
+                radial-gradient(circle at top left, rgba(139, 92, 246, 0.18), transparent 28%),
+                radial-gradient(circle at bottom right, rgba(34, 211, 238, 0.14), transparent 24%),
+                linear-gradient(135deg, #030712 0%, #0a1120 45%, #050816 100%);
+            color: var(--text);
+            font-family: Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+            overflow-x: hidden;
+        }
+
+        * { cursor: none; }
+        a, button { cursor: none; }
+
+        body.pointer-hidden {
+            cursor: none;
+        }
+
+        ::selection {
+            background: rgba(139, 92, 246, 0.4);
+            color: white;
+        }
+
+        ::-webkit-scrollbar { width: 10px; }
+        ::-webkit-scrollbar-track { background: rgba(15, 23, 42, 0.9); }
+        ::-webkit-scrollbar-thumb {
+            background: linear-gradient(180deg, rgba(139, 92, 246, 0.8), rgba(34, 211, 238, 0.8));
+            border-radius: 999px;
+        }
+
+        .glass {
+            background: rgba(15, 23, 42, 0.58);
+            border: 1px solid rgba(148, 163, 184, 0.14);
+            box-shadow: 0 20px 45px rgba(2, 6, 23, 0.38);
+            backdrop-filter: blur(18px);
+            -webkit-backdrop-filter: blur(18px);
+        }
+
+        .orb {
+            position: absolute;
+            border-radius: 50%;
+            filter: blur(70px);
+            opacity: 0.4;
+            pointer-events: none;
+            z-index: 0;
+        }
+
+        .orb-one {
+            width: 260px;
+            height: 260px;
+            background: rgba(139, 92, 246, 0.45);
+            top: 6%;
+            left: 8%;
+            animation: floatOne 16s ease-in-out infinite;
+        }
+
+        .orb-two {
+            width: 280px;
+            height: 280px;
+            background: rgba(34, 211, 238, 0.25);
+            right: 10%;
+            top: 20%;
+            animation: floatTwo 18s ease-in-out infinite;
+        }
+
+        .orb-three {
+            width: 220px;
+            height: 220px;
+            background: rgba(52, 211, 153, 0.2);
+            left: 46%;
+            bottom: 8%;
+            animation: floatThree 20s ease-in-out infinite;
+        }
+
+        @keyframes floatOne {
+            0%, 100% { transform: translateY(0) translateX(0) scale(1); }
+            50% { transform: translateY(30px) translateX(20px) scale(1.1); }
+        }
+
+        @keyframes floatTwo {
+            0%, 100% { transform: translateY(0) translateX(0) scale(1); }
+            50% { transform: translateY(-24px) translateX(-18px) scale(1.08); }
+        }
+
+        @keyframes floatThree {
+            0%, 100% { transform: translateY(0) translateX(0) scale(1); }
+            50% { transform: translateY(24px) translateX(-10px) scale(1.12); }
+        }
+
+        .text-glow {
+            text-shadow: 0 0 30px rgba(139, 92, 246, 0.35);
+        }
+
+        .nav-link {
+            position: relative;
+            transition: color 0.25s ease;
+        }
+
+        .nav-link::after {
+            content: "";
+            position: absolute;
+            left: 0;
+            bottom: -0.4rem;
+            width: 100%;
+            height: 1px;
+            background: linear-gradient(90deg, rgba(139, 92, 246, 0.9), rgba(34, 211, 238, 0.9));
+            transform: scaleX(0);
+            transform-origin: left;
+            transition: transform 0.25s ease;
+        }
+
+        .nav-link:hover::after,
+        .nav-link:focus-visible::after {
+            transform: scaleX(1);
+        }
+
+        .feature-card,
+        .case-card,
+        .stat-box,
+        .profile-panel,
+        .cta-box {
+            transition: transform 0.3s ease, border-color 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        .feature-card:hover,
+        .case-card:hover,
+        .stat-box:hover,
+        .profile-panel:hover,
+        .cta-box:hover {
+            transform: translateY(-6px);
+            border-color: rgba(139, 92, 246, 0.6);
+            box-shadow: 0 24px 55px rgba(15, 23, 42, 0.45);
+        }
+
+        .pulse-dot {
+            width: 10px;
+            height: 10px;
+            background: #34d399;
+            border-radius: 50%;
+            box-shadow: 0 0 20px rgba(52, 211, 153, 0.9);
+            animation: pulse 2.2s infinite;
+        }
+
+        @keyframes pulse {
+            0%, 100% { transform: scale(1); opacity: 1; }
+            50% { transform: scale(1.6); opacity: 0.75; }
+        }
+
+        .cursor-dot, .cursor-ring {
+            position: fixed;
+            top: 0;
+            left: 0;
+            pointer-events: none;
+            z-index: 9999;
+            transform: translate(-50%, -50%);
+            border-radius: 50%;
+            mix-blend-mode: screen;
+            transition: width 0.18s ease, height 0.18s ease, border-color 0.18s ease, opacity 0.18s ease, transform 0.18s ease;
+        }
+
+        .cursor-dot {
+            width: 10px;
+            height: 10px;
+            background: radial-gradient(circle at 30% 30%, rgba(255,255,255,1), rgba(147,197,253,0.9) 40%, rgba(167,139,250,0.8) 100%);
+            box-shadow: 0 0 18px rgba(125, 211, 252, 0.8), 0 0 28px rgba(139, 92, 246, 0.5);
+        }
+
+        .cursor-ring {
+            width: 42px;
+            height: 42px;
+            border: 1.5px solid rgba(103, 232, 249, 0.9);
+            background: rgba(34, 211, 238, 0.06);
+            box-shadow: inset 0 0 18px rgba(34, 211, 238, 0.08), 0 0 20px rgba(34, 211, 238, 0.12);
+        }
+
+        .cursor-ring.active {
+            width: 66px;
+            height: 66px;
+            border-color: rgba(167, 139, 250, 0.9);
+            background: rgba(139, 92, 246, 0.08);
+            box-shadow: 0 0 30px rgba(168, 85, 247, 0.3), inset 0 0 18px rgba(168, 85, 247, 0.12);
+        }
+
+        .cursor-ring::after {
+            content: "";
+            position: absolute;
+            inset: 14px;
+            border-radius: 50%;
+            border: 1px solid rgba(255,255,255,0.35);
+            opacity: 0;
+            transition: opacity 0.2s ease;
+        }
+
+        .cursor-ring.active::after {
+            opacity: 1;
+        }
+
+        .music-toggle {
+            transition: transform 0.2s ease, box-shadow 0.2s ease;
+        }
+
+        .music-toggle:hover {
+            transform: translateY(-2px) scale(1.02);
+            box-shadow: 0 12px 25px rgba(139, 92, 246, 0.35);
+        }
+
+        .grid-bg {
+            background-image:
+                linear-gradient(rgba(148, 163, 184, 0.08) 1px, transparent 1px),
+                linear-gradient(90deg, rgba(148, 163, 184, 0.08) 1px, transparent 1px);
+            background-size: 26px 26px;
+            mask-image: radial-gradient(circle at center, black 35%, transparent 100%);
+        }
+
+        .section-kicker {
+            letter-spacing: 0.28em;
+            text-transform: uppercase;
+            font-size: 0.72rem;
+            font-weight: 800;
+        }
+
+        .chip {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            border-radius: 9999px;
+            border: 1px solid rgba(148, 163, 184, 0.2);
+            background: rgba(15, 23, 42, 0.72);
+            color: #e2e8f0;
+            padding: 0.55rem 0.9rem;
+            font-size: 0.75rem;
+            font-weight: 600;
+        }
+
+        .mini-line {
+            position: relative;
+            display: inline-block;
+        }
+
+        .mini-line::after {
+            content: "";
+            position: absolute;
+            left: 0;
+            right: 0;
+            bottom: -0.3rem;
+            height: 2px;
+            background: linear-gradient(90deg, rgba(139, 92, 246, 0.9), rgba(34, 211, 238, 0.9));
+            border-radius: 9999px;
+        }
+
+        .hero-list li::before {
+            content: "✦";
+            color: #67e8f9;
+            margin-right: 0.6rem;
+        }
+
+        .timeline-item::before {
+            content: "";
+            position: absolute;
+            left: -0.75rem;
+            top: 0.4rem;
+            width: 0.7rem;
+            height: 0.7rem;
+            border-radius: 50%;
+            background: linear-gradient(135deg, #8b5cf6, #22d3ee);
+            box-shadow: 0 0 18px rgba(139, 92, 246, 0.7);
+        }
+
+        .experience-card {
+            background: linear-gradient(180deg, rgba(15, 23, 42, 0.72), rgba(15, 23, 42, 0.45));
+            border: 1px solid rgba(148, 163, 184, 0.15);
+            backdrop-filter: blur(14px);
+        }
+
+        .reveal {
+            opacity: 0;
+            transform: translateY(32px);
+            transition: opacity 0.8s ease, transform 0.8s ease;
+        }
+
+        .reveal.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        .profile-photo {
+            position: relative;
+            height: 260px;
+            border-radius: 28px;
+            background:
+                linear-gradient(135deg, rgba(15, 23, 42, 0.05), rgba(15, 23, 42, 0.5)),
+                url('https://images.unsplash.com/photo-1500648767791-00dcc994a43e?auto=format&fit=crop&w=900&q=80') center/cover no-repeat;
+            border: 1px solid rgba(148, 163, 184, 0.18);
+            box-shadow: 0 28px 50px rgba(2, 6, 23, 0.4);
+            overflow: hidden;
+        }
+
+        .profile-photo::before {
+            content: "";
+            position: absolute;
+            inset: 0;
+            background: linear-gradient(180deg, rgba(15, 23, 42, 0.14), rgba(15, 23, 42, 0.7));
+        }
+
+        .floating-badge {
+            position: absolute;
+            right: 1rem;
+            top: 1rem;
+            background: rgba(15, 23, 42, 0.8);
+            border: 1px solid rgba(148, 163, 184, 0.18);
+            backdrop-filter: blur(12px);
+            border-radius: 9999px;
+            padding: 0.5rem 0.8rem;
+            font-size: 0.7rem;
+            font-weight: 700;
+            letter-spacing: 0.12em;
+            text-transform: uppercase;
+            color: #e2e8f0;
+            z-index: 2;
+        }
+
+        .count-up {
+            display: inline-block;
+            min-width: 1.2ch;
+            font-variant-numeric: tabular-nums;
+        }
+
+        @media (max-width: 1024px) {
+            body {
+                background:
+                    radial-gradient(circle at top left, rgba(139, 92, 246, 0.16), transparent 22%),
+                    radial-gradient(circle at bottom right, rgba(34, 211, 238, 0.12), transparent 18%),
+                    linear-gradient(135deg, #030712 0%, #0a1120 45%, #050816 100%);
+            }
+        }
+
+        @media (max-width: 768px) {
+            * { cursor: auto; }
+            a, button { cursor: pointer; }
+            .cursor-dot, .cursor-ring { display: none; }
+
+            .max-w-6xl {
+                max-width: 100%;
+            }
+
+            .px-6 {
+                padding-left: 1rem;
+                padding-right: 1rem;
+            }
+
+            header .max-w-6xl {
+                padding-top: 1rem;
+                padding-bottom: 1rem;
+            }
+
+            nav {
+                flex-wrap: wrap;
+                justify-content: center;
+                gap: 0.75rem 1rem;
+            }
+
+            #about .grid,
+            #services .grid,
+            .grid.md\:grid-cols-3,
+            .grid.lg\:grid-cols-\[0\.9fr_1\.1fr\],
+            .grid.md\:grid-cols-\[1\.2fr_0\.8fr\],
+            #case-studies .space-y-8 {
+                display: block;
+            }
+
+            .stat-box {
+                min-width: 0;
+                flex: 1 1 30%;
+            }
+
+            .feature-card,
+            .case-card,
+            .experience-card,
+            .glass {
+                border-radius: 1.25rem;
+            }
+        }
+
+        @media (max-width: 480px) {
+            h1 { font-size: 1.5rem; }
+            h2 { font-size: 2.4rem !important; }
+            h3 { font-size: 2rem !important; }
+            .section-kicker { letter-spacing: 0.18em; }
+            .chip {
+                font-size: 0.7rem;
+                padding: 0.45rem 0.75rem;
+            }
+            .music-toggle {
+                bottom: 1rem;
+                right: 1rem;
+                padding: 0.7rem 0.9rem;
+                font-size: 0.75rem;
+            }
+        }
+    </style>
+</head>
+<body class="bg-slate-950 text-slate-300 antialiased leading-relaxed pointer-hidden">
+
+    <div class="cursor-dot" id="cursorDot"></div>
+    <div class="cursor-ring" id="cursorRing"></div>
+
+    <div class="orb orb-one"></div>
+    <div class="orb orb-two"></div>
+    <div class="orb orb-three"></div>
+
+    <header class="sticky top-0 z-50 border-b border-slate-800/80 bg-slate-950/55 backdrop-blur-xl">
+        <div class="max-w-6xl mx-auto px-6 py-5 flex flex-col md:flex-row items-center justify-between gap-4">
+            <div>
+                <h1 class="text-2xl font-black tracking-tight text-white">Dewan Habib</h1>
+                <p class="text-sm font-medium text-violet-300">Technical Community Strategist & Developer</p>
+            </div>
+
+            <nav class="flex items-center gap-6 text-sm font-medium text-slate-300">
+                <a href="#about" class="nav-link hover:text-white">About</a>
+                <a href="#services" class="nav-link hover:text-white">Services</a>
+                <a href="#case-studies" class="nav-link hover:text-white">Case Studies</a>
+                <a href="#contact" class="nav-link hover:text-white">Contact</a>
+            </nav>
+
+            <div class="flex items-center gap-3 text-sm font-medium">
+                <a href="mailto:dewanhabib@example.com" class="rounded-full border border-slate-700 bg-slate-900/60 px-4 py-2 text-slate-200 transition hover:border-violet-400 hover:text-violet-300">Email</a>
+                <a href="https://www.linkedin.com" target="_blank" rel="noreferrer" class="rounded-full border border-slate-700 bg-slate-900/60 px-4 py-2 text-slate-200 transition hover:border-cyan-400 hover:text-cyan-300">LinkedIn</a>
+                <a href="https://github.com" target="_blank" rel="noreferrer" class="rounded-full border border-slate-700 bg-slate-900/60 px-4 py-2 text-slate-200 transition hover:border-emerald-400 hover:text-emerald-300">GitHub</a>
+            </div>
+        </div>
+    </header>
+
+    <main class="relative z-10">
+        <section id="about" class="reveal max-w-6xl mx-auto px-6 py-16 md:py-24">
+            <div class="grid lg:grid-cols-[1.5fr_0.9fr] items-center gap-10">
+                <div>
+                    <div class="inline-flex items-center gap-2 rounded-full border border-violet-500/30 bg-violet-500/10 px-3 py-1.5 text-xs font-semibold uppercase tracking-[0.22em] text-violet-300 mb-6">
+                        <span class="pulse-dot"></span>
+                        Available for impact-driven work
+                    </div>
+
+                    <h2 class="text-4xl md:text-6xl font-black leading-[1.05] text-white text-glow">
+                        Building <span class="bg-gradient-to-r from-violet-400 via-cyan-300 to-emerald-300 bg-clip-text text-transparent">communities</span>
+                        that turn attention into lasting growth.
+                    </h2>
+
+                    <p class="mt-6 max-w-2xl text-lg text-slate-300 md:text-xl">
+                        I design scalable community infrastructure, automate engagement, and run launch strategies that connect technical execution with market growth. From Discord architecture to AI-powered experiences and creator-led campaigns, I build systems that create momentum and retention.
+                    </p>
+
+                    <div class="mt-8 flex flex-wrap gap-3">
+                        <span class="chip">Community Strategy</span>
+                        <span class="chip">AI Automation</span>
+                        <span class="chip">Growth Ops</span>
+                    </div>
+
+                    <div class="mt-8 flex flex-wrap gap-4">
+                        <a href="#case-studies" class="inline-flex items-center justify-center rounded-xl bg-gradient-to-r from-violet-600 to-cyan-500 px-6 py-3 text-base font-semibold text-white shadow-lg shadow-violet-900/30 transition hover:brightness-110">View Case Studies ↓</a>
+                        <a href="#contact" class="inline-flex items-center justify-center rounded-xl border border-slate-700 bg-slate-900/60 px-6 py-3 text-base font-semibold text-slate-100 transition hover:border-cyan-400 hover:text-cyan-300">Let’s Talk</a>
+                        <a href="RESUME/Dewan_Habib_resume.odg" target="_blank" class="inline-flex items-center justify-center rounded-xl border border-emerald-500/30 bg-emerald-500/10 px-5 py-3 text-base font-semibold text-emerald-200 transition hover:border-emerald-400 hover:text-emerald-100">Download Resume</a>
+                    </div>
+
+                    <div class="mt-10 flex flex-wrap gap-6 text-sm text-slate-300">
+                        <div class="stat-box glass rounded-2xl px-4 py-3 min-w-[120px]">
+                            <div class="text-2xl font-bold text-white"><span class="count-up" data-target="4" data-suffix="+">0</span></div>
+                            <div class="text-slate-400">Launches</div>
+                        </div>
+                        <div class="stat-box glass rounded-2xl px-4 py-3 min-w-[120px]">
+                            <div class="text-2xl font-bold text-white"><span class="count-up" data-target="15" data-suffix="+">0</span></div>
+                            <div class="text-slate-400">Creators</div>
+                        </div>
+                        <div class="stat-box glass rounded-2xl px-4 py-3 min-w-[120px]">
+                            <div class="text-2xl font-bold text-white"><span class="count-up" data-target="24" data-suffix="/7">0</span></div>
+                            <div class="text-slate-400">Automation</div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="profile-panel glass rounded-[28px] p-5 lg:p-7 relative overflow-hidden">
+                    <div class="absolute inset-0 bg-gradient-to-br from-violet-500/10 via-transparent to-cyan-400/10"></div>
+                    <div class="relative">
+                        <div class="profile-photo">
+                            <div class="floating-badge">Community + AI</div>
+                        </div>
+
+                        <div class="mt-5 flex items-center justify-between">
+                            <div>
+                                <div class="text-lg font-bold text-white">Dewan Habib</div>
+                                <div class="text-sm text-slate-400">Technical Community Strategist</div>
+                            </div>
+                            <span class="rounded-full border border-emerald-500/30 bg-emerald-500/10 px-2.5 py-1 text-[10px] font-bold uppercase tracking-[0.14em] text-emerald-300">Online</span>
+                        </div>
+
+                        <div class="mt-5 rounded-2xl border border-slate-700 bg-slate-950/70 p-4 mb-4">
+                            <div class="text-xs uppercase tracking-[0.2em] text-slate-400 mb-2">Focus</div>
+                            <div class="text-lg font-semibold text-white">Community systems that compound growth.</div>
+                        </div>
+
+                        <div class="grid gap-3 sm:grid-cols-2">
+                            <div class="rounded-2xl border border-violet-500/20 bg-violet-500/5 p-4">
+                                <div class="text-xs uppercase tracking-[0.2em] text-violet-300 mb-2">Core</div>
+                                <div class="font-semibold text-white">Discord + Automation</div>
+                            </div>
+                            <div class="rounded-2xl border border-cyan-500/20 bg-cyan-500/5 p-4">
+                                <div class="text-xs uppercase tracking-[0.2em] text-cyan-300 mb-2">Scale</div>
+                                <div class="font-semibold text-white">Creator campaigns</div>
+                            </div>
+                            <div class="rounded-2xl border border-emerald-500/20 bg-emerald-500/5 p-4 sm:col-span-2">
+                                <div class="text-xs uppercase tracking-[0.2em] text-emerald-300 mb-2">Impact</div>
+                                <div class="font-semibold text-white">Turn engagement into measurable community payoff.</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="services" class="reveal max-w-6xl mx-auto px-6 py-10 md:py-18">
+            <div class="mb-10">
+                <p class="section-kicker text-cyan-300">What I do</p>
+                <h3 class="mt-3 text-3xl md:text-4xl font-black text-white">Strategy, systems, and execution under one roof.</h3>
+            </div>
+
+            <div class="grid md:grid-cols-3 gap-6">
+                <div class="feature-card glass rounded-3xl p-6">
+                    <div class="mb-4 inline-flex h-12 w-12 items-center justify-center rounded-2xl bg-violet-500/10 text-2xl text-violet-300">⚙️</div>
+                    <h4 class="text-xl font-bold text-white mb-3">Community Architecture</h4>
+                    <p class="text-slate-300">Designing member journeys, permissions, onboarding flows, and moderation systems that keep communities structured and healthy as they scale.</p>
+                </div>
+
+                <div class="feature-card glass rounded-3xl p-6">
+                    <div class="mb-4 inline-flex h-12 w-12 items-center justify-center rounded-2xl bg-cyan-500/10 text-2xl text-cyan-300">🤖</div>
+                    <h4 class="text-xl font-bold text-white mb-3">AI + Automation</h4>
+                    <p class="text-slate-300">Building custom bots, AI workflows, and low-latency tools that deliver instant value inside communities and reduce repetitive operational friction.</p>
+                </div>
+
+                <div class="feature-card glass rounded-3xl p-6">
+                    <div class="mb-4 inline-flex h-12 w-12 items-center justify-center rounded-2xl bg-emerald-500/10 text-2xl text-emerald-300">📈</div>
+                    <h4 class="text-xl font-bold text-white mb-3">Growth Strategy</h4>
+                    <p class="text-slate-300">Running creator-led campaigns, regional launch systems, and event operations with the structure needed to convert audience energy into retention.</p>
+                </div>
+            </div>
+        </section>
+
+        <section class="reveal max-w-6xl mx-auto px-6 pb-8">
+            <div class="glass grid-bg rounded-[30px] p-6 md:p-8">
+                <div class="grid md:grid-cols-[1.2fr_0.8fr] gap-8 items-center">
+                    <div>
+                        <p class="section-kicker text-violet-300">Why clients hire me</p>
+                        <h3 class="mt-3 text-3xl md:text-4xl font-black text-white">I bridge product thinking, community ops, and technical execution.</h3>
+                    </div>
+                    <div class="flex flex-wrap gap-3 justify-start md:justify-end">
+                        <span class="chip">Discord systems</span>
+                        <span class="chip">Automation</span>
+                        <span class="chip">Creator ops</span>
+                        <span class="chip">AI workflows</span>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section class="reveal max-w-6xl mx-auto px-6 py-10 md:py-16">
+            <div class="grid lg:grid-cols-[0.9fr_1.1fr] gap-8">
+                <div class="experience-card rounded-[28px] p-6">
+                    <p class="section-kicker text-cyan-300">Experience snapshot</p>
+                    <div class="mt-6 space-y-6 relative before:absolute before:left-[0.45rem] before:top-0 before:h-full before:w-px before:bg-slate-700">
+                        <div class="timeline-item relative pl-8">
+                            <div class="text-sm text-violet-300 font-semibold">Community Systems</div>
+                            <div class="mt-1 text-lg font-bold text-white">Regional Discord Infrastructure</div>
+                            <div class="mt-1 text-slate-400">Built scalable onboarding, role architecture, and moderation layers.</div>
+                        </div>
+                        <div class="timeline-item relative pl-8">
+                            <div class="text-sm text-cyan-300 font-semibold">AI & Automation</div>
+                            <div class="mt-1 text-lg font-bold text-white">LLM-Driven Bot Experience</div>
+                            <div class="mt-1 text-slate-400">Created responsive, high-uptime AI interactions for real-time community engagement.</div>
+                        </div>
+                        <div class="timeline-item relative pl-8">
+                            <div class="text-sm text-emerald-300 font-semibold">Growth Strategy</div>
+                            <div class="mt-1 text-lg font-bold text-white">Launch & Creator Campaigns</div>
+                            <div class="mt-1 text-slate-400">Combined matchmaking, tournaments, and creator logistics into one growth engine.</div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="glass rounded-[28px] p-6 md:p-8">
+                    <p class="section-kicker text-violet-300">Core capabilities</p>
+                    <div class="mt-6 flex flex-wrap gap-3">
+                        <span class="chip">Discord architecture</span>
+                        <span class="chip">AutoMod & safety</span>
+                        <span class="chip">Python automation</span>
+                        <span class="chip">API integrations</span>
+                        <span class="chip">Campaign planning</span>
+                        <span class="chip">Creator coordination</span>
+                        <span class="chip">Community retention</span>
+                        <span class="chip">Event operations</span>
+                        <span class="chip">AI workflows</span>
+                        <span class="chip">Launch strategy</span>
+                    </div>
+                    <div class="mt-8 rounded-2xl border border-slate-700 bg-slate-950/70 p-5">
+                        <div class="flex items-center justify-between gap-3">
+                            <div>
+                                <div class="text-sm uppercase tracking-[0.2em] text-slate-400">Brand promise</div>
+                                <div class="mt-2 text-2xl font-bold text-white">From chaos to conversion.</div>
+                            </div>
+                            <span class="rounded-full border border-violet-500/40 bg-violet-500/10 px-3 py-1 text-xs font-semibold uppercase tracking-[0.18em] text-violet-200">High impact</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="case-studies" class="reveal max-w-6xl mx-auto px-6 py-16 md:py-24">
+            <div class="mb-10">
+                <p class="section-kicker text-violet-300">Featured work</p>
+                <h3 class="mt-3 text-3xl md:text-4xl font-black text-white">Case studies that blend systems thinking with real community growth.</h3>
+            </div>
+
+            <div class="space-y-8">
+                <article class="case-card glass rounded-[28px] p-6 md:p-8">
+                    <div class="flex items-center gap-3 mb-5">
+                        <span class="rounded-full border border-violet-500/30 bg-violet-500/10 px-3 py-1 text-xs font-bold uppercase tracking-[0.2em] text-violet-300">01. Infrastructure</span>
+                    </div>
+                    <h4 class="text-2xl md:text-3xl font-bold text-white mb-5">Architecting an official regional gaming community</h4>
+                    <div class="grid lg:grid-cols-[1.6fr_0.8fr] gap-8">
+                        <div class="space-y-5 text-slate-300">
+                            <div>
+                                <div class="font-semibold text-white mb-2">The Goal</div>
+                                <p>Build a secure, high-volume community foundation before a major region-wide launch.</p>
+                            </div>
+                            <div>
+                                <div class="font-semibold text-white mb-2">The Execution</div>
+                                <ul class="list-disc pl-5 space-y-2">
+                                    <li>Mapped the server architecture, role hierarchy, and permission gates for scalable onboarding.</li>
+                                    <li>Designed automated welcome flows that route users to the right channels instantly.</li>
+                                    <li>Set up moderation and AutoMod systems to keep conversation quality high under user spikes.</li>
+                                </ul>
+                            </div>
+                        </div>
+                        <div class="rounded-2xl border border-slate-700 bg-slate-900/60 p-5 h-fit">
+                            <div class="text-xs uppercase tracking-[0.2em] text-slate-400 mb-4">Stack</div>
+                            <div class="flex flex-wrap gap-2">
+                                <span class="rounded-full bg-slate-800 px-3 py-1 text-sm text-slate-200">Discord API</span>
+                                <span class="rounded-full bg-slate-800 px-3 py-1 text-sm text-slate-200">Permissions</span>
+                                <span class="rounded-full bg-slate-800 px-3 py-1 text-sm text-slate-200">AutoMod</span>
+                            </div>
+                        </div>
+                    </div>
+                </article>
+
+                <article class="case-card glass rounded-[28px] p-6 md:p-8">
+                    <div class="flex items-center gap-3 mb-5">
+                        <span class="rounded-full border border-cyan-500/30 bg-cyan-500/10 px-3 py-1 text-xs font-bold uppercase tracking-[0.2em] text-cyan-300">02. Automation</span>
+                    </div>
+                    <h4 class="text-2xl md:text-3xl font-bold text-white mb-5">Low-latency LLM-powered community bot</h4>
+                    <div class="grid lg:grid-cols-[1.6fr_0.8fr] gap-8">
+                        <div class="space-y-5 text-slate-300">
+                            <div>
+                                <div class="font-semibold text-white mb-2">The Goal</div>
+                                <p>Increase engagement and retention with a unique bot experience that feels responsive, entertaining, and on-brand.</p>
+                            </div>
+                            <div>
+                                <div class="font-semibold text-white mb-2">The Execution</div>
+                                <ul class="list-disc pl-5 space-y-2">
+                                    <li>Integrated a fast inference model to create near-instant responses for community interactions.</li>
+                                    <li>Built a strict, stateless prompt system to maintain a consistent persona and reliable tone.</li>
+                                    <li>Deployed the bot in a Linux server environment for uptime and operational stability.</li>
+                                </ul>
+                            </div>
+                        </div>
+                        <div class="rounded-2xl border border-slate-700 bg-slate-900/60 p-5 h-fit">
+                            <div class="text-xs uppercase tracking-[0.2em] text-slate-400 mb-4">Stack</div>
+                            <div class="flex flex-wrap gap-2">
+                                <span class="rounded-full bg-slate-800 px-3 py-1 text-sm text-slate-200">Python</span>
+                                <span class="rounded-full bg-slate-800 px-3 py-1 text-sm text-slate-200">Groq API</span>
+                                <span class="rounded-full bg-slate-800 px-3 py-1 text-sm text-slate-200">Linux</span>
+                            </div>
+                        </div>
+                    </div>
+                </article>
+
+                <article class="case-card glass rounded-[28px] p-6 md:p-8">
+                    <div class="flex items-center gap-3 mb-5">
+                        <span class="rounded-full border border-emerald-500/30 bg-emerald-500/10 px-3 py-1 text-xs font-bold uppercase tracking-[0.2em] text-emerald-300">03. Growth</span>
+                    </div>
+                    <h4 class="text-2xl md:text-3xl font-bold text-white mb-5">Regional launch growth via creators and tournament operations</h4>
+                    <div class="grid lg:grid-cols-[1.6fr_0.8fr] gap-8">
+                        <div class="space-y-5 text-slate-300">
+                            <div>
+                                <div class="font-semibold text-white mb-2">The Goal</div>
+                                <p>Capture demand in a new region through creator partnerships, event activation, and community conversion.</p>
+                            </div>
+                            <div>
+                                <div class="font-semibold text-white mb-2">The Execution</div>
+                                <ul class="list-disc pl-5 space-y-2">
+                                    <li>Managed a pool of creators with alignment to the local gaming audience and content style.</li>
+                                    <li>Launched competitive events and tournament operations with scheduling and prize management.</li>
+                                    <li>Built momentum around launch windows to keep participation and retention high.</li>
+                                </ul>
+                            </div>
+                        </div>
+                        <div class="rounded-2xl border border-slate-700 bg-slate-900/60 p-5 h-fit">
+                            <div class="text-xs uppercase tracking-[0.2em] text-slate-400 mb-4">Focus</div>
+                            <div class="flex flex-wrap gap-2">
+                                <span class="rounded-full bg-slate-800 px-3 py-1 text-sm text-slate-200">Creator ROI</span>
+                                <span class="rounded-full bg-slate-800 px-3 py-1 text-sm text-slate-200">Event Ops</span>
+                                <span class="rounded-full bg-slate-800 px-3 py-1 text-sm text-slate-200">Launch Growth</span>
+                            </div>
+                        </div>
+                    </div>
+                </article>
+
+                <article class="case-card glass rounded-[28px] p-6 md:p-8">
+                    <div class="flex items-center gap-3 mb-5">
+                        <span class="rounded-full border border-amber-500/30 bg-amber-500/10 px-3 py-1 text-xs font-bold uppercase tracking-[0.2em] text-amber-300">04. AI</span>
+                    </div>
+                    <h4 class="text-2xl md:text-3xl font-bold text-white mb-5">Smart academic assessor for handwritten document workflows</h4>
+                    <div class="grid lg:grid-cols-[1.6fr_0.8fr] gap-8">
+                        <div class="space-y-5 text-slate-300">
+                            <div>
+                                <div class="font-semibold text-white mb-2">The Goal</div>
+                                <p>Automate the extraction and evaluation of handwritten academic submissions with AI-assisted structure.</p>
+                            </div>
+                            <div>
+                                <div class="font-semibold text-white mb-2">The Execution</div>
+                                <ul class="list-disc pl-5 space-y-2">
+                                    <li>Integrated an OCR and reasoning pipeline capable of handling messy handwritten text patterns.</li>
+                                    <li>Built the evaluation logic from raw document intake to structured digital assessment output.</li>
+                                    <li>Reduced time spent on repetitive review while improving consistency and scale.</li>
+                                </ul>
+                            </div>
+                        </div>
+                        <div class="rounded-2xl border border-slate-700 bg-slate-900/60 p-5 h-fit">
+                            <div class="text-xs uppercase tracking-[0.2em] text-slate-400 mb-4">Stack</div>
+                            <div class="flex flex-wrap gap-2">
+                                <span class="rounded-full bg-slate-800 px-3 py-1 text-sm text-slate-200">Python</span>
+                                <span class="rounded-full bg-slate-800 px-3 py-1 text-sm text-slate-200">Gemini API</span>
+                                <span class="rounded-full bg-slate-800 px-3 py-1 text-sm text-slate-200">OCR</span>
+                            </div>
+                        </div>
+                    </div>
+                </article>
+            </div>
+        </section>
+
+        <section id="contact" class="reveal max-w-6xl mx-auto px-6 pb-20 pt-8">
+            <div class="cta-box glass rounded-[32px] p-8 md:p-10">
+                <div class="grid md:grid-cols-[1.3fr_0.7fr] gap-8 items-center">
+                    <div>
+                        <p class="section-kicker text-violet-300">Let’s build</p>
+                        <h3 class="mt-3 text-3xl md:text-4xl font-black text-white">Need a better community system, launch engine, or AI-powered workflow?</h3>
+                    </div>
+                    <div class="flex flex-col gap-3 md:items-end">
+                        <a href="mailto:dewanhabib@example.com" class="inline-flex w-full md:w-auto items-center justify-center rounded-xl bg-gradient-to-r from-violet-600 to-cyan-500 px-6 py-3 text-base font-semibold text-white shadow-lg shadow-violet-900/30 transition hover:brightness-110">Reach Out</a>
+                        <div class="flex gap-3 text-sm text-slate-300">
+                            <a href="https://www.linkedin.com" target="_blank" rel="noreferrer" class="hover:text-violet-300">LinkedIn</a>
+                            <a href="https://github.com" target="_blank" rel="noreferrer" class="hover:text-cyan-300">GitHub</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <footer class="border-t border-slate-800 bg-slate-950/60 py-8">
+        <div class="max-w-6xl mx-auto px-6 flex flex-col md:flex-row items-center justify-between gap-4 text-sm text-slate-400">
+            <p>Designed and built for high-performance community systems.</p>
+            <p>© 2026 Dewan Habib</p>
+        </div>
+    </footer>
+
+    <button id="musicToggle" class="music-toggle fixed bottom-6 right-6 z-50 rounded-full border border-violet-500/30 bg-slate-950/85 px-4 py-3 text-sm font-semibold text-violet-200 shadow-xl shadow-violet-900/20 backdrop-blur-xl" aria-label="Toggle background music">
+        🎵 Play ambient
+    </button>
+
+    <audio id="ambientAudio" loop preload="auto" src="https://cdn.pixabay.com/download/audio/2022/01/18/audio_07374d6a42.mp3?filename=slow-vibes-ambient-129854.mp3"></audio>
+
+    <script>
+        const cursorDot = document.getElementById('cursorDot');
+        const cursorRing = document.getElementById('cursorRing');
+        const musicToggle = document.getElementById('musicToggle');
+        const ambientAudio = document.getElementById('ambientAudio');
+
+        let mouseX = window.innerWidth / 2;
+        let mouseY = window.innerHeight / 2;
+        let ringX = mouseX;
+        let ringY = mouseY;
+
+        const interactiveSelectors = 'a, button, .feature-card, .case-card, .stat-box, .profile-panel, .cta-box, .chip';
+
+        const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+        if (window.innerWidth > 768 && !prefersReducedMotion) {
+            document.addEventListener('pointermove', (event) => {
+                mouseX = event.clientX;
+                mouseY = event.clientY;
+                cursorDot.style.left = mouseX + 'px';
+                cursorDot.style.top = mouseY + 'px';
+            });
+
+            function animateCursor() {
+                ringX += (mouseX - ringX) * 0.18;
+                ringY += (mouseY - ringY) * 0.18;
+                cursorRing.style.left = ringX + 'px';
+                cursorRing.style.top = ringY + 'px';
+                requestAnimationFrame(animateCursor);
+            }
+            animateCursor();
+
+            document.querySelectorAll(interactiveSelectors).forEach((element) => {
+                element.addEventListener('pointerenter', () => {
+                    cursorRing.classList.add('active');
+                    cursorRing.style.transform = 'translate(-50%, -50%) scale(1.08)';
+                });
+
+                element.addEventListener('pointerleave', () => {
+                    cursorRing.classList.remove('active');
+                    cursorRing.style.transform = 'translate(-50%, -50%) scale(1)';
+                });
+            });
+        } else {
+            document.body.classList.remove('pointer-hidden');
+            cursorDot.style.display = 'none';
+            cursorRing.style.display = 'none';
+        }
+
+        const revealElements = document.querySelectorAll('.reveal');
+        const revealObserver = new IntersectionObserver((entries) => {
+            entries.forEach((entry) => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('visible');
+                    revealObserver.unobserve(entry.target);
+                }
+            });
+        }, { threshold: 0.15 });
+
+        revealElements.forEach((element) => revealObserver.observe(element));
+
+        const counters = document.querySelectorAll('.count-up');
+        const counterObserver = new IntersectionObserver((entries) => {
+            entries.forEach((entry) => {
+                if (!entry.isIntersecting) return;
+
+                const el = entry.target;
+                const target = Number(el.dataset.target || 0);
+                const suffix = el.dataset.suffix || '';
+                const duration = 1300;
+                let start = null;
+
+                const step = (timestamp) => {
+                    if (!start) start = timestamp;
+                    const progress = Math.min((timestamp - start) / duration, 1);
+                    const eased = 1 - Math.pow(1 - progress, 3);
+                    const value = Math.floor(target * eased);
+                    el.textContent = value + suffix;
+
+                    if (progress < 1) {
+                        requestAnimationFrame(step);
+                    } else {
+                        el.textContent = target + suffix;
+                    }
+                };
+
+                requestAnimationFrame(step);
+                counterObserver.unobserve(el);
+            });
+        }, { threshold: 0.5 });
+
+        counters.forEach((counter) => counterObserver.observe(counter));
+
+        let isMusicPlaying = false;
+
+        musicToggle.addEventListener('click', async () => {
+            try {
+                if (!isMusicPlaying) {
+                    await ambientAudio.play();
+                    isMusicPlaying = true;
+                    musicToggle.textContent = '🔇 Pause music';
+                } else {
+                    ambientAudio.pause();
+                    isMusicPlaying = false;
+                    musicToggle.textContent = '🎵 Play ambient';
+                }
+            } catch (error) {
+                console.log('Audio autoplay was blocked by the browser. User interaction required.');
+            }
+        });
+    </script>
+</body>
+</html>
