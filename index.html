@@ -1,3 +1,4 @@
+```html
 <!DOCTYPE html>
 <html lang="en" class="scroll-smooth">
 <head>
@@ -257,22 +258,6 @@
             font-weight: 600;
         }
 
-        .mini-line {
-            position: relative;
-            display: inline-block;
-        }
-
-        .mini-line::after {
-            content: "";
-            position: absolute;
-            left: 0;
-            right: 0;
-            bottom: -0.3rem;
-            height: 2px;
-            background: linear-gradient(90deg, rgba(139, 92, 246, 0.9), rgba(34, 211, 238, 0.9));
-            border-radius: 9999px;
-        }
-
         .hero-list li::before {
             content: "✦";
             color: #67e8f9;
@@ -364,19 +349,9 @@
             a, button { cursor: pointer; }
             .cursor-dot, .cursor-ring { display: none; }
 
-            .max-w-6xl {
-                max-width: 100%;
-            }
-
-            .px-6 {
-                padding-left: 1rem;
-                padding-right: 1rem;
-            }
-
-            header .max-w-6xl {
-                padding-top: 1rem;
-                padding-bottom: 1rem;
-            }
+            .max-w-6xl { max-width: 100%; }
+            .px-6 { padding-left: 1rem; padding-right: 1rem; }
+            header .max-w-6xl { padding-top: 1rem; padding-bottom: 1rem; }
 
             nav {
                 flex-wrap: wrap;
@@ -393,17 +368,8 @@
                 display: block;
             }
 
-            .stat-box {
-                min-width: 0;
-                flex: 1 1 30%;
-            }
-
-            .feature-card,
-            .case-card,
-            .experience-card,
-            .glass {
-                border-radius: 1.25rem;
-            }
+            .stat-box { min-width: 0; flex: 1 1 30%; }
+            .feature-card, .case-card, .experience-card, .glass { border-radius: 1.25rem; }
         }
 
         @media (max-width: 480px) {
@@ -411,16 +377,8 @@
             h2 { font-size: 2.4rem !important; }
             h3 { font-size: 2rem !important; }
             .section-kicker { letter-spacing: 0.18em; }
-            .chip {
-                font-size: 0.7rem;
-                padding: 0.45rem 0.75rem;
-            }
-            .music-toggle {
-                bottom: 1rem;
-                right: 1rem;
-                padding: 0.7rem 0.9rem;
-                font-size: 0.75rem;
-            }
+            .chip { font-size: 0.7rem; padding: 0.45rem 0.75rem; }
+            .music-toggle { bottom: 1rem; right: 1rem; padding: 0.7rem 0.9rem; font-size: 0.75rem; }
         }
     </style>
 </head>
@@ -443,12 +401,14 @@
             <nav class="flex items-center gap-6 text-sm font-medium text-slate-300">
                 <a href="#about" class="nav-link hover:text-white">About</a>
                 <a href="#services" class="nav-link hover:text-white">Services</a>
+                <a href="#experience" class="nav-link hover:text-white">Experience</a>
+                <a href="#publications" class="nav-link hover:text-white">Research</a>
                 <a href="#case-studies" class="nav-link hover:text-white">Case Studies</a>
                 <a href="#contact" class="nav-link hover:text-white">Contact</a>
             </nav>
 
             <div class="flex items-center gap-3 text-sm font-medium">
-                <a href="mailto:dewanhabib@example.com" class="rounded-full border border-slate-700 bg-slate-900/60 px-4 py-2 text-slate-200 transition hover:border-violet-400 hover:text-violet-300">Email</a>
+                <a href="mailto:dewanhabib2004@gmail.com" class="rounded-full border border-slate-700 bg-slate-900/60 px-4 py-2 text-slate-200 transition hover:border-violet-400 hover:text-violet-300">Email</a>
                 <a href="https://www.linkedin.com" target="_blank" rel="noreferrer" class="rounded-full border border-slate-700 bg-slate-900/60 px-4 py-2 text-slate-200 transition hover:border-cyan-400 hover:text-cyan-300">LinkedIn</a>
                 <a href="https://github.com" target="_blank" rel="noreferrer" class="rounded-full border border-slate-700 bg-slate-900/60 px-4 py-2 text-slate-200 transition hover:border-emerald-400 hover:text-emerald-300">GitHub</a>
             </div>
@@ -482,7 +442,7 @@
                     <div class="mt-8 flex flex-wrap gap-4">
                         <a href="#case-studies" class="inline-flex items-center justify-center rounded-xl bg-gradient-to-r from-violet-600 to-cyan-500 px-6 py-3 text-base font-semibold text-white shadow-lg shadow-violet-900/30 transition hover:brightness-110">View Case Studies ↓</a>
                         <a href="#contact" class="inline-flex items-center justify-center rounded-xl border border-slate-700 bg-slate-900/60 px-6 py-3 text-base font-semibold text-slate-100 transition hover:border-cyan-400 hover:text-cyan-300">Let’s Talk</a>
-                        <a href="RESUME/Dewan_Habib_resume.odg" target="_blank" class="inline-flex items-center justify-center rounded-xl border border-emerald-500/30 bg-emerald-500/10 px-5 py-3 text-base font-semibold text-emerald-200 transition hover:border-emerald-400 hover:text-emerald-100">Download Resume</a>
+                        <a href="Dewan_Habib_Resume.pdf" target="_blank" class="inline-flex items-center justify-center rounded-xl border border-emerald-500/30 bg-emerald-500/10 px-5 py-3 text-base font-semibold text-emerald-200 transition hover:border-emerald-400 hover:text-emerald-100">Download Resume (PDF)</a>
                     </div>
 
                     <div class="mt-10 flex flex-wrap gap-6 text-sm text-slate-300">
@@ -584,51 +544,81 @@
             </div>
         </section>
 
-        <section class="reveal max-w-6xl mx-auto px-6 py-10 md:py-16">
+        <section id="experience" class="reveal max-w-6xl mx-auto px-6 py-10 md:py-16">
             <div class="grid lg:grid-cols-[0.9fr_1.1fr] gap-8">
                 <div class="experience-card rounded-[28px] p-6">
                     <p class="section-kicker text-cyan-300">Experience snapshot</p>
                     <div class="mt-6 space-y-6 relative before:absolute before:left-[0.45rem] before:top-0 before:h-full before:w-px before:bg-slate-700">
                         <div class="timeline-item relative pl-8">
-                            <div class="text-sm text-violet-300 font-semibold">Community Systems</div>
-                            <div class="mt-1 text-lg font-bold text-white">Regional Discord Infrastructure</div>
-                            <div class="mt-1 text-slate-400">Built scalable onboarding, role architecture, and moderation layers.</div>
+                            <div class="text-xs font-bold text-violet-300 uppercase tracking-wider">Jan 2026 – Present</div>
+                            <div class="mt-1 text-lg font-bold text-white">Official Honor of Kings India</div>
+                            <div class="text-sm font-semibold text-slate-300">Senior Community Lead & Moderator</div>
+                            <div class="mt-1 text-slate-400 text-sm">Architected official Discord setup, AutoMod triggers, tournament bracket management, and referee permissions.</div>
                         </div>
                         <div class="timeline-item relative pl-8">
-                            <div class="text-sm text-cyan-300 font-semibold">AI & Automation</div>
-                            <div class="mt-1 text-lg font-bold text-white">LLM-Driven Bot Experience</div>
-                            <div class="mt-1 text-slate-400">Created responsive, high-uptime AI interactions for real-time community engagement.</div>
+                            <div class="text-xs font-bold text-cyan-300 uppercase tracking-wider">June 2026 – Present</div>
+                            <div class="mt-1 text-lg font-bold text-white">Gangstar Mirage City India</div>
+                            <div class="text-sm font-semibold text-slate-300">Senior Community Lead & Moderator</div>
+                            <div class="mt-1 text-slate-400 text-sm">Managed regional invite events, content drives, community guidelines enforcement, and crisis management.</div>
                         </div>
                         <div class="timeline-item relative pl-8">
-                            <div class="text-sm text-emerald-300 font-semibold">Growth Strategy</div>
-                            <div class="mt-1 text-lg font-bold text-white">Launch & Creator Campaigns</div>
-                            <div class="mt-1 text-slate-400">Combined matchmaking, tournaments, and creator logistics into one growth engine.</div>
+                            <div class="text-xs font-bold text-emerald-300 uppercase tracking-wider">2023 – 2027</div>
+                            <div class="mt-1 text-lg font-bold text-white">Guru Nanak Institute of Technology</div>
+                            <div class="text-sm font-semibold text-slate-300">B.Tech in Computer Science & Engineering</div>
+                            <div class="mt-1 text-slate-400 text-sm">Focusing on algorithms, artificial intelligence, and software engineering principles.</div>
                         </div>
                     </div>
                 </div>
 
-                <div class="glass rounded-[28px] p-6 md:p-8">
-                    <p class="section-kicker text-violet-300">Core capabilities</p>
-                    <div class="mt-6 flex flex-wrap gap-3">
-                        <span class="chip">Discord architecture</span>
-                        <span class="chip">AutoMod & safety</span>
-                        <span class="chip">Python automation</span>
-                        <span class="chip">API integrations</span>
-                        <span class="chip">Campaign planning</span>
-                        <span class="chip">Creator coordination</span>
-                        <span class="chip">Community retention</span>
-                        <span class="chip">Event operations</span>
-                        <span class="chip">AI workflows</span>
-                        <span class="chip">Launch strategy</span>
+                <div class="glass rounded-[28px] p-6 md:p-8 flex flex-col justify-between">
+                    <div>
+                        <p class="section-kicker text-violet-300">Certifications & Education</p>
+                        <div class="mt-6 space-y-4">
+                            <div class="border-l-2 border-violet-500 pl-4 py-1">
+                                <div class="text-base font-bold text-white">Cloud Computing</div>
+                                <div class="text-xs text-violet-300 font-semibold">NPTEL / SWAYAM — IIT Kharagpur</div>
+                                <div class="text-slate-400 text-xs mt-1">Distributed systems, virtualization, and cloud resource provisioning.</div>
+                            </div>
+                            <div class="border-l-2 border-cyan-500 pl-4 py-1">
+                                <div class="text-base font-bold text-white">Programming in Java</div>
+                                <div class="text-xs text-cyan-300 font-semibold">NPTEL / SWAYAM — IIT Kharagpur</div>
+                                <div class="text-slate-400 text-xs mt-1">Object-oriented programming, multithreading, and socket programming.</div>
+                            </div>
+                            <div class="border-l-2 border-emerald-500 pl-4 py-1">
+                                <div class="text-base font-bold text-white">Principles of Management</div>
+                                <div class="text-xs text-emerald-300 font-semibold">NPTEL / SWAYAM — IIT Roorkee</div>
+                                <div class="text-slate-400 text-xs mt-1">Strategic planning, team leadership, operations, and organizational management.</div>
+                            </div>
+                        </div>
                     </div>
+
                     <div class="mt-8 rounded-2xl border border-slate-700 bg-slate-950/70 p-5">
                         <div class="flex items-center justify-between gap-3">
                             <div>
-                                <div class="text-sm uppercase tracking-[0.2em] text-slate-400">Brand promise</div>
-                                <div class="mt-2 text-2xl font-bold text-white">From chaos to conversion.</div>
+                                <div class="text-xs uppercase tracking-[0.2em] text-slate-400">Brand promise</div>
+                                <div class="mt-1 text-xl font-bold text-white">From chaos to conversion.</div>
                             </div>
                             <span class="rounded-full border border-violet-500/40 bg-violet-500/10 px-3 py-1 text-xs font-semibold uppercase tracking-[0.18em] text-violet-200">High impact</span>
                         </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="publications" class="reveal max-w-6xl mx-auto px-6 py-10">
+            <div class="glass rounded-[28px] p-6 md:p-8">
+                <p class="section-kicker text-violet-300">Research & Publications</p>
+                <h3 class="mt-3 text-2xl md:text-3xl font-bold text-white mb-6">Published Research</h3>
+                <div class="grid md:grid-cols-2 gap-6">
+                    <div class="border-l-2 border-violet-500 pl-4 py-1">
+                        <div class="text-lg font-bold text-white">Building a Robust Stock Price Prediction Using LSTM and VECM</div>
+                        <div class="text-sm font-semibold text-violet-300 mt-1">KSII Transactions on Internet and Information Systems | April 2026</div>
+                        <p class="text-slate-400 text-sm mt-2">Hybrid quantitative finance framework combining Long Short-Term Memory (LSTM) neural networks with Vector Error Correction Models (VECM) for time series forecasting.</p>
+                    </div>
+                    <div class="border-l-2 border-cyan-500 pl-4 py-1">
+                        <div class="text-lg font-bold text-white">A Decentralized Crypto Launchpad on Binance Smart Chain</div>
+                        <div class="text-sm font-semibold text-cyan-300 mt-1">IEEE | November 2025</div>
+                        <p class="text-slate-400 text-sm mt-2">Binance Smart Chain (BSC) dApp architecture utilizing smart contracts for low-fee token launches and Web3 wallet integration.</p>
                     </div>
                 </div>
             </div>
@@ -645,19 +635,19 @@
                     <div class="flex items-center gap-3 mb-5">
                         <span class="rounded-full border border-violet-500/30 bg-violet-500/10 px-3 py-1 text-xs font-bold uppercase tracking-[0.2em] text-violet-300">01. Infrastructure</span>
                     </div>
-                    <h4 class="text-2xl md:text-3xl font-bold text-white mb-5">Architecting an official regional gaming community</h4>
+                    <h4 class="text-2xl md:text-3xl font-bold text-white mb-5">Honor of Kings (HoK) & GSTM India Community Architecture</h4>
                     <div class="grid lg:grid-cols-[1.6fr_0.8fr] gap-8">
                         <div class="space-y-5 text-slate-300">
                             <div>
                                 <div class="font-semibold text-white mb-2">The Goal</div>
-                                <p>Build a secure, high-volume community foundation before a major region-wide launch.</p>
+                                <p>Build a secure, high-volume official Discord community foundation prior to the nationwide Honor of Kings India launch.</p>
                             </div>
                             <div>
                                 <div class="font-semibold text-white mb-2">The Execution</div>
                                 <ul class="list-disc pl-5 space-y-2">
-                                    <li>Mapped the server architecture, role hierarchy, and permission gates for scalable onboarding.</li>
-                                    <li>Designed automated welcome flows that route users to the right channels instantly.</li>
-                                    <li>Set up moderation and AutoMod systems to keep conversation quality high under user spikes.</li>
+                                    <li>Mapped server architecture, role hierarchy, and permission gates for seamless onboarding.</li>
+                                    <li>Designed automated welcome flows routing thousands of players directly into regional and competitive channels.</li>
+                                    <li>Configured AutoMod rules, anti-spam filters, and moderation protocols to sustain quality during user spikes.</li>
                                 </ul>
                             </div>
                         </div>
@@ -665,8 +655,8 @@
                             <div class="text-xs uppercase tracking-[0.2em] text-slate-400 mb-4">Stack</div>
                             <div class="flex flex-wrap gap-2">
                                 <span class="rounded-full bg-slate-800 px-3 py-1 text-sm text-slate-200">Discord API</span>
-                                <span class="rounded-full bg-slate-800 px-3 py-1 text-sm text-slate-200">Permissions</span>
                                 <span class="rounded-full bg-slate-800 px-3 py-1 text-sm text-slate-200">AutoMod</span>
+                                <span class="rounded-full bg-slate-800 px-3 py-1 text-sm text-slate-200">Community Ops</span>
                             </div>
                         </div>
                     </div>
@@ -676,19 +666,19 @@
                     <div class="flex items-center gap-3 mb-5">
                         <span class="rounded-full border border-cyan-500/30 bg-cyan-500/10 px-3 py-1 text-xs font-bold uppercase tracking-[0.2em] text-cyan-300">02. Automation</span>
                     </div>
-                    <h4 class="text-2xl md:text-3xl font-bold text-white mb-5">Low-latency LLM-powered community bot</h4>
+                    <h4 class="text-2xl md:text-3xl font-bold text-white mb-5">AI-Powered Community Discord Bot (Groq API)</h4>
                     <div class="grid lg:grid-cols-[1.6fr_0.8fr] gap-8">
                         <div class="space-y-5 text-slate-300">
                             <div>
                                 <div class="font-semibold text-white mb-2">The Goal</div>
-                                <p>Increase engagement and retention with a unique bot experience that feels responsive, entertaining, and on-brand.</p>
+                                <p>Increase engagement and retention using a ultra-low-latency AI bot providing custom community interactions.</p>
                             </div>
                             <div>
                                 <div class="font-semibold text-white mb-2">The Execution</div>
                                 <ul class="list-disc pl-5 space-y-2">
-                                    <li>Integrated a fast inference model to create near-instant responses for community interactions.</li>
-                                    <li>Built a strict, stateless prompt system to maintain a consistent persona and reliable tone.</li>
-                                    <li>Deployed the bot in a Linux server environment for uptime and operational stability.</li>
+                                    <li>Integrated Groq LPU API to achieve near-instantaneous inference for real-time chat interactions.</li>
+                                    <li>Developed stateless prompt structures enforcing specific persona boundaries.</li>
+                                    <li>Deployed on a Linux server environment ensuring 99.9% operational uptime.</li>
                                 </ul>
                             </div>
                         </div>
@@ -707,28 +697,28 @@
                     <div class="flex items-center gap-3 mb-5">
                         <span class="rounded-full border border-emerald-500/30 bg-emerald-500/10 px-3 py-1 text-xs font-bold uppercase tracking-[0.2em] text-emerald-300">03. Growth</span>
                     </div>
-                    <h4 class="text-2xl md:text-3xl font-bold text-white mb-5">Regional launch growth via creators and tournament operations</h4>
+                    <h4 class="text-2xl md:text-3xl font-bold text-white mb-5">Regional Launch Growth & Tournament Operations</h4>
                     <div class="grid lg:grid-cols-[1.6fr_0.8fr] gap-8">
                         <div class="space-y-5 text-slate-300">
                             <div>
                                 <div class="font-semibold text-white mb-2">The Goal</div>
-                                <p>Capture demand in a new region through creator partnerships, event activation, and community conversion.</p>
+                                <p>Capture audience demand through influencer partnerships, event activations, and competitive player pipelines.</p>
                             </div>
                             <div>
                                 <div class="font-semibold text-white mb-2">The Execution</div>
                                 <ul class="list-disc pl-5 space-y-2">
-                                    <li>Managed a pool of creators with alignment to the local gaming audience and content style.</li>
-                                    <li>Launched competitive events and tournament operations with scheduling and prize management.</li>
-                                    <li>Built momentum around launch windows to keep participation and retention high.</li>
+                                    <li>Curated and managed regional content creators aligned with target gaming demographics.</li>
+                                    <li>Executed competitive esports operations including the Blossom Cup tournament series and prize distributions.</li>
+                                    <li>Maintained engagement flywheels across launch windows to boost overall community retention.</li>
                                 </ul>
                             </div>
                         </div>
                         <div class="rounded-2xl border border-slate-700 bg-slate-900/60 p-5 h-fit">
                             <div class="text-xs uppercase tracking-[0.2em] text-slate-400 mb-4">Focus</div>
                             <div class="flex flex-wrap gap-2">
-                                <span class="rounded-full bg-slate-800 px-3 py-1 text-sm text-slate-200">Creator ROI</span>
-                                <span class="rounded-full bg-slate-800 px-3 py-1 text-sm text-slate-200">Event Ops</span>
-                                <span class="rounded-full bg-slate-800 px-3 py-1 text-sm text-slate-200">Launch Growth</span>
+                                <span class="rounded-full bg-slate-800 px-3 py-1 text-sm text-slate-200">Creator Ops</span>
+                                <span class="rounded-full bg-slate-800 px-3 py-1 text-sm text-slate-200">Tournament Ops</span>
+                                <span class="rounded-full bg-slate-800 px-3 py-1 text-sm text-slate-200">Growth</span>
                             </div>
                         </div>
                     </div>
@@ -738,19 +728,19 @@
                     <div class="flex items-center gap-3 mb-5">
                         <span class="rounded-full border border-amber-500/30 bg-amber-500/10 px-3 py-1 text-xs font-bold uppercase tracking-[0.2em] text-amber-300">04. AI</span>
                     </div>
-                    <h4 class="text-2xl md:text-3xl font-bold text-white mb-5">Smart academic assessor for handwritten document workflows</h4>
+                    <h4 class="text-2xl md:text-3xl font-bold text-white mb-5">Smart Academic Assessor (Gemini API & Handwritten OCR)</h4>
                     <div class="grid lg:grid-cols-[1.6fr_0.8fr] gap-8">
                         <div class="space-y-5 text-slate-300">
                             <div>
                                 <div class="font-semibold text-white mb-2">The Goal</div>
-                                <p>Automate the extraction and evaluation of handwritten academic submissions with AI-assisted structure.</p>
+                                <p>Automate end-to-end evaluation and transcription of handwritten academic answer scripts.</p>
                             </div>
                             <div>
                                 <div class="font-semibold text-white mb-2">The Execution</div>
                                 <ul class="list-disc pl-5 space-y-2">
-                                    <li>Integrated an OCR and reasoning pipeline capable of handling messy handwritten text patterns.</li>
-                                    <li>Built the evaluation logic from raw document intake to structured digital assessment output.</li>
-                                    <li>Reduced time spent on repetitive review while improving consistency and scale.</li>
+                                    <li>Engineered an automated pipeline leveraging Gemini Flash for multimodal OCR and reasoning.</li>
+                                    <li>Digitized handwritten submissions into structured digital scoring outputs.</li>
+                                    <li>Streamlined manual grading overhead while ensuring objective grading consistency.</li>
                                 </ul>
                             </div>
                         </div>
@@ -758,8 +748,8 @@
                             <div class="text-xs uppercase tracking-[0.2em] text-slate-400 mb-4">Stack</div>
                             <div class="flex flex-wrap gap-2">
                                 <span class="rounded-full bg-slate-800 px-3 py-1 text-sm text-slate-200">Python</span>
-                                <span class="rounded-full bg-slate-800 px-3 py-1 text-sm text-slate-200">Gemini API</span>
-                                <span class="rounded-full bg-slate-800 px-3 py-1 text-sm text-slate-200">OCR</span>
+                                <span class="rounded-full bg-slate-800 px-3 py-1 text-sm text-slate-200">Gemini Flash</span>
+                                <span class="rounded-full bg-slate-800 px-3 py-1 text-sm text-slate-200">Multimodal OCR</span>
                             </div>
                         </div>
                     </div>
@@ -775,7 +765,7 @@
                         <h3 class="mt-3 text-3xl md:text-4xl font-black text-white">Need a better community system, launch engine, or AI-powered workflow?</h3>
                     </div>
                     <div class="flex flex-col gap-3 md:items-end">
-                        <a href="mailto:dewanhabib@example.com" class="inline-flex w-full md:w-auto items-center justify-center rounded-xl bg-gradient-to-r from-violet-600 to-cyan-500 px-6 py-3 text-base font-semibold text-white shadow-lg shadow-violet-900/30 transition hover:brightness-110">Reach Out</a>
+                        <a href="mailto:dewanhabib2004@gmail.com" class="inline-flex w-full md:w-auto items-center justify-center rounded-xl bg-gradient-to-r from-violet-600 to-cyan-500 px-6 py-3 text-base font-semibold text-white shadow-lg shadow-violet-900/30 transition hover:brightness-110">Reach Out</a>
                         <div class="flex gap-3 text-sm text-slate-300">
                             <a href="https://www.linkedin.com" target="_blank" rel="noreferrer" class="hover:text-violet-300">LinkedIn</a>
                             <a href="https://github.com" target="_blank" rel="noreferrer" class="hover:text-cyan-300">GitHub</a>
@@ -912,3 +902,4 @@
     </script>
 </body>
 </html>
+
