@@ -272,7 +272,7 @@
             50% { transform: scale(1.45); opacity: 0.7; }
         }
 
-        /* Ambient Cursor Follower (Desktop Fine Pointer Only) */
+        /* Sleek Ambient Pointer Aura & Magnetic Halo (Desktop Fine Pointer Only) */
         .cursor-dot, .cursor-ring {
             position: fixed;
             top: 0;
@@ -280,35 +280,38 @@
             pointer-events: none;
             z-index: 9999;
             transform: translate(-50%, -50%);
-            mix-blend-mode: screen;
             display: none;
         }
 
         @media (hover: hover) and (pointer: fine) {
             .cursor-dot {
                 display: block;
-                width: 6px;
-                height: 6px;
+                width: 340px;
+                height: 340px;
                 border-radius: 50%;
-                background: #22d3ee;
-                box-shadow: 0 0 12px #22d3ee;
+                background: radial-gradient(circle, rgba(139, 92, 246, 0.14) 0%, rgba(34, 211, 238, 0.06) 35%, transparent 70%);
+                mix-blend-mode: screen;
+                transition: opacity 0.25s ease;
             }
 
             .cursor-ring {
                 display: block;
-                width: 36px;
-                height: 36px;
+                width: 24px;
+                height: 24px;
                 border-radius: 50%;
-                border: 1.25px solid rgba(139, 92, 246, 0.55);
-                background: rgba(34, 211, 238, 0.03);
-                transition: width 0.2s ease, height 0.2s ease, border-color 0.2s ease, background 0.2s ease;
+                border: 1.5px solid rgba(34, 211, 238, 0.55);
+                box-shadow: 0 0 16px rgba(34, 211, 238, 0.25);
+                opacity: 0;
+                transition: width 0.2s ease, height 0.2s ease, opacity 0.2s ease, border-color 0.2s ease, background 0.2s ease;
             }
 
             .cursor-ring.active {
-                width: 54px;
-                height: 54px;
-                border-color: rgba(34, 211, 238, 0.85);
+                opacity: 1;
+                width: 44px;
+                height: 44px;
+                border-color: rgba(167, 139, 250, 0.9);
                 background: rgba(139, 92, 246, 0.08);
+                box-shadow: 0 0 24px rgba(139, 92, 246, 0.35);
             }
         }
 
@@ -431,21 +434,22 @@
     <div class="orb orb-three"></div>
 
     <!-- Sticky Responsive Header -->
-    <header class="sticky top-0 z-50 border-b border-slate-800/80 bg-slate-950/80 backdrop-blur-xl">
-        <div class="max-w-6xl mx-auto px-4 sm:px-6 py-3 md:py-3.5 flex items-center justify-between gap-3">
-            <a href="#about" class="group flex items-center gap-3 focus:outline-none">
-                <div class="relative flex h-10 w-10 items-center justify-center rounded-xl bg-gradient-to-br from-violet-600 to-cyan-500 font-display text-sm font-bold text-white shadow-md shadow-violet-950/50 transition group-hover:scale-105">
-                    DH
-                    <span class="absolute -top-1 -right-1 h-2.5 w-2.5 rounded-full bg-emerald-400 ring-2 ring-slate-950"></span>
+    <header class="sticky top-0 z-50 border-b border-slate-800/80 bg-slate-950/85 backdrop-blur-xl">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 py-3 flex items-center justify-between gap-4">
+            <a href="#about" class="group flex items-center gap-3 shrink-0 focus:outline-none">
+                <div class="relative flex h-10 w-10 shrink-0 items-center justify-center rounded-xl bg-gradient-to-br from-violet-600 to-cyan-500 font-display text-sm font-bold text-white shadow-md shadow-violet-950/50 transition group-hover:scale-105 overflow-hidden ring-1 ring-white/15">
+                    <span>DH</span>
+                    <div class="absolute inset-0 bg-cover bg-center" style="background-image: url('ProfilePic.png');" aria-label="Dewan Habib"></div>
+                    <span class="absolute -bottom-0.5 -right-0.5 z-10 h-2.5 w-2.5 rounded-full bg-emerald-400 ring-2 ring-slate-950"></span>
                 </div>
-                <div>
-                    <h1 class="text-base sm:text-lg font-bold tracking-tight text-white">Dewan Habib</h1>
-                    <p class="text-[11px] sm:text-xs font-medium text-cyan-300">Technical Community &amp; Esports Strategist</p>
+                <div class="whitespace-nowrap">
+                    <h1 class="text-base font-bold tracking-tight text-white leading-tight">Dewan Habib</h1>
+                    <p class="text-[11px] font-medium text-cyan-300 leading-tight">Community &amp; Esports Strategist</p>
                 </div>
             </a>
 
-            <!-- Desktop Nav -->
-            <nav class="hidden md:flex items-center gap-5 lg:gap-6 text-xs lg:text-sm font-medium text-slate-300" aria-label="Primary Navigation">
+            <!-- Desktop Nav (Clean Single-Line) -->
+            <nav class="hidden lg:flex items-center gap-5 text-sm font-medium text-slate-300 whitespace-nowrap" aria-label="Primary Navigation">
                 <a href="#about" class="nav-link hover:text-white">About</a>
                 <a href="#architecture-stack" class="nav-link hover:text-white">Playbook</a>
                 <a href="#services" class="nav-link hover:text-white">Services</a>
@@ -455,22 +459,31 @@
                 <a href="#contact" class="nav-link hover:text-white">Contact</a>
             </nav>
 
-            <!-- Desktop Quick Actions -->
-            <div class="hidden lg:flex items-center gap-2 text-xs font-semibold">
-                <button id="openCmdPaletteBtn" type="button" class="inline-flex items-center gap-1.5 rounded-full border border-violet-500/40 bg-violet-500/10 px-3 py-1.5 text-xs text-violet-200 transition hover:border-cyan-400 hover:text-white">
-                    <span>⚡ Quick Menu</span>
+            <!-- Desktop Quick Actions (Crisp Single-Line Pills + Resume at Top) -->
+            <div class="hidden md:flex items-center gap-2 text-xs font-semibold whitespace-nowrap shrink-0">
+                <a href="#contact" data-resume-file="Dewanhabib_resume.pdf" download="Dewanhabib_resume.pdf" target="_blank" rel="noreferrer" class="resume-link inline-flex items-center gap-1 rounded-full border border-emerald-500/45 bg-emerald-500/15 px-3.5 py-1.5 text-emerald-200 transition hover:border-emerald-400 hover:bg-emerald-500/25 hover:text-white">
+                    Resume ↓
+                </a>
+                <a href="https://www.linkedin.com/in/dewan-habib-701a5b320" target="_blank" rel="noreferrer" class="inline-flex items-center rounded-full border border-slate-700/80 bg-slate-900/75 px-3.5 py-1.5 text-slate-200 transition hover:border-cyan-400 hover:text-cyan-300">
+                    LinkedIn ↗
+                </a>
+                <a href="https://github.com/DewanHabib10" target="_blank" rel="noreferrer" class="inline-flex items-center rounded-full border border-slate-700/80 bg-slate-900/75 px-3.5 py-1.5 text-slate-200 transition hover:border-violet-400 hover:text-violet-300">
+                    GitHub ↗
+                </a>
+                <button id="openCmdPaletteBtn" type="button" aria-label="Open Quick Menu" class="inline-flex items-center rounded-full border border-violet-500/40 bg-violet-500/15 px-3 py-1.5 text-violet-200 transition hover:border-cyan-400 hover:text-white">
+                    ⚡
                 </button>
-                <a href="mailto:dewanhabib2004@gmail.com" class="rounded-full border border-slate-700/80 bg-slate-900/70 px-3 py-1.5 text-slate-200 transition hover:border-violet-400 hover:text-violet-300">Email</a>
-                <a href="https://www.linkedin.com/in/dewan-habib-701a5b320" target="_blank" rel="noreferrer" class="rounded-full border border-slate-700/80 bg-slate-900/70 px-3 py-1.5 text-slate-200 transition hover:border-cyan-400 hover:text-cyan-300">LinkedIn ↗</a>
-                <a href="https://github.com/DewanHabib10" target="_blank" rel="noreferrer" class="rounded-full border border-slate-700/80 bg-slate-900/70 px-3 py-1.5 text-slate-200 transition hover:border-emerald-400 hover:text-emerald-300">GitHub ↗</a>
             </div>
 
             <!-- Mobile Action & Hamburger Buttons -->
-            <div class="flex md:hidden items-center gap-2">
-                <button id="openCmdPaletteMobileBtn" type="button" aria-label="Open Quick Menu" class="inline-flex items-center gap-1 rounded-xl border border-violet-500/40 bg-violet-500/15 px-3 py-2 text-xs font-semibold text-violet-200">
-                    ⚡ Menu
+            <div class="flex md:hidden items-center gap-2 shrink-0">
+                <a href="#contact" data-resume-file="Dewanhabib_resume.pdf" download="Dewanhabib_resume.pdf" target="_blank" rel="noreferrer" class="resume-link inline-flex items-center rounded-xl border border-emerald-500/40 bg-emerald-500/15 px-2.5 py-2 text-xs font-semibold text-emerald-200 whitespace-nowrap">
+                    Resume ↓
+                </a>
+                <button id="openCmdPaletteMobileBtn" type="button" aria-label="Open Quick Menu" class="inline-flex items-center rounded-xl border border-violet-500/40 bg-violet-500/15 px-2.5 py-2 text-xs font-semibold text-violet-200">
+                    ⚡
                 </button>
-                <button id="mobileMenuBtn" type="button" aria-expanded="false" aria-controls="mobileMenu" aria-label="Toggle navigation menu" class="inline-flex items-center justify-center rounded-xl border border-slate-700/80 bg-slate-900/80 p-2.5 text-slate-200 hover:border-violet-400 hover:text-white focus:outline-none">
+                <button id="mobileMenuBtn" type="button" aria-expanded="false" aria-controls="mobileMenu" aria-label="Toggle navigation menu" class="inline-flex items-center justify-center rounded-xl border border-slate-700/80 bg-slate-900/80 p-2 text-slate-200 hover:border-violet-400 hover:text-white focus:outline-none">
                     <svg id="menuIconOpen" class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
                         <path stroke-linecap="round" stroke-linejoin="round" d="M4 6h16M4 12h16M4 18h16" />
                     </svg>
@@ -482,7 +495,7 @@
         </div>
 
         <!-- Mobile Collapsible Navigation Drawer -->
-        <div id="mobileMenu" class="hidden md:hidden border-t border-slate-800/80 bg-slate-950/95 backdrop-blur-2xl px-4 pt-3 pb-5 space-y-3">
+        <div id="mobileMenu" class="hidden lg:hidden border-t border-slate-800/80 bg-slate-950/95 backdrop-blur-2xl px-4 pt-3 pb-5 space-y-3">
             <div class="grid grid-cols-2 gap-2 text-sm font-medium">
                 <a href="#about" class="mobile-nav-link rounded-xl border border-slate-800 bg-slate-900/60 px-3.5 py-2.5 text-slate-200 hover:border-violet-500/40 hover:text-white">About</a>
                 <a href="#architecture-stack" class="mobile-nav-link rounded-xl border border-slate-800 bg-slate-900/60 px-3.5 py-2.5 text-cyan-300 hover:border-cyan-500/40 hover:text-white">6-Step Playbook</a>
@@ -493,9 +506,10 @@
                 <a href="#contact" class="mobile-nav-link col-span-2 text-center rounded-xl border border-slate-800 bg-slate-900/60 px-3.5 py-2.5 text-slate-200 hover:border-violet-500/40 hover:text-white">Contact</a>
             </div>
             <div class="flex flex-wrap items-center gap-2 pt-2 border-t border-slate-800/80 text-xs font-semibold">
+                <a href="#contact" data-resume-file="Dewanhabib_resume.pdf" download="Dewanhabib_resume.pdf" target="_blank" rel="noreferrer" class="resume-link flex-1 text-center rounded-xl bg-emerald-500/15 border border-emerald-500/35 py-2.5 text-emerald-200">Resume ↓</a>
                 <a href="mailto:dewanhabib2004@gmail.com" class="flex-1 text-center rounded-xl bg-violet-600/20 border border-violet-500/40 py-2.5 text-violet-200">Email</a>
                 <a href="https://www.linkedin.com/in/dewan-habib-701a5b320" target="_blank" rel="noreferrer" class="flex-1 text-center rounded-xl bg-cyan-500/15 border border-cyan-500/30 py-2.5 text-cyan-200">LinkedIn ↗</a>
-                <a href="https://github.com/DewanHabib10" target="_blank" rel="noreferrer" class="flex-1 text-center rounded-xl bg-emerald-500/15 border border-emerald-500/30 py-2.5 text-emerald-200">GitHub ↗</a>
+                <a href="https://github.com/DewanHabib10" target="_blank" rel="noreferrer" class="flex-1 text-center rounded-xl bg-slate-800 border border-slate-700 py-2.5 text-slate-200">GitHub ↗</a>
             </div>
         </div>
     </header>
@@ -1320,7 +1334,7 @@
             <div class="flex items-center gap-2">
                 <span class="h-2 w-2 rounded-full bg-emerald-400 animate-pulse"></span>
                 <button id="toggleConstellationModeBtn" type="button" class="rounded-full bg-violet-500/20 border border-violet-500/40 px-3 py-1 text-violet-200 hover:bg-violet-500/35 hover:text-white transition">
-                    Bg: <span id="constellationModeLabel">Mesh</span>
+                    Bg: <span id="constellationModeLabel">Aurora</span>
                 </button>
             </div>
 
@@ -1567,122 +1581,103 @@
         }
 
         // =========================================================================
-        // 1. INTERACTIVE CONSTELLATION CANVAS (Clean Visual Nodes, No Text Clutter)
+        // 1. FLOWING AURORA WAVES & STARFIELD BACKGROUND (Clean, Smooth, Interactive)
         // =========================================================================
         const canvas = document.getElementById('constellationCanvas');
         const ctx = canvas ? canvas.getContext('2d') : null;
-        let nodes = [];
-        let packets = [];
-        let constellationMode = 0; // 0: Mesh, 1: Swarm, 2: Pulse
-        const modeNames = ['Mesh', 'Swarm', 'Pulse'];
+        let stars = [];
+        let ripples = [];
+        let waveTime = 0;
+        let constellationMode = 0; // 0: Aurora, 1: Starfield, 2: Pulse
+        const modeNames = ['Aurora', 'Stars', 'Pulse'];
         let pointer = { x: window.innerWidth / 2, y: window.innerHeight / 2, active: false };
 
         function initConstellation() {
             if (!canvas) return;
             canvas.width = window.innerWidth;
             canvas.height = window.innerHeight;
-            const count = window.innerWidth < 768 ? 26 : 50;
-            const palette = ['#8b5cf6', '#22d3ee', '#34d399', '#c084fc'];
+            const count = window.innerWidth < 768 ? 35 : 70;
+            const palette = ['rgba(167, 139, 250, 0.75)', 'rgba(34, 211, 238, 0.7)', 'rgba(52, 211, 153, 0.65)', 'rgba(226, 232, 240, 0.5)'];
 
-            nodes = Array.from({ length: count }, (_, i) => ({
+            stars = Array.from({ length: count }, () => ({
                 x: Math.random() * canvas.width,
                 y: Math.random() * canvas.height,
-                vx: (Math.random() - 0.5) * 0.55,
-                vy: (Math.random() - 0.5) * 0.55,
-                r: i % 8 === 0 ? 3 : 1.8,
-                color: palette[i % palette.length]
+                r: 0.9 + Math.random() * 1.8,
+                vy: -0.15 - Math.random() * 0.35,
+                vx: (Math.random() - 0.5) * 0.15,
+                phase: Math.random() * Math.PI * 2,
+                color: palette[Math.floor(Math.random() * palette.length)]
             }));
         }
 
         function triggerShockwave(cx = window.innerWidth / 2, cy = window.innerHeight / 2) {
-            playTone(360, 0.1, 'triangle', 0.04);
-            nodes.forEach((n) => {
-                const dx = n.x - cx;
-                const dy = n.y - cy;
-                const dist = Math.hypot(dx, dy) || 1;
-                const force = Math.min(12, 380 / dist);
-                n.vx += (dx / dist) * force;
-                n.vy += (dy / dist) * force;
-            });
-            for (let i = 0; i < 8; i++) {
-                if (nodes.length > 2) {
-                    const a = nodes[Math.floor(Math.random() * nodes.length)];
-                    const b = nodes[Math.floor(Math.random() * nodes.length)];
-                    if (a !== b) packets.push({ a, b, p: 0, speed: 0.024 + Math.random() * 0.02 });
-                }
-            }
+            playTone(380, 0.12, 'sine', 0.04);
+            ripples.push({ x: cx, y: cy, r: 10, maxR: Math.max(canvas.width, canvas.height) * 0.55, alpha: 0.55 });
         }
 
         function drawConstellation() {
             if (!ctx || !canvas) return;
             ctx.clearRect(0, 0, canvas.width, canvas.height);
+            waveTime += constellationMode === 2 ? 0.025 : 0.012;
 
-            const maxDist = window.innerWidth < 768 ? 115 : 150;
+            // Draw smooth flowing aurora silk ribbons (Modes: Aurora & Pulse)
+            if (constellationMode !== 1) {
+                const waveConfigs = [
+                    { yBase: 0.32, amp: 48, freq: 0.0022, speed: 1.0, color: 'rgba(139, 92, 246, 0.22)' },
+                    { yBase: 0.50, amp: 56, freq: 0.0018, speed: 1.35, color: 'rgba(34, 211, 238, 0.18)' },
+                    { yBase: 0.68, amp: 42, freq: 0.0025, speed: 0.85, color: 'rgba(52, 211, 153, 0.14)' }
+                ];
+                const pointerInfluence = pointer.active ? (pointer.y / canvas.height - 0.5) * 65 : 0;
 
-            for (let i = 0; i < nodes.length; i++) {
-                const n = nodes[i];
-
-                if (constellationMode === 1 && pointer.active) {
-                    const dx = pointer.x - n.x;
-                    const dy = pointer.y - n.y;
-                    const dist = Math.hypot(dx, dy) || 1;
-                    if (dist < 280) {
-                        n.vx += (dx / dist) * 0.08;
-                        n.vy += (dy / dist) * 0.08;
+                waveConfigs.forEach((w, idx) => {
+                    ctx.beginPath();
+                    ctx.strokeStyle = w.color;
+                    ctx.lineWidth = 2;
+                    for (let x = 0; x <= canvas.width; x += 24) {
+                        const y = canvas.height * w.yBase
+                            + Math.sin(x * w.freq + waveTime * w.speed + idx * 1.4) * w.amp
+                            + Math.cos(x * w.freq * 0.6 - waveTime * 0.7) * 20
+                            + pointerInfluence * Math.sin(x * 0.003);
+                        if (x === 0) ctx.moveTo(x, y);
+                        else ctx.lineTo(x, y);
                     }
-                } else if (constellationMode === 2) {
-                    n.vx *= 1.002;
-                    n.vy *= 1.002;
-                }
-
-                const speed = Math.hypot(n.vx, n.vy);
-                const maxSpeed = constellationMode === 2 ? 2.0 : 1.0;
-                if (speed > maxSpeed) {
-                    n.vx = (n.vx / speed) * maxSpeed;
-                    n.vy = (n.vy / speed) * maxSpeed;
-                }
-
-                n.x += n.vx;
-                n.y += n.vy;
-
-                if (n.x < 0 || n.x > canvas.width) n.vx *= -1;
-                if (n.y < 0 || n.y > canvas.height) n.vy *= -1;
-
-                for (let j = i + 1; j < nodes.length; j++) {
-                    const m = nodes[j];
-                    const dx = n.x - m.x;
-                    const dy = n.y - m.y;
-                    const dist = Math.hypot(dx, dy);
-                    if (dist < maxDist) {
-                        const alpha = (1 - dist / maxDist) * 0.18;
-                        ctx.strokeStyle = `rgba(139, 92, 246, ${alpha})`;
-                        ctx.lineWidth = 1;
-                        ctx.beginPath();
-                        ctx.moveTo(n.x, n.y);
-                        ctx.lineTo(m.x, m.y);
-                        ctx.stroke();
-                    }
-                }
-
-                ctx.fillStyle = n.color;
-                ctx.beginPath();
-                ctx.arc(n.x, n.y, n.r, 0, Math.PI * 2);
-                ctx.fill();
+                    ctx.stroke();
+                });
             }
 
-            for (let i = packets.length - 1; i >= 0; i--) {
-                const pkt = packets[i];
-                pkt.p += pkt.speed;
-                if (pkt.p >= 1) {
-                    packets.splice(i, 1);
+            // Draw drifting twinkling starfield particles
+            stars.forEach((st) => {
+                st.x += st.vx;
+                st.y += st.vy * (constellationMode === 2 ? 1.8 : 1);
+                st.phase += 0.03;
+
+                if (st.y < -10) { st.y = canvas.height + 10; st.x = Math.random() * canvas.width; }
+                if (st.x < -10) st.x = canvas.width + 10;
+                if (st.x > canvas.width + 10) st.x = -10;
+
+                const twinkle = 0.45 + 0.55 * Math.sin(st.phase);
+                ctx.globalAlpha = twinkle;
+                ctx.fillStyle = st.color;
+                ctx.beginPath();
+                ctx.arc(st.x, st.y, st.r, 0, Math.PI * 2);
+                ctx.fill();
+            });
+            ctx.globalAlpha = 1;
+
+            // Draw expanding energy pulse ripples
+            for (let i = ripples.length - 1; i >= 0; i--) {
+                const rp = ripples[i];
+                rp.r += 9;
+                rp.alpha *= 0.965;
+                if (rp.alpha < 0.02 || rp.r > rp.maxR) {
+                    ripples.splice(i, 1);
                     continue;
                 }
-                const px = pkt.a.x + (pkt.b.x - pkt.a.x) * pkt.p;
-                const py = pkt.a.y + (pkt.b.y - pkt.a.y) * pkt.p;
-                ctx.fillStyle = '#22d3ee';
+                ctx.strokeStyle = `rgba(34, 211, 238, ${rp.alpha})`;
+                ctx.lineWidth = 1.5;
                 ctx.beginPath();
-                ctx.arc(px, py, 2.5, 0, Math.PI * 2);
-                ctx.fill();
+                ctx.arc(rp.x, rp.y, rp.r, 0, Math.PI * 2);
+                ctx.stroke();
             }
 
             requestAnimationFrame(drawConstellation);
@@ -2054,8 +2049,8 @@
             });
 
             function animateCursor() {
-                ringX += (mouseX - ringX) * 0.22;
-                ringY += (mouseY - ringY) * 0.22;
+                ringX += (mouseX - ringX) * 0.38;
+                ringY += (mouseY - ringY) * 0.38;
                 cursorRing.style.left = ringX + 'px';
                 cursorRing.style.top = ringY + 'px';
                 requestAnimationFrame(animateCursor);
