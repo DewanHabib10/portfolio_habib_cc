@@ -549,7 +549,7 @@
                         <a href="#contact" class="inline-flex items-center justify-center rounded-xl border border-slate-700 bg-slate-900/70 px-5 py-3.5 text-sm sm:text-base font-semibold text-slate-100 transition hover:border-violet-400 hover:text-violet-300">
                             Let’s Talk
                         </a>
-                        <a href="https://drive.google.com/file/d/1IK5kgFQMdu9rG-lsqg4vIf26Iizu_sT1/view?usp=sharing" target="_blank" rel="noreferrer" class="inline-flex items-center justify-center rounded-xl border border-emerald-500/30 bg-emerald-500/10 px-5 py-3.5 text-sm sm:text-base font-semibold text-emerald-200 transition hover:border-emerald-400 hover:text-emerald-100">
+                        <a href="#contact" data-resume-file="Dewanhabib_resume.pdf" download="Dewanhabib_resume.pdf" target="_blank" rel="noreferrer" class="resume-link inline-flex items-center justify-center rounded-xl border border-emerald-500/30 bg-emerald-500/10 px-5 py-3.5 text-sm sm:text-base font-semibold text-emerald-200 transition hover:border-emerald-400 hover:text-emerald-100">
                             Download Resume (PDF) ↗
                         </a>
                     </div>
@@ -602,9 +602,10 @@
 
                                 <!-- Center Identity -->
                                 <div class="my-4 flex items-center gap-4 z-10">
-                                    <div class="relative flex h-16 w-16 shrink-0 items-center justify-center rounded-2xl bg-gradient-to-br from-violet-600 via-indigo-600 to-cyan-500 text-2xl font-extrabold text-white shadow-xl ring-2 ring-white/15 font-display">
-                                        DH
-                                        <span class="absolute -bottom-1 -right-1 flex h-5 w-5 items-center justify-center rounded-full bg-emerald-500 text-[10px] text-slate-950 font-black" title="Verified Strategist">✓</span>
+                                    <div class="relative flex h-16 w-16 shrink-0 items-center justify-center rounded-2xl bg-gradient-to-br from-violet-600 via-indigo-600 to-cyan-500 text-2xl font-extrabold text-white shadow-xl ring-2 ring-white/15 font-display overflow-hidden">
+                                        <span>DH</span>
+                                        <div class="absolute inset-0 bg-cover bg-center" style="background-image: url('ProfilePic.png');" aria-label="Dewan Habib"></div>
+                                        <span class="absolute -bottom-0.5 -right-0.5 z-10 flex h-5 w-5 items-center justify-center rounded-full bg-emerald-500 text-[10px] text-slate-950 font-black ring-2 ring-slate-950" title="Verified Strategist">✓</span>
                                     </div>
                                     <div>
                                         <div class="text-xl font-bold text-white leading-tight">Dewan Habib</div>
@@ -1305,7 +1306,7 @@
                             <span class="text-slate-700">•</span>
                             <a href="https://github.com/DewanHabib10" target="_blank" rel="noreferrer" class="hover:text-emerald-300 transition">GitHub ↗</a>
                             <span class="text-slate-700">•</span>
-                            <a href="https://drive.google.com/file/d/1IK5kgFQMdu9rG-lsqg4vIf26Iizu_sT1/view?usp=sharing" target="_blank" rel="noreferrer" class="hover:text-violet-300 transition">Resume (PDF) ↗</a>
+                            <a href="#contact" data-resume-file="Dewanhabib_resume.pdf" download="Dewanhabib_resume.pdf" target="_blank" rel="noreferrer" class="resume-link hover:text-violet-300 transition">Resume (PDF) ↗</a>
                         </div>
                     </div>
                 </div>
@@ -1327,8 +1328,8 @@
                 <button id="pulseShockwaveBtn" type="button" class="rounded-full bg-cyan-500/15 border border-cyan-500/35 px-3 py-1 text-cyan-200 hover:bg-cyan-500/30 hover:text-white transition">
                     💥 Pulse
                 </button>
-                <button id="toggleMusicBtn" type="button" class="rounded-full bg-slate-800/90 border border-slate-700 px-3 py-1 text-slate-300 hover:text-white transition">
-                    🎵 Music: <span id="musicStateLabel">Off</span>
+                <button id="toggleMusicBtn" type="button" class="rounded-full bg-slate-800/90 border border-slate-700 px-2.5 sm:px-3 py-1 text-slate-300 hover:text-white transition">
+                    🎵 <span class="hidden sm:inline">Music: </span><span id="musicStateLabel">Off</span>
                 </button>
                 <button id="toggleSoundBtn" type="button" class="rounded-full bg-slate-800/90 border border-slate-700 px-3 py-1 text-slate-300 hover:text-white transition">
                     🔊 <span id="soundStateLabel">Off</span>
@@ -1468,63 +1469,71 @@
         const arpNotes = [220.0, 261.63, 329.63, 392.0, 440.0, 392.0, 329.63, 293.66]; // A minor / chill synth
         let arpStep = 0;
 
-        function startAmbientMusic() {
+        function triggerArpNote() {
+            if (!musicPlaying || !audioCtx || !masterMusicGain) return;
+            const now = audioCtx.currentTime;
+            const osc = audioCtx.createOscillator();
+            const noteGain = audioCtx.createGain();
+            osc.type = 'triangle';
+            osc.frequency.setValueAtTime(arpNotes[arpStep % arpNotes.length], now);
+            arpStep++;
+
+            noteGain.gain.setValueAtTime(0.001, now);
+            noteGain.gain.linearRampToValueAtTime(0.42, now + 0.05);
+            noteGain.gain.exponentialRampToValueAtTime(0.0001, now + 0.72);
+
+            osc.connect(noteGain);
+            noteGain.connect(masterMusicGain);
+            osc.start(now);
+            osc.stop(now + 0.78);
+        }
+
+        async function startAmbientMusic() {
             try {
                 if (!audioCtx) {
                     const AudioContextClass = window.AudioContext || window.webkitAudioContext;
                     if (AudioContextClass) audioCtx = new AudioContextClass();
                 }
                 if (!audioCtx) return;
-                if (audioCtx.state === 'suspended') audioCtx.resume();
+                if (audioCtx.state === 'suspended') {
+                    await audioCtx.resume();
+                }
+                if (!musicPlaying) return;
 
+                stopAmbientMusic();
+
+                const now = audioCtx.currentTime;
                 masterMusicGain = audioCtx.createGain();
-                masterMusicGain.gain.setValueAtTime(0.001, audioCtx.currentTime);
-                masterMusicGain.gain.exponentialRampToValueAtTime(0.14, audioCtx.currentTime + 1.2);
+                masterMusicGain.gain.setValueAtTime(0.01, now);
+                masterMusicGain.gain.linearRampToValueAtTime(0.38, now + 0.5);
 
                 const filter = audioCtx.createBiquadFilter();
                 filter.type = 'lowpass';
-                filter.frequency.setValueAtTime(750, audioCtx.currentTime);
+                filter.frequency.setValueAtTime(1600, now);
 
                 masterMusicGain.connect(filter);
                 filter.connect(audioCtx.destination);
 
-                // Warm low drone pad (A2 + E3)
+                // Warm synth pad (A2 + E3)
                 padOsc1 = audioCtx.createOscillator();
                 padOsc2 = audioCtx.createOscillator();
                 const padGain = audioCtx.createGain();
-                padGain.gain.setValueAtTime(0.18, audioCtx.currentTime);
+                padGain.gain.setValueAtTime(0.32, now);
 
                 padOsc1.type = 'triangle';
-                padOsc1.frequency.setValueAtTime(110.0, audioCtx.currentTime);
+                padOsc1.frequency.setValueAtTime(110.0, now);
                 padOsc2.type = 'sine';
-                padOsc2.frequency.setValueAtTime(164.81, audioCtx.currentTime);
+                padOsc2.frequency.setValueAtTime(164.81, now);
 
                 padOsc1.connect(padGain);
                 padOsc2.connect(padGain);
                 padGain.connect(masterMusicGain);
 
-                padOsc1.start();
-                padOsc2.start();
+                padOsc1.start(now);
+                padOsc2.start(now);
 
-                if (musicTimer) clearInterval(musicTimer);
-                musicTimer = setInterval(() => {
-                    if (!musicPlaying || !audioCtx || !masterMusicGain) return;
-                    const now = audioCtx.currentTime;
-                    const osc = audioCtx.createOscillator();
-                    const noteGain = audioCtx.createGain();
-                    osc.type = 'sine';
-                    osc.frequency.setValueAtTime(arpNotes[arpStep % arpNotes.length], now);
-                    arpStep++;
-
-                    noteGain.gain.setValueAtTime(0.001, now);
-                    noteGain.gain.linearRampToValueAtTime(0.16, now + 0.06);
-                    noteGain.gain.exponentialRampToValueAtTime(0.0001, now + 0.75);
-
-                    osc.connect(noteGain);
-                    noteGain.connect(masterMusicGain);
-                    osc.start(now);
-                    osc.stop(now + 0.8);
-                }, 460);
+                triggerArpNote();
+                musicTimer = setInterval(triggerArpNote, 440);
             } catch (e) {}
         }
 
@@ -1986,6 +1995,12 @@
                     copyEmailBtn.click();
                 }
             });
+        });
+
+        // Wire local repository resume PDF links
+        document.querySelectorAll('.resume-link').forEach((link) => {
+            const file = link.getAttribute('data-resume-file');
+            if (file) link.setAttribute('href', file);
         });
 
         // =========================================================================
