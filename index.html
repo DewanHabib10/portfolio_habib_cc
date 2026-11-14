@@ -3,18 +3,19 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Dewan Habib | Technical Community Strategist</title>
-    <meta name="description" content="Portfolio of Dewan Habib — technical community strategist, automation builder, and growth-focused developer.">
+    <title>Dewan Habib | Technical Community & Esports Strategist</title>
+    <meta name="description" content="Portfolio of Dewan Habib — Technical Community Strategist, Esports Operations Lead, and AI Automation Builder scaling 46,800+ member gaming ecosystems, managing 500+ regional creators, and directing KIC & EWC esports operations.">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Space+Grotesk:wght@600;700;800&display=swap" rel="stylesheet">
     <script src="https://cdn.tailwindcss.com"></script>
     <style>
         :root {
-            --bg: #050816;
-            --bg-soft: #0b1220;
-            --panel: rgba(15, 23, 42, 0.78);
-            --panel-strong: rgba(15, 23, 42, 0.95);
-            --text: #e5eefb;
-            --muted: #9aa7bd;
-            --edge: rgba(148, 163, 184, 0.18);
+            --bg: #040714;
+            --bg-soft: #0b1121;
+            --panel: rgba(15, 23, 42, 0.72);
+            --text: #f1f5f9;
+            --muted: #94a3b8;
             --primary: #8b5cf6;
             --secondary: #22d3ee;
             --accent: #34d399;
@@ -22,120 +23,198 @@
 
         html {
             scroll-behavior: smooth;
+            scroll-padding-top: 5.5rem;
         }
 
         body {
             background:
-                radial-gradient(circle at top left, rgba(139, 92, 246, 0.18), transparent 28%),
-                radial-gradient(circle at bottom right, rgba(34, 211, 238, 0.14), transparent 24%),
-                linear-gradient(135deg, #030712 0%, #0a1120 45%, #050816 100%);
+                radial-gradient(circle at 12% 8%, rgba(139, 92, 246, 0.16), transparent 30%),
+                radial-gradient(circle at 88% 22%, rgba(34, 211, 238, 0.12), transparent 26%),
+                radial-gradient(circle at 50% 85%, rgba(52, 211, 153, 0.08), transparent 30%),
+                linear-gradient(135deg, #030712 0%, #0a1120 48%, #040714 100%);
             color: var(--text);
-            font-family: Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+            font-family: 'Inter', ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
             overflow-x: hidden;
         }
 
-        * { cursor: none; }
-        a, button { cursor: none; }
-
-        body.pointer-hidden {
-            cursor: none;
+        h1, h2, h3, h4, .font-display {
+            font-family: 'Space Grotesk', 'Inter', ui-sans-serif, system-ui, sans-serif;
         }
 
         ::selection {
-            background: rgba(139, 92, 246, 0.4);
+            background: rgba(139, 92, 246, 0.45);
             color: white;
         }
 
-        ::-webkit-scrollbar { width: 10px; }
-        ::-webkit-scrollbar-track { background: rgba(15, 23, 42, 0.9); }
+        ::-webkit-scrollbar { width: 8px; height: 6px; }
+        ::-webkit-scrollbar-track { background: #030712; }
         ::-webkit-scrollbar-thumb {
             background: linear-gradient(180deg, rgba(139, 92, 246, 0.8), rgba(34, 211, 238, 0.8));
             border-radius: 999px;
         }
 
+        /* Interactive Background Canvas */
+        #constellationCanvas {
+            position: fixed;
+            inset: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            z-index: 1;
+            opacity: 0.7;
+        }
+
+        /* Outlined Kinetic Hero Watermark */
+        .hero-watermark {
+            font-family: 'Space Grotesk', sans-serif;
+            font-weight: 800;
+            font-size: clamp(3.2rem, 11.5vw, 9.2rem);
+            line-height: 0.9;
+            letter-spacing: -0.03em;
+            color: transparent;
+            -webkit-text-stroke: 1.5px rgba(139, 92, 246, 0.22);
+            text-transform: uppercase;
+            user-select: none;
+            pointer-events: none;
+            position: relative;
+        }
+
+        .hero-watermark::after {
+            content: attr(data-text);
+            position: absolute;
+            left: 0;
+            top: 0;
+            color: transparent;
+            -webkit-text-stroke: 1.5px rgba(34, 211, 238, 0.42);
+            clip-path: polygon(0 0, var(--scan-x, 35%) 0, var(--scan-x, 35%) 100%, 0 100%);
+            transition: clip-path 0.15s ease-out;
+        }
+
         .glass {
-            background: rgba(15, 23, 42, 0.58);
-            border: 1px solid rgba(148, 163, 184, 0.14);
-            box-shadow: 0 20px 45px rgba(2, 6, 23, 0.38);
+            position: relative;
+            background: rgba(15, 23, 42, 0.68);
+            border: 1px solid rgba(148, 163, 184, 0.16);
+            box-shadow: 0 20px 45px rgba(2, 6, 23, 0.45);
             backdrop-filter: blur(18px);
             -webkit-backdrop-filter: blur(18px);
         }
 
-        .orb {
+        /* Subtle Accent Corner Highlights */
+        .hud-corners {
+            position: relative;
+        }
+
+        .hud-corners::before,
+        .hud-corners::after {
+            content: "";
             position: absolute;
+            width: 12px;
+            height: 12px;
+            pointer-events: none;
+            transition: all 0.3s ease;
+            z-index: 5;
+        }
+
+        .hud-corners::before {
+            top: -1px;
+            left: -1px;
+            border-top: 2px solid rgba(34, 211, 238, 0.65);
+            border-left: 2px solid rgba(34, 211, 238, 0.65);
+            border-top-left-radius: 8px;
+        }
+
+        .hud-corners::after {
+            bottom: -1px;
+            right: -1px;
+            border-bottom: 2px solid rgba(139, 92, 246, 0.65);
+            border-right: 2px solid rgba(139, 92, 246, 0.65);
+            border-bottom-right-radius: 8px;
+        }
+
+        .hud-corners:hover::before,
+        .hud-corners:hover::after {
+            width: 20px;
+            height: 20px;
+            border-color: #22d3ee;
+        }
+
+        .orb {
+            position: fixed;
             border-radius: 50%;
-            filter: blur(70px);
-            opacity: 0.4;
+            filter: blur(95px);
+            opacity: 0.25;
             pointer-events: none;
             z-index: 0;
         }
 
         .orb-one {
-            width: 260px;
-            height: 260px;
+            width: 300px;
+            height: 300px;
             background: rgba(139, 92, 246, 0.45);
-            top: 6%;
-            left: 8%;
-            animation: floatOne 16s ease-in-out infinite;
+            top: 4%;
+            left: 4%;
+            animation: floatOne 18s ease-in-out infinite;
         }
 
         .orb-two {
-            width: 280px;
-            height: 280px;
-            background: rgba(34, 211, 238, 0.25);
-            right: 10%;
-            top: 20%;
-            animation: floatTwo 18s ease-in-out infinite;
+            width: 320px;
+            height: 320px;
+            background: rgba(34, 211, 238, 0.28);
+            right: 5%;
+            top: 26%;
+            animation: floatTwo 20s ease-in-out infinite;
         }
 
         .orb-three {
-            width: 220px;
-            height: 220px;
+            width: 260px;
+            height: 260px;
             background: rgba(52, 211, 153, 0.2);
-            left: 46%;
+            left: 40%;
             bottom: 8%;
-            animation: floatThree 20s ease-in-out infinite;
+            animation: floatThree 22s ease-in-out infinite;
         }
 
         @keyframes floatOne {
-            0%, 100% { transform: translateY(0) translateX(0) scale(1); }
-            50% { transform: translateY(30px) translateX(20px) scale(1.1); }
+            0%, 100% { transform: translate(0, 0) scale(1); }
+            50% { transform: translate(24px, 28px) scale(1.08); }
         }
 
         @keyframes floatTwo {
-            0%, 100% { transform: translateY(0) translateX(0) scale(1); }
-            50% { transform: translateY(-24px) translateX(-18px) scale(1.08); }
+            0%, 100% { transform: translate(0, 0) scale(1); }
+            50% { transform: translate(-20px, -24px) scale(1.06); }
         }
 
         @keyframes floatThree {
-            0%, 100% { transform: translateY(0) translateX(0) scale(1); }
-            50% { transform: translateY(24px) translateX(-10px) scale(1.12); }
+            0%, 100% { transform: translate(0, 0) scale(1); }
+            50% { transform: translate(-14px, 22px) scale(1.1); }
         }
 
         .text-glow {
-            text-shadow: 0 0 30px rgba(139, 92, 246, 0.35);
+            text-shadow: 0 0 34px rgba(139, 92, 246, 0.28);
         }
 
         .nav-link {
             position: relative;
-            transition: color 0.25s ease;
+            transition: color 0.22s ease;
         }
 
         .nav-link::after {
             content: "";
             position: absolute;
             left: 0;
-            bottom: -0.4rem;
+            bottom: -0.35rem;
             width: 100%;
-            height: 1px;
-            background: linear-gradient(90deg, rgba(139, 92, 246, 0.9), rgba(34, 211, 238, 0.9));
+            height: 2px;
+            border-radius: 999px;
+            background: linear-gradient(90deg, #8b5cf6, #22d3ee);
             transform: scaleX(0);
             transform-origin: left;
             transition: transform 0.25s ease;
         }
 
         .nav-link:hover::after,
-        .nav-link:focus-visible::after {
+        .nav-link:focus-visible::after,
+        .nav-link.active::after {
             transform: scaleX(1);
         }
 
@@ -144,33 +223,56 @@
         .stat-box,
         .profile-panel,
         .cta-box {
-            transition: transform 0.3s ease, border-color 0.3s ease, box-shadow 0.3s ease;
+            transition: transform 0.28s cubic-bezier(0.22, 1, 0.36, 1), border-color 0.28s ease, box-shadow 0.28s ease;
         }
 
-        .feature-card:hover,
-        .case-card:hover,
-        .stat-box:hover,
-        .profile-panel:hover,
-        .cta-box:hover {
-            transform: translateY(-6px);
-            border-color: rgba(139, 92, 246, 0.6);
-            box-shadow: 0 24px 55px rgba(15, 23, 42, 0.45);
+        /* Dynamic Spotlight Glare Effect on Cards */
+        .spotlight-card {
+            position: relative;
+            overflow: hidden;
+        }
+
+        .spotlight-card::before {
+            content: "";
+            position: absolute;
+            inset: 0;
+            background: radial-gradient(500px circle at var(--mouse-x, 50%) var(--mouse-y, 50%), rgba(139, 92, 246, 0.12), transparent 42%);
+            opacity: 0;
+            transition: opacity 0.3s ease;
+            pointer-events: none;
+            z-index: 1;
+        }
+
+        @media (hover: hover) {
+            .spotlight-card:hover::before {
+                opacity: 1;
+            }
+            .feature-card:hover,
+            .case-card:hover,
+            .stat-box:hover,
+            .cta-box:hover {
+                transform: translateY(-5px);
+                border-color: rgba(34, 211, 238, 0.45);
+                box-shadow: 0 24px 55px rgba(2, 6, 23, 0.6), 0 0 24px rgba(139, 92, 246, 0.14);
+            }
         }
 
         .pulse-dot {
-            width: 10px;
-            height: 10px;
+            width: 9px;
+            height: 9px;
             background: #34d399;
             border-radius: 50%;
-            box-shadow: 0 0 20px rgba(52, 211, 153, 0.9);
+            box-shadow: 0 0 14px rgba(52, 211, 153, 0.9);
             animation: pulse 2.2s infinite;
+            flex-shrink: 0;
         }
 
         @keyframes pulse {
             0%, 100% { transform: scale(1); opacity: 1; }
-            50% { transform: scale(1.6); opacity: 0.75; }
+            50% { transform: scale(1.45); opacity: 0.7; }
         }
 
+        /* Ambient Cursor Follower (Desktop Fine Pointer Only) */
         .cursor-dot, .cursor-ring {
             position: fixed;
             top: 0;
@@ -178,113 +280,96 @@
             pointer-events: none;
             z-index: 9999;
             transform: translate(-50%, -50%);
-            border-radius: 50%;
             mix-blend-mode: screen;
-            transition: width 0.18s ease, height 0.18s ease, border-color 0.18s ease, opacity 0.18s ease, transform 0.18s ease;
+            display: none;
         }
 
-        .cursor-dot {
-            width: 10px;
-            height: 10px;
-            background: radial-gradient(circle at 30% 30%, rgba(255,255,255,1), rgba(147,197,253,0.9) 40%, rgba(167,139,250,0.8) 100%);
-            box-shadow: 0 0 18px rgba(125, 211, 252, 0.8), 0 0 28px rgba(139, 92, 246, 0.5);
-        }
+        @media (hover: hover) and (pointer: fine) {
+            .cursor-dot {
+                display: block;
+                width: 6px;
+                height: 6px;
+                border-radius: 50%;
+                background: #22d3ee;
+                box-shadow: 0 0 12px #22d3ee;
+            }
 
-        .cursor-ring {
-            width: 42px;
-            height: 42px;
-            border: 1.5px solid rgba(103, 232, 249, 0.9);
-            background: rgba(34, 211, 238, 0.06);
-            box-shadow: inset 0 0 18px rgba(34, 211, 238, 0.08), 0 0 20px rgba(34, 211, 238, 0.12);
-        }
+            .cursor-ring {
+                display: block;
+                width: 36px;
+                height: 36px;
+                border-radius: 50%;
+                border: 1.25px solid rgba(139, 92, 246, 0.55);
+                background: rgba(34, 211, 238, 0.03);
+                transition: width 0.2s ease, height 0.2s ease, border-color 0.2s ease, background 0.2s ease;
+            }
 
-        .cursor-ring.active {
-            width: 66px;
-            height: 66px;
-            border-color: rgba(167, 139, 250, 0.9);
-            background: rgba(139, 92, 246, 0.08);
-            box-shadow: 0 0 30px rgba(168, 85, 247, 0.3), inset 0 0 18px rgba(168, 85, 247, 0.12);
-        }
-
-        .cursor-ring::after {
-            content: "";
-            position: absolute;
-            inset: 14px;
-            border-radius: 50%;
-            border: 1px solid rgba(255,255,255,0.35);
-            opacity: 0;
-            transition: opacity 0.2s ease;
-        }
-
-        .cursor-ring.active::after {
-            opacity: 1;
-        }
-
-        .music-toggle {
-            transition: transform 0.2s ease, box-shadow 0.2s ease;
-        }
-
-        .music-toggle:hover {
-            transform: translateY(-2px) scale(1.02);
-            box-shadow: 0 12px 25px rgba(139, 92, 246, 0.35);
+            .cursor-ring.active {
+                width: 54px;
+                height: 54px;
+                border-color: rgba(34, 211, 238, 0.85);
+                background: rgba(139, 92, 246, 0.08);
+            }
         }
 
         .grid-bg {
             background-image:
-                linear-gradient(rgba(148, 163, 184, 0.08) 1px, transparent 1px),
-                linear-gradient(90deg, rgba(148, 163, 184, 0.08) 1px, transparent 1px);
+                linear-gradient(rgba(148, 163, 184, 0.06) 1px, transparent 1px),
+                linear-gradient(90deg, rgba(148, 163, 184, 0.06) 1px, transparent 1px);
             background-size: 26px 26px;
-            mask-image: radial-gradient(circle at center, black 35%, transparent 100%);
         }
 
         .section-kicker {
-            letter-spacing: 0.28em;
+            letter-spacing: 0.2em;
             text-transform: uppercase;
-            font-size: 0.72rem;
-            font-weight: 800;
+            font-size: 0.74rem;
+            font-weight: 700;
         }
 
         .chip {
             display: inline-flex;
             align-items: center;
-            gap: 0.5rem;
+            gap: 0.45rem;
             border-radius: 9999px;
-            border: 1px solid rgba(148, 163, 184, 0.2);
-            background: rgba(15, 23, 42, 0.72);
+            border: 1px solid rgba(148, 163, 184, 0.22);
+            background: rgba(15, 23, 42, 0.8);
             color: #e2e8f0;
-            padding: 0.55rem 0.9rem;
-            font-size: 0.75rem;
+            padding: 0.45rem 0.9rem;
+            font-size: 0.78rem;
             font-weight: 600;
+            transition: all 0.2s ease;
         }
 
-        .hero-list li::before {
-            content: "✦";
-            color: #67e8f9;
-            margin-right: 0.6rem;
+        .chip:hover {
+            border-color: #22d3ee;
+            color: #ffffff;
+            transform: translateY(-2px);
+            box-shadow: 0 6px 18px rgba(34, 211, 238, 0.16);
         }
 
         .timeline-item::before {
             content: "";
             position: absolute;
-            left: -0.75rem;
-            top: 0.4rem;
-            width: 0.7rem;
-            height: 0.7rem;
+            left: -0.42rem;
+            top: 0.35rem;
+            width: 0.75rem;
+            height: 0.75rem;
             border-radius: 50%;
             background: linear-gradient(135deg, #8b5cf6, #22d3ee);
-            box-shadow: 0 0 18px rgba(139, 92, 246, 0.7);
+            box-shadow: 0 0 14px rgba(139, 92, 246, 0.8);
+            border: 2px solid #040714;
         }
 
         .experience-card {
-            background: linear-gradient(180deg, rgba(15, 23, 42, 0.72), rgba(15, 23, 42, 0.45));
-            border: 1px solid rgba(148, 163, 184, 0.15);
+            background: linear-gradient(180deg, rgba(15, 23, 42, 0.78), rgba(15, 23, 42, 0.52));
+            border: 1px solid rgba(148, 163, 184, 0.16);
             backdrop-filter: blur(14px);
         }
 
         .reveal {
             opacity: 0;
-            transform: translateY(32px);
-            transition: opacity 0.8s ease, transform 0.8s ease;
+            transform: translateY(24px);
+            transition: opacity 0.65s ease, transform 0.65s ease;
         }
 
         .reveal.visible {
@@ -294,111 +379,75 @@
 
         .profile-photo {
             position: relative;
-            height: 260px;
-            border-radius: 28px;
+            min-height: 225px;
+            border-radius: 20px;
             background:
-                linear-gradient(135deg, rgba(15, 23, 42, 0.05), rgba(15, 23, 42, 0.5)),
-                url('ProfilePic.png') center/cover no-repeat;
-            border: 1px solid rgba(148, 163, 184, 0.18);
-            box-shadow: 0 28px 50px rgba(2, 6, 23, 0.4);
+                radial-gradient(circle at 80% 20%, rgba(34, 211, 238, 0.22), transparent 45%),
+                radial-gradient(circle at 20% 80%, rgba(139, 92, 246, 0.28), transparent 50%),
+                linear-gradient(145deg, #0f172a 0%, #070b16 100%);
+            border: 1px solid rgba(148, 163, 184, 0.22);
+            box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.08), 0 20px 40px rgba(2, 6, 23, 0.45);
             overflow: hidden;
-        }
-
-        .profile-photo::before {
-            content: "";
-            position: absolute;
-            inset: 0;
-            background: linear-gradient(180deg, rgba(15, 23, 42, 0.14), rgba(15, 23, 42, 0.7));
-        }
-
-        .floating-badge {
-            position: absolute;
-            right: 1rem;
-            top: 1rem;
-            background: rgba(15, 23, 42, 0.8);
-            border: 1px solid rgba(148, 163, 184, 0.18);
-            backdrop-filter: blur(12px);
-            border-radius: 9999px;
-            padding: 0.5rem 0.8rem;
-            font-size: 0.7rem;
-            font-weight: 700;
-            letter-spacing: 0.12em;
-            text-transform: uppercase;
-            color: #e2e8f0;
-            z-index: 2;
         }
 
         .count-up {
             display: inline-block;
-            min-width: 1.2ch;
             font-variant-numeric: tabular-nums;
         }
 
-        @media (max-width: 1024px) {
-            body {
-                background:
-                    radial-gradient(circle at top left, rgba(139, 92, 246, 0.16), transparent 22%),
-                    radial-gradient(circle at bottom right, rgba(34, 211, 238, 0.12), transparent 18%),
-                    linear-gradient(135deg, #030712 0%, #0a1120 45%, #050816 100%);
-            }
+        .filter-tab.active,
+        .arch-layer-btn.active {
+            background: linear-gradient(135deg, rgba(139, 92, 246, 0.92), rgba(34, 211, 238, 0.85));
+            color: #ffffff;
+            border-color: transparent;
+            box-shadow: 0 10px 25px rgba(139, 92, 246, 0.32);
         }
 
-        @media (max-width: 768px) {
-            * { cursor: auto; }
-            a, button { cursor: pointer; }
-            .cursor-dot, .cursor-ring { display: none; }
+        .no-scrollbar::-webkit-scrollbar { display: none; }
+        .no-scrollbar { -ms-overflow-style: none; scrollbar-width: none; }
 
-            .max-w-6xl { max-width: 100%; }
-            .px-6 { padding-left: 1rem; padding-right: 1rem; }
-            header .max-w-6xl { padding-top: 1rem; padding-bottom: 1rem; }
-
-            nav {
-                flex-wrap: wrap;
-                justify-content: center;
-                gap: 0.75rem 1rem;
-            }
-
-            #about .grid,
-            #services .grid,
-            .grid.md\:grid-cols-3,
-            .grid.lg\:grid-cols-\[0\.9fr_1\.1fr\],
-            .grid.md\:grid-cols-\[1\.2fr_0\.8fr\],
-            #case-studies .space-y-8 {
-                display: block;
-            }
-
-            .stat-box { min-width: 0; flex: 1 1 30%; }
-            .feature-card, .case-card, .experience-card, .glass { border-radius: 1.25rem; }
+        /* Animated Data Flow in SVG */
+        @keyframes dashFlow {
+            to { stroke-dashoffset: -40; }
         }
-
-        @media (max-width: 480px) {
-            h1 { font-size: 1.5rem; }
-            h2 { font-size: 2.4rem !important; }
-            h3 { font-size: 2rem !important; }
-            .section-kicker { letter-spacing: 0.18em; }
-            .chip { font-size: 0.7rem; padding: 0.45rem 0.75rem; }
-            .music-toggle { bottom: 1rem; right: 1rem; padding: 0.7rem 0.9rem; font-size: 0.75rem; }
+        .flow-line {
+            stroke-dasharray: 6 6;
+            animation: dashFlow 1.6s linear infinite;
         }
     </style>
 </head>
-<body class="bg-slate-950 text-slate-300 antialiased leading-relaxed pointer-hidden">
+<body class="bg-slate-950 text-slate-200 antialiased leading-relaxed selection:bg-violet-500/40 selection:text-white pb-24">
 
+    <!-- Interactive Live Community Constellation Canvas -->
+    <canvas id="constellationCanvas" aria-hidden="true"></canvas>
+
+    <!-- Ambient Cursor Follower (Desktop Only) -->
     <div class="cursor-dot" id="cursorDot"></div>
     <div class="cursor-ring" id="cursorRing"></div>
 
+    <!-- Ambient Background Orbs -->
     <div class="orb orb-one"></div>
     <div class="orb orb-two"></div>
     <div class="orb orb-three"></div>
 
-    <header class="sticky top-0 z-50 border-b border-slate-800/80 bg-slate-950/55 backdrop-blur-xl">
-        <div class="max-w-6xl mx-auto px-6 py-5 flex flex-col md:flex-row items-center justify-between gap-4">
-            <div>
-                <h1 class="text-2xl font-black tracking-tight text-white">Dewan Habib</h1>
-                <p class="text-sm font-medium text-violet-300">Technical Community & Esports Strategist</p>
-            </div>
+    <!-- Sticky Responsive Header -->
+    <header class="sticky top-0 z-50 border-b border-slate-800/80 bg-slate-950/80 backdrop-blur-xl">
+        <div class="max-w-6xl mx-auto px-4 sm:px-6 py-3 md:py-3.5 flex items-center justify-between gap-3">
+            <a href="#about" class="group flex items-center gap-3 focus:outline-none">
+                <div class="relative flex h-10 w-10 items-center justify-center rounded-xl bg-gradient-to-br from-violet-600 to-cyan-500 font-display text-sm font-bold text-white shadow-md shadow-violet-950/50 transition group-hover:scale-105">
+                    DH
+                    <span class="absolute -top-1 -right-1 h-2.5 w-2.5 rounded-full bg-emerald-400 ring-2 ring-slate-950"></span>
+                </div>
+                <div>
+                    <h1 class="text-base sm:text-lg font-bold tracking-tight text-white">Dewan Habib</h1>
+                    <p class="text-[11px] sm:text-xs font-medium text-cyan-300">Technical Community &amp; Esports Strategist</p>
+                </div>
+            </a>
 
-            <nav class="flex items-center gap-6 text-sm font-medium text-slate-300">
+            <!-- Desktop Nav -->
+            <nav class="hidden md:flex items-center gap-5 lg:gap-6 text-xs lg:text-sm font-medium text-slate-300" aria-label="Primary Navigation">
                 <a href="#about" class="nav-link hover:text-white">About</a>
+                <a href="#architecture-stack" class="nav-link hover:text-white">Playbook</a>
                 <a href="#services" class="nav-link hover:text-white">Services</a>
                 <a href="#experience" class="nav-link hover:text-white">Experience</a>
                 <a href="#publications" class="nav-link hover:text-white">Research</a>
@@ -406,96 +455,211 @@
                 <a href="#contact" class="nav-link hover:text-white">Contact</a>
             </nav>
 
-            <div class="flex items-center gap-3 text-sm font-medium">
-                <a href="mailto:dewanhabib2004@gmail.com" class="rounded-full border border-slate-700 bg-slate-900/60 px-4 py-2 text-slate-200 transition hover:border-violet-400 hover:text-violet-300">Email</a>
-                <a href="https://www.linkedin.com/in/dewan-habib-701a5b320" target="_blank" rel="noreferrer" class="rounded-full border border-slate-700 bg-slate-900/60 px-4 py-2 text-slate-200 transition hover:border-cyan-400 hover:text-cyan-300">LinkedIn</a>
-                <a href="https://github.com/DewanHabib10" target="_blank" rel="noreferrer" class="rounded-full border border-slate-700 bg-slate-900/60 px-4 py-2 text-slate-200 transition hover:border-emerald-400 hover:text-emerald-300">GitHub</a>
+            <!-- Desktop Quick Actions -->
+            <div class="hidden lg:flex items-center gap-2 text-xs font-semibold">
+                <button id="openCmdPaletteBtn" type="button" class="inline-flex items-center gap-1.5 rounded-full border border-violet-500/40 bg-violet-500/10 px-3 py-1.5 text-xs text-violet-200 transition hover:border-cyan-400 hover:text-white">
+                    <span>⚡ Quick Menu</span>
+                </button>
+                <a href="mailto:dewanhabib2004@gmail.com" class="rounded-full border border-slate-700/80 bg-slate-900/70 px-3 py-1.5 text-slate-200 transition hover:border-violet-400 hover:text-violet-300">Email</a>
+                <a href="https://www.linkedin.com/in/dewan-habib-701a5b320" target="_blank" rel="noreferrer" class="rounded-full border border-slate-700/80 bg-slate-900/70 px-3 py-1.5 text-slate-200 transition hover:border-cyan-400 hover:text-cyan-300">LinkedIn ↗</a>
+                <a href="https://github.com/DewanHabib10" target="_blank" rel="noreferrer" class="rounded-full border border-slate-700/80 bg-slate-900/70 px-3 py-1.5 text-slate-200 transition hover:border-emerald-400 hover:text-emerald-300">GitHub ↗</a>
+            </div>
+
+            <!-- Mobile Action & Hamburger Buttons -->
+            <div class="flex md:hidden items-center gap-2">
+                <button id="openCmdPaletteMobileBtn" type="button" aria-label="Open Quick Menu" class="inline-flex items-center gap-1 rounded-xl border border-violet-500/40 bg-violet-500/15 px-3 py-2 text-xs font-semibold text-violet-200">
+                    ⚡ Menu
+                </button>
+                <button id="mobileMenuBtn" type="button" aria-expanded="false" aria-controls="mobileMenu" aria-label="Toggle navigation menu" class="inline-flex items-center justify-center rounded-xl border border-slate-700/80 bg-slate-900/80 p-2.5 text-slate-200 hover:border-violet-400 hover:text-white focus:outline-none">
+                    <svg id="menuIconOpen" class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+                        <path stroke-linecap="round" stroke-linejoin="round" d="M4 6h16M4 12h16M4 18h16" />
+                    </svg>
+                    <svg id="menuIconClose" class="hidden h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+                        <path stroke-linecap="round" stroke-linejoin="round" d="M6 18L18 6M6 6l12 12" />
+                    </svg>
+                </button>
+            </div>
+        </div>
+
+        <!-- Mobile Collapsible Navigation Drawer -->
+        <div id="mobileMenu" class="hidden md:hidden border-t border-slate-800/80 bg-slate-950/95 backdrop-blur-2xl px-4 pt-3 pb-5 space-y-3">
+            <div class="grid grid-cols-2 gap-2 text-sm font-medium">
+                <a href="#about" class="mobile-nav-link rounded-xl border border-slate-800 bg-slate-900/60 px-3.5 py-2.5 text-slate-200 hover:border-violet-500/40 hover:text-white">About</a>
+                <a href="#architecture-stack" class="mobile-nav-link rounded-xl border border-slate-800 bg-slate-900/60 px-3.5 py-2.5 text-cyan-300 hover:border-cyan-500/40 hover:text-white">6-Step Playbook</a>
+                <a href="#services" class="mobile-nav-link rounded-xl border border-slate-800 bg-slate-900/60 px-3.5 py-2.5 text-slate-200 hover:border-violet-500/40 hover:text-white">Services</a>
+                <a href="#experience" class="mobile-nav-link rounded-xl border border-slate-800 bg-slate-900/60 px-3.5 py-2.5 text-slate-200 hover:border-violet-500/40 hover:text-white">Experience</a>
+                <a href="#publications" class="mobile-nav-link rounded-xl border border-slate-800 bg-slate-900/60 px-3.5 py-2.5 text-slate-200 hover:border-violet-500/40 hover:text-white">Research</a>
+                <a href="#case-studies" class="mobile-nav-link rounded-xl border border-slate-800 bg-slate-900/60 px-3.5 py-2.5 text-slate-200 hover:border-violet-500/40 hover:text-white">Case Studies</a>
+                <a href="#contact" class="mobile-nav-link col-span-2 text-center rounded-xl border border-slate-800 bg-slate-900/60 px-3.5 py-2.5 text-slate-200 hover:border-violet-500/40 hover:text-white">Contact</a>
+            </div>
+            <div class="flex flex-wrap items-center gap-2 pt-2 border-t border-slate-800/80 text-xs font-semibold">
+                <a href="mailto:dewanhabib2004@gmail.com" class="flex-1 text-center rounded-xl bg-violet-600/20 border border-violet-500/40 py-2.5 text-violet-200">Email</a>
+                <a href="https://www.linkedin.com/in/dewan-habib-701a5b320" target="_blank" rel="noreferrer" class="flex-1 text-center rounded-xl bg-cyan-500/15 border border-cyan-500/30 py-2.5 text-cyan-200">LinkedIn ↗</a>
+                <a href="https://github.com/DewanHabib10" target="_blank" rel="noreferrer" class="flex-1 text-center rounded-xl bg-emerald-500/15 border border-emerald-500/30 py-2.5 text-emerald-200">GitHub ↗</a>
             </div>
         </div>
     </header>
 
     <main class="relative z-10">
-        <section id="about" class="reveal max-w-6xl mx-auto px-6 py-16 md:py-24">
-            <div class="grid lg:grid-cols-[1.5fr_0.9fr] items-center gap-10">
-                <div>
-                    <div class="inline-flex items-center gap-2 rounded-full border border-violet-500/30 bg-violet-500/10 px-3 py-1.5 text-xs font-semibold uppercase tracking-[0.22em] text-violet-300 mb-6">
+        <!-- HERO / COMMAND DECK SECTION -->
+        <section id="about" class="reveal max-w-6xl mx-auto px-4 sm:px-6 pt-6 pb-14 md:py-16">
+            <!-- Kinetic Outlined Backdrop Banner -->
+            <div class="mb-4 sm:mb-6 select-none overflow-hidden">
+                <div class="flex flex-wrap items-center justify-between gap-2 text-xs font-semibold text-slate-400 mb-1">
+                    <span>Community Strategist &amp; Esports Operations</span>
+                    <span class="text-cyan-300">46,841+ Members • 500+ Creators • KIC Mumbai LAN</span>
+                </div>
+                <div class="hero-watermark" id="heroWatermark" data-text="COMMUNITY">COMMUNITY</div>
+            </div>
+
+            <div class="grid grid-cols-1 lg:grid-cols-12 items-start gap-8 lg:gap-10">
+                <!-- Left Column: Hero Copy & CTAs -->
+                <div class="lg:col-span-7">
+                    <div class="inline-flex flex-wrap items-center gap-2.5 rounded-full border border-violet-500/35 bg-violet-500/10 px-3.5 py-1.5 text-xs font-semibold text-violet-200 mb-5">
                         <span class="pulse-dot"></span>
-                        Available for impact-driven work
+                        <span>Available for Community, Esports &amp; AI Operations</span>
                     </div>
 
-                    <h2 class="text-4xl md:text-6xl font-black leading-[1.05] text-white text-glow">
-                        Building <span class="bg-gradient-to-r from-violet-400 via-cyan-300 to-emerald-300 bg-clip-text text-transparent">communities</span>
-                        that turn attention into lasting growth.
+                    <h2 class="text-3xl sm:text-5xl lg:text-[3.35rem] font-bold leading-[1.08] tracking-tight text-white text-glow">
+                        Building <span class="bg-gradient-to-r from-violet-400 via-cyan-300 to-emerald-300 bg-clip-text text-transparent">thriving gaming communities</span>
+                        &amp; seamless tournament experiences.
                     </h2>
 
-                    <p class="mt-6 max-w-2xl text-lg text-slate-300 md:text-xl">
-                        I design scalable community infrastructure, execute competitive esports operations, and automate engagement to connect technical execution with market growth. From architecture for tier-1 creator hubs to running official EWC qualifiers and community tournaments, I build systems that convert audience energy into retention.
+                    <p class="mt-5 max-w-2xl text-base sm:text-lg text-slate-300 leading-relaxed">
+                        From scaling official Discord communities past <strong class="text-white font-semibold">46,841+ combined members</strong> and managing <strong class="text-white font-semibold">500+ creators</strong> across India &amp; Pakistan to running online qualifiers and sponsored <strong class="text-white font-semibold">Mumbai LAN</strong> broadcast operations for the <strong class="text-white font-semibold">HoK International Championship (KIC)</strong> and <strong class="text-white font-semibold">EWC</strong>, I turn player energy into lasting growth.
                     </p>
 
-                    <div class="mt-8 flex flex-wrap gap-3">
-                        <span class="chip">Community Strategy</span>
-                        <span class="chip">Esports Ops</span>
-                        <span class="chip">AI Automation</span>
-                        <span class="chip">Growth Ops</span>
-                        <span class="chip">Game Anti-Cheat Management</span>
-                        <span class="chip">League Ops & Stats</span>
-                        <span class="chip">Tournament Automation</span>
+                    <div class="mt-6 flex flex-wrap gap-2">
+                        <span class="chip">Discord Server Design</span>
+                        <span class="chip">KIC Mumbai LAN &amp; EWC Ops</span>
+                        <span class="chip">500+ Creator Management</span>
+                        <span class="chip">Tournament Automation Bots</span>
+                        <span class="chip">Live Broadcast &amp; Referee Sync</span>
+                        <span class="chip">AI Grading Workflows</span>
                     </div>
 
-                    <div class="mt-8 flex flex-wrap gap-4">
-                        <a href="#case-studies" class="inline-flex items-center justify-center rounded-xl bg-gradient-to-r from-violet-600 to-cyan-500 px-6 py-3 text-base font-semibold text-white shadow-lg shadow-violet-900/30 transition hover:brightness-110">View Case Studies ↓</a>
-                        <a href="#contact" class="inline-flex items-center justify-center rounded-xl border border-slate-700 bg-slate-900/60 px-6 py-3 text-base font-semibold text-slate-100 transition hover:border-cyan-400 hover:text-cyan-300">Let’s Talk</a>
-                        <a href="https://drive.google.com/file/d/1IK5kgFQMdu9rG-lsqg4vIf26Iizu_sT1/view?usp=sharing" target="_blank" class="inline-flex items-center justify-center rounded-xl border border-emerald-500/30 bg-emerald-500/10 px-5 py-3 text-base font-semibold text-emerald-200 transition hover:border-emerald-400 hover:text-emerald-100">Download Resume (PDF)</a>
+                    <!-- Primary Action Buttons -->
+                    <div class="mt-7 flex flex-col sm:flex-row flex-wrap gap-3">
+                        <a href="#case-studies" class="inline-flex items-center justify-center rounded-xl bg-gradient-to-r from-violet-600 to-cyan-500 px-6 py-3.5 text-sm sm:text-base font-semibold text-white shadow-lg shadow-violet-900/30 transition hover:brightness-110">
+                            View Case Studies ↓
+                        </a>
+                        <a href="#architecture-stack" class="inline-flex items-center justify-center rounded-xl border border-cyan-500/40 bg-cyan-500/10 px-5 py-3.5 text-sm sm:text-base font-semibold text-cyan-200 transition hover:border-cyan-300 hover:text-white">
+                            Interactive Playbook ⚡
+                        </a>
+                        <a href="#contact" class="inline-flex items-center justify-center rounded-xl border border-slate-700 bg-slate-900/70 px-5 py-3.5 text-sm sm:text-base font-semibold text-slate-100 transition hover:border-violet-400 hover:text-violet-300">
+                            Let’s Talk
+                        </a>
+                        <a href="https://drive.google.com/file/d/1IK5kgFQMdu9rG-lsqg4vIf26Iizu_sT1/view?usp=sharing" target="_blank" rel="noreferrer" class="inline-flex items-center justify-center rounded-xl border border-emerald-500/30 bg-emerald-500/10 px-5 py-3.5 text-sm sm:text-base font-semibold text-emerald-200 transition hover:border-emerald-400 hover:text-emerald-100">
+                            Download Resume (PDF) ↗
+                        </a>
                     </div>
 
-                    <div class="mt-10 flex flex-wrap gap-6 text-sm text-slate-300">
-                        <div class="stat-box glass rounded-2xl px-4 py-3 min-w-[120px]">
-                            <div class="text-2xl font-bold text-white"><span class="count-up" data-target="7" data-suffix="+">0</span></div>
-                            <div class="text-slate-400">Community Server Launches</div>
+                    <!-- Upgraded Quantified Hero Stats -->
+                    <div class="mt-9 grid grid-cols-2 sm:grid-cols-4 gap-3 text-sm">
+                        <div class="stat-box spotlight-card hud-corners glass rounded-2xl p-3.5 sm:p-4">
+                            <div class="text-xl sm:text-2xl font-bold text-white font-display">
+                                <span class="count-up" data-target="46841" data-suffix="+">0</span>
+                            </div>
+                            <div class="text-xs text-slate-400 mt-1">Members Scaled</div>
                         </div>
-                        <div class="stat-box glass rounded-2xl px-4 py-3 min-w-[120px]">
-                            <div class="text-2xl font-bold text-white"><span class="count-up" data-target="3000" data-suffix="+">0</span></div>
-                            <div class="text-slate-400">Tournament Members</div>
+                        <div class="stat-box spotlight-card hud-corners glass rounded-2xl p-3.5 sm:p-4">
+                            <div class="text-xl sm:text-2xl font-bold text-violet-300 font-display">
+                                <span class="count-up" data-target="500" data-suffix="+">0</span>
+                            </div>
+                            <div class="text-xs text-slate-400 mt-1">Creators Managed</div>
                         </div>
-                        <div class="stat-box glass rounded-2xl px-4 py-3 min-w-[120px]">
-                            <div class="text-2xl font-bold text-white"><span class="count-up" data-target="24" data-suffix="/7">0</span></div>
-                            <div class="text-slate-400">Automation</div>
+                        <div class="stat-box spotlight-card hud-corners glass rounded-2xl p-3.5 sm:p-4">
+                            <div class="text-xl sm:text-2xl font-bold text-emerald-300 font-display">
+                                &lt;<span class="count-up" data-target="60" data-suffix="s">0</span>
+                            </div>
+                            <div class="text-xs text-slate-400 mt-1">Lobby Setup Time</div>
+                        </div>
+                        <div class="stat-box spotlight-card hud-corners glass rounded-2xl p-3.5 sm:p-4">
+                            <div class="text-xl sm:text-2xl font-bold text-cyan-300 font-display">
+                                <span class="count-up" data-target="2" data-suffix="">0</span>
+                            </div>
+                            <div class="text-xs text-slate-400 mt-1">Published Papers</div>
                         </div>
                     </div>
                 </div>
 
-                <div class="profile-panel glass rounded-[28px] p-5 lg:p-7 relative overflow-hidden">
-                    <div class="absolute inset-0 bg-gradient-to-br from-violet-500/10 via-transparent to-cyan-400/10"></div>
-                    <div class="relative">
-                        <div class="profile-photo">
-                            <div class="floating-badge">Community + AI</div>
-                        </div>
+                <!-- Right Column: 3D Tilt Profile Card with Readable Live Highlights -->
+                <div class="lg:col-span-5">
+                    <div id="tiltCommandCard" class="profile-panel hud-corners spotlight-card glass rounded-[28px] p-5 sm:p-6 relative overflow-hidden">
+                        <div class="absolute inset-0 bg-gradient-to-br from-violet-500/10 via-transparent to-cyan-400/10 pointer-events-none"></div>
+                        <div class="relative z-10">
+                            <!-- Profile Banner -->
+                            <div class="profile-photo p-4 sm:p-5 flex flex-col justify-between grid-bg">
+                                <div class="flex items-center justify-between gap-2 z-10">
+                                    <span class="inline-flex items-center gap-1.5 rounded-full border border-emerald-500/30 bg-slate-950/85 px-3 py-1 text-[11px] font-semibold text-emerald-300">
+                                        <span class="h-2 w-2 rounded-full bg-emerald-400 animate-ping"></span>
+                                        Open to Opportunities
+                                    </span>
+                                    <span class="rounded-full border border-slate-700/80 bg-slate-950/85 px-3 py-1 text-[11px] font-semibold text-cyan-300">
+                                        Community + AI
+                                    </span>
+                                </div>
 
-                        <div class="mt-5 flex items-center justify-between">
-                            <div>
-                                <div class="text-lg font-bold text-white">Dewan Habib</div>
-                                <div class="text-sm text-slate-400">Technical Community Strategist</div>
-                            </div>
-                            <span class="rounded-full border border-emerald-500/30 bg-emerald-500/10 px-2.5 py-1 text-[10px] font-bold uppercase tracking-[0.14em] text-emerald-300">Online</span>
-                        </div>
+                                <!-- Center Identity -->
+                                <div class="my-4 flex items-center gap-4 z-10">
+                                    <div class="relative flex h-16 w-16 shrink-0 items-center justify-center rounded-2xl bg-gradient-to-br from-violet-600 via-indigo-600 to-cyan-500 text-2xl font-extrabold text-white shadow-xl ring-2 ring-white/15 font-display">
+                                        DH
+                                        <span class="absolute -bottom-1 -right-1 flex h-5 w-5 items-center justify-center rounded-full bg-emerald-500 text-[10px] text-slate-950 font-black" title="Verified Strategist">✓</span>
+                                    </div>
+                                    <div>
+                                        <div class="text-xl font-bold text-white leading-tight">Dewan Habib</div>
+                                        <div class="text-xs sm:text-sm text-cyan-300 font-medium">LeagueOps Admin &amp; Community Lead</div>
+                                        <div class="text-xs text-slate-400 mt-0.5">Kolkata &amp; Mumbai LAN • B.Tech CSE ’27</div>
+                                    </div>
+                                </div>
 
-                        <div class="mt-5 rounded-2xl border border-slate-700 bg-slate-950/70 p-4 mb-4">
-                            <div class="text-xs uppercase tracking-[0.2em] text-slate-400 mb-2">Focus</div>
-                            <div class="text-lg font-semibold text-white">Community infrastructure & esports systems that compound growth.</div>
-                        </div>
+                                <!-- Live Community Metrics -->
+                                <div class="grid grid-cols-3 gap-2 pt-3 border-t border-slate-800/90 z-10 text-center">
+                                    <a href="https://discord.gg/4Z7Fzdf5Vy" target="_blank" rel="noreferrer" class="rounded-xl bg-slate-950/80 border border-slate-800 px-2 py-1.5 hover:border-emerald-400/60 transition block">
+                                        <div class="text-xs sm:text-sm font-bold text-emerald-300">37,823</div>
+                                        <div class="text-[11px] text-slate-400">GST India ↗</div>
+                                    </a>
+                                    <a href="https://discord.gg/mENDtYjtvG" target="_blank" rel="noreferrer" class="rounded-xl bg-slate-950/80 border border-slate-800 px-2 py-1.5 hover:border-violet-400/60 transition block">
+                                        <div class="text-xs sm:text-sm font-bold text-violet-300">9,018</div>
+                                        <div class="text-[11px] text-slate-400">HoK India ↗</div>
+                                    </a>
+                                    <div class="rounded-xl bg-slate-950/80 border border-slate-800 px-2 py-1.5">
+                                        <div class="text-xs sm:text-sm font-bold text-cyan-300">500+</div>
+                                        <div class="text-[11px] text-slate-400">Creators (IN/PK)</div>
+                                    </div>
+                                </div>
+                            </div>
 
-                        <div class="grid gap-3 sm:grid-cols-2">
-                            <div class="rounded-2xl border border-violet-500/20 bg-violet-500/5 p-4">
-                                <div class="text-xs uppercase tracking-[0.2em] text-violet-300 mb-2">Core</div>
-                                <div class="font-semibold text-white">Discord Architecture + Tournament Ops</div>
+                            <!-- Interactive Plain-English Workflow Preview -->
+                            <div class="mt-4 rounded-2xl border border-slate-800 bg-slate-950/85 p-4 text-xs sm:text-sm">
+                                <div class="flex items-center justify-between text-xs text-slate-400 pb-2 border-b border-slate-800/90">
+                                    <span class="font-semibold text-slate-200">Interactive Workflow Preview</span>
+                                    <span id="simStatusBadge" class="text-emerald-400 font-semibold text-xs">● Ready</span>
+                                </div>
+                                <div id="liveConsoleLog" class="mt-2.5 space-y-1.5 text-xs text-slate-300 min-h-[68px]">
+                                    <div><span class="text-emerald-400 font-semibold">✓ GST India:</span> 37,823 members organized with automated onboarding</div>
+                                    <div><span class="text-cyan-400 font-semibold">✓ KIC Mumbai LAN:</span> Broadcast crew &amp; on-site referees synced</div>
+                                    <div><span class="text-violet-400 font-semibold">✓ Creator Network:</span> 500+ creators active across India &amp; Pakistan</div>
+                                </div>
+                                <div class="mt-3 pt-2.5 border-t border-slate-800/90 flex flex-wrap gap-2">
+                                    <button id="simMatchBtn" type="button" class="flex-1 rounded-xl border border-violet-500/40 bg-violet-500/15 px-3 py-2 text-xs font-semibold text-violet-200 hover:bg-violet-500/30 hover:text-white transition">
+                                        ⚡ Preview Match Setup
+                                    </button>
+                                    <button id="simCreatorBtn" type="button" class="flex-1 rounded-xl border border-cyan-500/40 bg-cyan-500/15 px-3 py-2 text-xs font-semibold text-cyan-200 hover:bg-cyan-500/30 hover:text-white transition">
+                                        🚀 Preview Creator Drop
+                                    </button>
+                                </div>
                             </div>
-                            <div class="rounded-2xl border border-cyan-500/20 bg-cyan-500/5 p-4">
-                                <div class="text-xs uppercase tracking-[0.2em] text-cyan-300 mb-2">Scale</div>
-                                <div class="font-semibold text-white">Creator Hubs & Campaign Execution</div>
-                            </div>
-                            <div class="rounded-2xl border border-emerald-500/20 bg-emerald-500/5 p-4 sm:col-span-2">
-                                <div class="text-xs uppercase tracking-[0.2em] text-emerald-300 mb-2">Impact</div>
-                                <div class="font-semibold text-white">Turn player and creator engagement into measurable tournament & community payoff.</div>
+
+                            <div class="mt-3 grid grid-cols-2 gap-3">
+                                <div class="rounded-2xl border border-violet-500/20 bg-violet-500/5 p-3">
+                                    <div class="text-[11px] font-semibold uppercase tracking-wider text-violet-300">KIC Qualifier</div>
+                                    <div class="text-xs sm:text-sm font-semibold text-white mt-0.5">Online + Mumbai LAN</div>
+                                </div>
+                                <div class="rounded-2xl border border-cyan-500/20 bg-cyan-500/5 p-3">
+                                    <div class="text-[11px] font-semibold uppercase tracking-wider text-cyan-300">Creator Ops (500+)</div>
+                                    <div class="text-xs sm:text-sm font-semibold text-white mt-0.5">GST IN/PK &amp; HoK India</div>
+                                </div>
                             </div>
                         </div>
                     </div>
@@ -503,404 +667,645 @@
             </div>
         </section>
 
-        <section id="services" class="reveal max-w-6xl mx-auto px-6 py-10 md:py-18">
-            <div class="mb-10">
-                <p class="section-kicker text-cyan-300">What I do</p>
-                <h3 class="mt-3 text-3xl md:text-4xl font-black text-white">Strategy, systems, and execution under one roof.</h3>
-            </div>
-
-            <div class="grid md:grid-cols-3 gap-6">
-                <div class="feature-card glass rounded-3xl p-6">
-                    <div class="mb-4 inline-flex h-12 w-12 items-center justify-center rounded-2xl bg-violet-500/10 text-2xl text-violet-300">⚙️</div>
-                    <h4 class="text-xl font-bold text-white mb-3">Community Architecture</h4>
-                    <p class="text-slate-300">Designing member journeys, role permissions, and onboarding flows for major gaming hubs—including HOK India Creators Hub and GSTM Pakistan Creator Hub—keeping communities structured, healthy, and high-performing as they scale.</p>
-                </div>
-
-                <div class="feature-card glass rounded-3xl p-6">
-                    <div class="mb-4 inline-flex h-12 w-12 items-center justify-center rounded-2xl bg-cyan-500/10 text-2xl text-cyan-300">🏆</div>
-                    <h4 class="text-xl font-bold text-white mb-3">Esports & Tournament Operations</h4>
-                    <p class="text-slate-300">Orchestrating end-to-end community tournament pipelines and executing official Esports World Cup (EWC) qualifiers for Honor of Kings in direct partnership with NODWIN Gaming.</p>
-                </div>
-
-                <div class="feature-card glass rounded-3xl p-6">
-                    <div class="mb-4 inline-flex h-12 w-12 items-center justify-center rounded-2xl bg-emerald-500/10 text-2xl text-emerald-300">🤖</div>
-                    <h4 class="text-xl font-bold text-white mb-3">AI + Automation</h4>
-                    <p class="text-slate-300">Building custom bots, low-latency AI workflows, and automated event moderation systems that deliver instant value inside communities and reduce repetitive operational friction.</p>
-                </div>
-            </div>
-        </section>
-
-        <section class="reveal max-w-6xl mx-auto px-6 pb-8">
-            <div class="glass grid-bg rounded-[30px] p-6 md:p-8">
-                <div class="grid md:grid-cols-[1.2fr_0.8fr] gap-8 items-center">
+        <!-- INTERACTIVE 6-STEP COMMUNITY & ESPORTS PLAYBOOK -->
+        <section id="architecture-stack" class="reveal max-w-6xl mx-auto px-4 sm:px-6 py-12 md:py-16">
+            <div class="glass hud-corners rounded-[30px] p-6 sm:p-8 md:p-10">
+                <div class="flex flex-col md:flex-row md:items-end justify-between gap-4 mb-6">
                     <div>
-                        <p class="section-kicker text-violet-300">Why clients hire me</p>
-                        <h3 class="mt-3 text-3xl md:text-4xl font-black text-white">I bridge product thinking, community ops, and technical execution.</h3>
+                        <p class="section-kicker text-cyan-300">Interactive Playbook</p>
+                        <h3 class="mt-2 text-2xl sm:text-3xl md:text-4xl font-bold text-white">
+                            How I Build &amp; Scale Gaming Communities
+                        </h3>
+                        <p class="mt-2 text-sm sm:text-base text-slate-300 max-w-2xl">
+                            Select any stage below to see how I take a community from first member join to automated tournaments, 500+ creator campaigns, and live LAN broadcast finals.
+                        </p>
                     </div>
-                    <div class="flex flex-wrap gap-3 justify-start md:justify-end">
-                        <span class="chip">Discord systems</span>
-                        <span class="chip">Automation</span>
-                        <span class="chip">Creator ops</span>
-                        <span class="chip">AI workflows</span>
+                    <div class="text-xs font-semibold text-emerald-300 bg-emerald-500/10 border border-emerald-500/30 rounded-xl px-3.5 py-2 shrink-0">
+                        6 Proven Stages
+                    </div>
+                </div>
+
+                <!-- 6-Stage Selector Pills -->
+                <div class="flex items-center gap-2 overflow-x-auto no-scrollbar pb-2 mb-6" role="tablist" aria-label="6-Step Community Playbook">
+                    <button type="button" data-layer="0" class="arch-layer-btn active shrink-0 rounded-xl border border-slate-700 bg-slate-900/90 px-4 py-2.5 text-xs font-semibold text-slate-200 transition">
+                        1. Member Onboarding
+                    </button>
+                    <button type="button" data-layer="1" class="arch-layer-btn shrink-0 rounded-xl border border-slate-700 bg-slate-900/90 px-4 py-2.5 text-xs font-semibold text-slate-200 transition hover:text-white">
+                        2. Safety &amp; AutoMod
+                    </button>
+                    <button type="button" data-layer="2" class="arch-layer-btn shrink-0 rounded-xl border border-slate-700 bg-slate-900/90 px-4 py-2.5 text-xs font-semibold text-slate-200 transition hover:text-white">
+                        3. 500+ Creator Hubs
+                    </button>
+                    <button type="button" data-layer="3" class="arch-layer-btn shrink-0 rounded-xl border border-slate-700 bg-slate-900/90 px-4 py-2.5 text-xs font-semibold text-slate-200 transition hover:text-white">
+                        4. Fast Match Bots
+                    </button>
+                    <button type="button" data-layer="4" class="arch-layer-btn shrink-0 rounded-xl border border-slate-700 bg-slate-900/90 px-4 py-2.5 text-xs font-semibold text-slate-200 transition hover:text-white">
+                        5. KIC Mumbai LAN Ops
+                    </button>
+                    <button type="button" data-layer="5" class="arch-layer-btn shrink-0 rounded-xl border border-slate-700 bg-slate-900/90 px-4 py-2.5 text-xs font-semibold text-slate-200 transition hover:text-white">
+                        6. AI &amp; Research
+                    </button>
+                </div>
+
+                <!-- Dynamic Stage Display -->
+                <div class="grid grid-cols-1 lg:grid-cols-12 gap-6 items-stretch rounded-2xl border border-slate-800 bg-slate-950/80 p-5 sm:p-6">
+                    <div class="lg:col-span-7 flex flex-col justify-between">
+                        <div>
+                            <div class="flex flex-wrap items-center gap-2.5 mb-2">
+                                <span id="archLayerCode" class="text-xs font-bold uppercase tracking-wider text-violet-300">Stage 01 • First Impressions</span>
+                                <span id="archLayerMetric" class="rounded-full bg-emerald-500/15 border border-emerald-500/30 px-3 py-0.5 text-xs font-semibold text-emerald-300">46,841+ Members Onboarded</span>
+                            </div>
+                            <h4 id="archLayerTitle" class="text-xl sm:text-2xl font-bold text-white">Localized Onboarding &amp; Clear Role Structure</h4>
+                            <p id="archLayerDesc" class="mt-2.5 text-sm sm:text-base text-slate-300 leading-relaxed">
+                                Designed welcoming, clutter-free onboarding flows and regional channel layouts for Gangstar Mirage City India (37,823 members) and Honor of Kings India (9,018 members)—so new players immediately find teammates, rules, and events.
+                            </p>
+                        </div>
+
+                        <div id="archLayerPills" class="mt-5 pt-4 border-t border-slate-800/90 flex flex-wrap gap-2">
+                            <span class="rounded-lg bg-slate-900 border border-slate-700 px-3 py-1 text-xs font-medium text-cyan-300">GST India: 37,823 Members</span>
+                            <span class="rounded-lg bg-slate-900 border border-slate-700 px-3 py-1 text-xs font-medium text-violet-300">HoK India: 9,018 Members</span>
+                            <span class="rounded-lg bg-slate-900 border border-slate-700 px-3 py-1 text-xs font-medium text-emerald-300">Clear Role Permissions</span>
+                        </div>
+                    </div>
+
+                    <!-- Right Column: Clean Visual Flow & Plain-English Outcomes -->
+                    <div class="lg:col-span-5 rounded-xl border border-slate-800/90 bg-slate-900/65 p-4 sm:p-5 flex flex-col justify-between text-xs sm:text-sm">
+                        <div class="flex items-center justify-between text-slate-300 border-b border-slate-800 pb-2.5 mb-3">
+                            <span id="archTerminalHeader" class="font-semibold text-white">How It Works</span>
+                            <span class="text-xs font-semibold text-cyan-300">Live Flow</span>
+                        </div>
+
+                        <!-- Animated Visual Flow Diagram -->
+                        <div class="my-1 bg-slate-950/90 rounded-xl border border-slate-800/80 p-3">
+                            <svg class="w-full h-20" viewBox="0 0 360 70" fill="none">
+                                <line x1="55" y1="35" x2="155" y2="35" stroke="#8b5cf6" stroke-width="2" class="flow-line" />
+                                <line x1="205" y1="35" x2="305" y2="35" stroke="#22d3ee" stroke-width="2" class="flow-line" />
+                                <rect x="6" y="15" width="84" height="40" rx="10" fill="#0f172a" stroke="#8b5cf6" stroke-width="1.5" />
+                                <text id="svgNode1" x="48" y="39" fill="#e2e8f0" font-size="10.5" font-weight="600" text-anchor="middle" font-family="Inter, sans-serif">Player Joins</text>
+                                <rect x="136" y="15" width="88" height="40" rx="10" fill="#0f172a" stroke="#22d3ee" stroke-width="1.5" />
+                                <text id="svgNode2" x="180" y="39" fill="#67e8f9" font-size="10.5" font-weight="600" text-anchor="middle" font-family="Inter, sans-serif">Auto-Roles</text>
+                                <rect x="270" y="15" width="84" height="40" rx="10" fill="#0f172a" stroke="#34d399" stroke-width="1.5" />
+                                <text id="svgNode3" x="312" y="39" fill="#6ee7b7" font-size="10.5" font-weight="600" text-anchor="middle" font-family="Inter, sans-serif">Active Hub</text>
+                            </svg>
+                        </div>
+
+                        <div id="archTerminalCode" class="space-y-2 text-xs text-slate-300 mt-3">
+                            <div class="flex items-start gap-2"><span class="text-violet-400 font-bold">1.</span><span>Players verify in seconds without getting overwhelmed.</span></div>
+                            <div class="flex items-start gap-2"><span class="text-cyan-400 font-bold">2.</span><span>Regional &amp; tournament roles unlock automatically.</span></div>
+                            <div class="flex items-start gap-2"><span class="text-emerald-400 font-bold">3.</span><span>Higher daily engagement and long-term retention.</span></div>
+                        </div>
                     </div>
                 </div>
             </div>
         </section>
 
-        <section id="experience" class="reveal max-w-6xl mx-auto px-6 py-10 md:py-16">
-            <div class="grid lg:grid-cols-[0.9fr_1.1fr] gap-8">
-                <div class="experience-card rounded-[28px] p-6">
-                    <p class="section-kicker text-cyan-300">Experience snapshot</p>
-                    <div class="mt-6 space-y-6 relative before:absolute before:left-[0.45rem] before:top-0 before:h-full before:w-px before:bg-slate-700">
-                        <div class="timeline-item relative pl-8">
-                            <div class="text-xs font-bold text-violet-300 uppercase tracking-wider">Jan 2026 – Present</div>
-                            <div class="mt-1 text-lg font-bold text-white">Official Honor of Kings India</div>
-                            <div class="text-sm font-semibold text-slate-300">Senior Community Lead & Moderator</div>
-                            <div class="mt-1 text-slate-400 text-sm">Architected official Discord setup, AutoMod triggers, tournament bracket management, and referee permissions.</div>
+        <!-- SERVICES SECTION -->
+        <section id="services" class="reveal max-w-6xl mx-auto px-4 sm:px-6 py-12 md:py-16">
+            <div class="mb-8 md:mb-10">
+                <p class="section-kicker text-cyan-300">What I Do</p>
+                <h3 class="mt-2 text-2xl sm:text-3xl md:text-4xl font-bold text-white">Strategy, systems, and live execution under one roof.</h3>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-5 md:gap-6">
+                <div class="feature-card spotlight-card hud-corners glass rounded-3xl p-6 flex flex-col justify-between">
+                    <div>
+                        <div class="mb-4 inline-flex h-12 w-12 items-center justify-center rounded-2xl bg-violet-500/15 border border-violet-500/30 text-2xl text-violet-300">⚙️</div>
+                        <h4 class="text-xl font-bold text-white mb-2.5">Community &amp; Creator Architecture</h4>
+                        <p class="text-sm sm:text-base text-slate-300">
+                            Designing localized Discord structures, verification flows, and creator ecosystems—scaling <strong class="text-white">GST India (37,823)</strong> and <strong class="text-white">HoK India (9,018)</strong> while managing <strong class="text-white">500+ creators</strong> across India and Pakistan.
+                        </p>
+                    </div>
+                    <div class="mt-5 pt-4 border-t border-slate-800/80 flex items-center justify-between text-xs font-semibold text-violet-300">
+                        <span>46,841+ Members • 500+ Creators</span>
+                        <span>7+ Hubs</span>
+                    </div>
+                </div>
+
+                <div class="feature-card spotlight-card hud-corners glass rounded-3xl p-6 flex flex-col justify-between">
+                    <div>
+                        <div class="mb-4 inline-flex h-12 w-12 items-center justify-center rounded-2xl bg-cyan-500/15 border border-cyan-500/30 text-2xl text-cyan-300">🏆</div>
+                        <h4 class="text-xl font-bold text-white mb-2.5">Esports &amp; LAN LeagueOps</h4>
+                        <p class="text-sm sm:text-base text-slate-300">
+                            Directing online qualifiers and on-site LAN finals—including the <strong class="text-white">HoK International Championship (KIC)</strong> Mumbai LAN (sponsored), <strong class="text-white">EWC Qualifiers</strong> with <strong class="text-white">NODWIN Gaming</strong>, broadcast coordination, and live refereeing.
+                        </p>
+                    </div>
+                    <div class="mt-5 pt-4 border-t border-slate-800/80 flex items-center justify-between text-xs font-semibold text-cyan-300">
+                        <span>KIC Mumbai LAN &amp; EWC Ops</span>
+                        <span>LeagueOps Admin</span>
+                    </div>
+                </div>
+
+                <div class="feature-card spotlight-card hud-corners glass rounded-3xl p-6 flex flex-col justify-between">
+                    <div>
+                        <div class="mb-4 inline-flex h-12 w-12 items-center justify-center rounded-2xl bg-emerald-500/15 border border-emerald-500/30 text-2xl text-emerald-300">🤖</div>
+                        <h4 class="text-xl font-bold text-white mb-2.5">AI &amp; Bot Automation</h4>
+                        <p class="text-sm sm:text-base text-slate-300">
+                            Building custom Discord bots that spin up private match lobbies and verify player rosters in <strong class="text-white">under 60 seconds</strong>, alongside <strong class="text-white">Gemini Flash OCR</strong> tools that automate handwritten academic grading.
+                        </p>
+                    </div>
+                    <div class="mt-5 pt-4 border-t border-slate-800/80 flex items-center justify-between text-xs font-semibold text-emerald-300">
+                        <span>90% Less Manual Overhead</span>
+                        <span>Python • Gemini</span>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- WHY CLIENTS HIRE ME BANNER -->
+        <section class="reveal max-w-6xl mx-auto px-4 sm:px-6 pb-6">
+            <div class="glass hud-corners grid-bg rounded-[28px] p-6 sm:p-8">
+                <div class="grid grid-cols-1 md:grid-cols-12 gap-6 items-center">
+                    <div class="md:col-span-7">
+                        <p class="section-kicker text-violet-300">Why Studios &amp; Teams Hire Me</p>
+                        <h3 class="mt-2 text-2xl sm:text-3xl font-bold text-white">I bridge community empathy, LAN broadcast discipline, and software engineering.</h3>
+                    </div>
+                    <div class="md:col-span-5 flex flex-wrap gap-2.5 md:justify-end">
+                        <span class="chip">Publisher-Grade Discord Ops</span>
+                        <span class="chip">On-Site LAN &amp; Broadcast Sync</span>
+                        <span class="chip">500+ Creator Retention Loops</span>
+                        <span class="chip">Custom Bot Tooling</span>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- EXPERIENCE & EDUCATION SECTION -->
+        <section id="experience" class="reveal max-w-6xl mx-auto px-4 sm:px-6 py-12 md:py-16">
+            <div class="grid grid-cols-1 lg:grid-cols-12 gap-6 md:gap-8">
+                <!-- Left Column: Reverse-Chronological Experience Timeline -->
+                <div class="lg:col-span-7 experience-card hud-corners rounded-[28px] p-6 sm:p-8">
+                    <div class="flex items-center justify-between gap-2 mb-6">
+                        <div>
+                            <p class="section-kicker text-cyan-300">Career Timeline</p>
+                            <h3 class="mt-1 text-2xl font-bold text-white">Leadership &amp; Esports Operations</h3>
                         </div>
-                        <div class="timeline-item relative pl-8">
-                            <div class="text-xs font-bold text-cyan-300 uppercase tracking-wider">June 2026 – Present</div>
-                            <div class="mt-1 text-lg font-bold text-white">Gangstar Mirage City India</div>
-                            <div class="text-sm font-semibold text-slate-300">Senior Community Lead & Moderator</div>
-                            <div class="mt-1 text-slate-400 text-sm">Managed regional invite events, content drives, community guidelines enforcement, and crisis management.</div>
+                        <span class="rounded-full border border-cyan-500/30 bg-cyan-500/10 px-3 py-1 text-xs font-semibold text-cyan-200">2025 – Present</span>
+                    </div>
+
+                    <div class="space-y-6 relative before:absolute before:left-0 before:top-2 before:h-[95%] before:w-0.5 before:bg-slate-800 pl-6">
+                        <div class="timeline-item relative">
+                            <div class="flex flex-wrap items-center justify-between gap-2">
+                                <span class="text-xs font-bold text-amber-300 uppercase tracking-wider">Sept – Oct 2026</span>
+                                <span class="rounded-md bg-amber-500/10 border border-amber-500/25 px-2.5 py-0.5 text-[11px] font-semibold text-amber-300">Sponsored Mumbai LAN</span>
+                            </div>
+                            <div class="mt-1 text-lg font-bold text-white">Honor of Kings India — KIC Qualifier (Online &amp; Mumbai LAN)</div>
+                            <div class="text-sm font-semibold text-slate-200">LeagueOps Admin (Online Qualifiers &amp; On-Site Finals)</div>
+                            <p class="mt-1.5 text-slate-300 text-sm leading-relaxed">
+                                Directed end-to-end LeagueOps for the September online qualifiers, then traveled to Mumbai (sponsored) in October for the LAN Finals—synchronizing live match schedules with the broadcast production crew, leading on-site referees, and managing stage player operations.
+                            </p>
                         </div>
-                        <div class="timeline-item relative pl-8">
-                            <div class="text-xs font-bold text-emerald-300 uppercase tracking-wider">2023 – 2027</div>
-                            <div class="mt-1 text-lg font-bold text-white">Guru Nanak Institute of Technology</div>
-                            <div class="text-sm font-semibold text-slate-300">B.Tech in Computer Science & Engineering</div>
-                            <div class="mt-1 text-slate-400 text-sm">Focusing on algorithms, artificial intelligence, and software engineering principles.</div>
+
+                        <div class="timeline-item relative">
+                            <div class="flex flex-wrap items-center justify-between gap-2">
+                                <span class="text-xs font-bold text-emerald-300 uppercase tracking-wider">June 2026 – Present</span>
+                                <span class="rounded-md bg-emerald-500/10 border border-emerald-500/25 px-2.5 py-0.5 text-[11px] font-semibold text-emerald-300">37,823 Members • IN &amp; PK Creators</span>
+                            </div>
+                            <div class="mt-1 text-lg font-bold text-white">Gangstar Mirage City (GST) India &amp; Pakistan</div>
+                            <div class="text-sm font-semibold text-slate-200">Senior Community Lead &amp; Creator Ops Architect</div>
+                            <p class="mt-1.5 text-slate-300 text-sm leading-relaxed">
+                                Architected the official GST India Discord server from scratch and scaled it to 37,823 members. Built and managed the GST India &amp; Pakistan Creator Hubs (part of 500+ creators managed across titles), driving regional invite campaigns and retention events.
+                            </p>
                         </div>
-                        <div class="timeline-item relative pl-8">
-                            <div class="text-xs font-bold text-violet-300 uppercase tracking-wider">May 2026</div>
-                            <div class="mt-1 text-lg font-bold text-white">Honor of Kings World Cup 2026 at KWC Qualifiers India</div>
-                            <div class="text-sm font-semibold text-slate-300">Lobby management, Matchroom Administration</div>
-                            <div class="mt-1 text-slate-400 text-sm">Managing live league matchroom making, player management for official india qualifiers.</div>
+
+                        <div class="timeline-item relative">
+                            <div class="flex flex-wrap items-center justify-between gap-2">
+                                <span class="text-xs font-bold text-cyan-300 uppercase tracking-wider">May 2026</span>
+                                <span class="rounded-md bg-cyan-500/10 border border-cyan-500/25 px-2.5 py-0.5 text-[11px] font-semibold text-cyan-300">NODWIN Gaming Partnered</span>
+                            </div>
+                            <div class="mt-1 text-lg font-bold text-white">Honor of Kings World Cup (KWC / EWC) India Qualifiers</div>
+                            <div class="text-sm font-semibold text-slate-200">Tournament Operations &amp; Matchroom Lead</div>
+                            <p class="mt-1.5 text-slate-300 text-sm leading-relaxed">
+                                Directed live tournament lobbies, matchroom administration, roster/ID verification, and real-time referee dispute resolution across multi-stage official India qualifiers and the Kings Arise India City Tour.
+                            </p>
+                        </div>
+
+                        <div class="timeline-item relative">
+                            <div class="flex flex-wrap items-center justify-between gap-2">
+                                <span class="text-xs font-bold text-violet-300 uppercase tracking-wider">Jan 2026 – Present</span>
+                                <span class="rounded-md bg-violet-500/10 border border-violet-500/25 px-2.5 py-0.5 text-[11px] font-semibold text-violet-300">9,018 Members • Creator Hub</span>
+                            </div>
+                            <div class="mt-1 text-lg font-bold text-white">Official Honor of Kings (HoK) India</div>
+                            <div class="text-sm font-semibold text-slate-200">Senior Community Lead &amp; Moderator</div>
+                            <p class="mt-1.5 text-slate-300 text-sm leading-relaxed">
+                                Built the official HoK India Discord (scaled to 9,018 members) and HoK India Creators Hub ground-up—configuring channel permissions, AutoMod anti-raid triggers, Blossom Cup brackets, and creator campaign operations.
+                            </p>
                         </div>
                     </div>
                 </div>
 
-                <div class="glass rounded-[28px] p-6 md:p-8 flex flex-col justify-between">
+                <!-- Right Column: Education & IIT Certifications -->
+                <div class="lg:col-span-5 glass hud-corners rounded-[28px] p-6 sm:p-8 flex flex-col justify-between gap-6">
                     <div>
-                        <p class="section-kicker text-violet-300">Certifications & Education</p>
-                        <div class="mt-6 space-y-4">
-                            <div class="border-l-2 border-violet-500 pl-4 py-1">
-                                <div class="text-base font-bold text-white">Cloud Computing</div>
+                        <p class="section-kicker text-violet-300">Academic Foundation</p>
+                        <h3 class="mt-1 text-2xl font-bold text-white">Education &amp; IIT Certifications</h3>
+
+                        <!-- Degree Card -->
+                        <div class="mt-5 rounded-2xl border border-emerald-500/30 bg-emerald-500/5 p-4">
+                            <div class="flex items-center justify-between gap-2 text-xs font-bold uppercase tracking-wider text-emerald-300">
+                                <span>B.Tech Degree</span>
+                                <span>2023 – 2027</span>
+                            </div>
+                            <div class="mt-1 text-base font-bold text-white">Computer Science &amp; Engineering</div>
+                            <div class="text-xs font-semibold text-slate-300">Guru Nanak Institute of Technology (GNIT)</div>
+                            <p class="text-xs text-slate-400 mt-1.5">
+                                Coursework in Data Structures &amp; Algorithms, Artificial Intelligence, Distributed Cloud Systems, and Software Engineering.
+                            </p>
+                        </div>
+
+                        <!-- NPTEL / IIT Certifications -->
+                        <div class="mt-5 space-y-3.5">
+                            <div class="border-l-2 border-violet-500 pl-4 py-0.5">
+                                <div class="text-sm font-bold text-white">Cloud Computing</div>
                                 <div class="text-xs text-violet-300 font-semibold">NPTEL / SWAYAM — IIT Kharagpur</div>
-                                <div class="text-slate-400 text-xs mt-1">Distributed systems, virtualization, and cloud resource provisioning.</div>
+                                <div class="text-slate-400 text-xs mt-0.5">Distributed architecture, virtualization, and cloud resource provisioning.</div>
                             </div>
-                            <div class="border-l-2 border-cyan-500 pl-4 py-1">
-                                <div class="text-base font-bold text-white">Programming in Java</div>
+                            <div class="border-l-2 border-cyan-500 pl-4 py-0.5">
+                                <div class="text-sm font-bold text-white">Programming in Java</div>
                                 <div class="text-xs text-cyan-300 font-semibold">NPTEL / SWAYAM — IIT Kharagpur</div>
-                                <div class="text-slate-400 text-xs mt-1">Object-oriented programming, multithreading, and socket programming.</div>
+                                <div class="text-slate-400 text-xs mt-0.5">Object-oriented design, multithreading, and network socket programming.</div>
                             </div>
-                            <div class="border-l-2 border-emerald-500 pl-4 py-1">
-                                <div class="text-base font-bold text-white">Principles of Management</div>
+                            <div class="border-l-2 border-emerald-500 pl-4 py-0.5">
+                                <div class="text-sm font-bold text-white">Principles of Management</div>
                                 <div class="text-xs text-emerald-300 font-semibold">NPTEL / SWAYAM — IIT Roorkee</div>
-                                <div class="text-slate-400 text-xs mt-1">Strategic planning, team leadership, operations, and organizational management.</div>
+                                <div class="text-slate-400 text-xs mt-0.5">Strategic planning, cross-functional leadership, and organizational ops.</div>
                             </div>
                         </div>
                     </div>
 
-                    <div class="mt-8 rounded-2xl border border-slate-700 bg-slate-950/70 p-5">
+                    <div class="rounded-2xl border border-slate-800 bg-slate-950/80 p-4">
                         <div class="flex items-center justify-between gap-3">
                             <div>
-                                <div class="text-xs uppercase tracking-[0.2em] text-slate-400">Brand promise</div>
-                                <div class="mt-1 text-xl font-bold text-white">From chaos to conversion.</div>
+                                <div class="text-[11px] uppercase tracking-[0.18em] text-slate-400 font-semibold">Core Philosophy</div>
+                                <div class="mt-0.5 text-lg font-bold text-white">From community chaos to repeatable conversion.</div>
                             </div>
-                            <span class="rounded-full border border-violet-500/40 bg-violet-500/10 px-3 py-1 text-xs font-semibold uppercase tracking-[0.18em] text-violet-200">High impact</span>
+                            <span class="shrink-0 rounded-full border border-violet-500/40 bg-violet-500/10 px-3 py-1 text-[11px] font-semibold uppercase tracking-wider text-violet-200">High Impact</span>
                         </div>
                     </div>
                 </div>
             </div>
         </section>
 
-        <section id="publications" class="reveal max-w-6xl mx-auto px-6 py-10">
-            <div class="glass rounded-[28px] p-6 md:p-8">
-                <p class="section-kicker text-violet-300">Research & Publications</p>
-                <h3 class="mt-3 text-2xl md:text-3xl font-bold text-white mb-6">Published Research</h3>
-                <div class="grid md:grid-cols-2 gap-6">
-                    <div class="border-l-2 border-violet-500 pl-4 py-1">
-                        <div class="text-lg font-bold text-white">Building a Robust Stock Price Prediction Using LSTM and VECM</div>
-                        <div class="text-sm font-semibold text-violet-300 mt-1">KSII Transactions on Internet and Information Systems | April 2026</div>
-                        <p class="text-slate-400 text-sm mt-2">Hybrid quantitative finance framework combining Long Short-Term Memory (LSTM) neural networks with Vector Error Correction Models (VECM) for time series forecasting.</p>
+        <!-- RESEARCH & PUBLICATIONS SECTION -->
+        <section id="publications" class="reveal max-w-6xl mx-auto px-4 sm:px-6 py-8">
+            <div class="glass hud-corners rounded-[28px] p-6 sm:p-8">
+                <div class="flex flex-col sm:flex-row sm:items-end justify-between gap-4 mb-6">
+                    <div>
+                        <p class="section-kicker text-violet-300">Peer-Reviewed Research</p>
+                        <h3 class="mt-1 text-2xl sm:text-3xl font-bold text-white">Published Academic Work</h3>
                     </div>
-                    <div class="border-l-2 border-cyan-500 pl-4 py-1">
-                        <div class="text-lg font-bold text-white">A Decentralized Crypto Launchpad on Binance Smart Chain</div>
-                        <div class="text-sm font-semibold text-cyan-300 mt-1">IEEE | November 2025</div>
-                        <p class="text-slate-400 text-sm mt-2">Binance Smart Chain (BSC) dApp architecture utilizing smart contracts for low-fee token launches and Web3 wallet integration.</p>
+                    <span class="text-xs font-semibold text-slate-400">Quantitative Machine Learning &amp; Web3 Systems</span>
+                </div>
+
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                    <!-- Paper 1 -->
+                    <div class="spotlight-card rounded-2xl border border-slate-800/90 bg-slate-900/55 p-5 flex flex-col justify-between hover:border-violet-500/40 transition">
+                        <div>
+                            <div class="flex flex-wrap items-center justify-between gap-2 mb-2.5">
+                                <span class="rounded-full bg-violet-500/15 border border-violet-500/30 px-3 py-0.5 text-xs font-semibold text-violet-300">KSII Transactions • Apr 2026</span>
+                                <span class="text-xs text-slate-400">Quantitative AI</span>
+                            </div>
+                            <h4 class="text-lg font-bold text-white leading-snug">Building a Robust Stock Price Prediction Using LSTM and VECM</h4>
+                            <p class="text-slate-300 text-sm mt-2.5 leading-relaxed">
+                                Engineered a hybrid quantitative forecasting framework combining Long Short-Term Memory (LSTM) deep neural networks with Vector Error Correction Models (VECM) to capture both non-linear volatility and long-run cointegration in financial time series.
+                            </p>
+                        </div>
+                        <div class="mt-4 pt-3 border-t border-slate-800/80 flex flex-wrap items-center justify-between gap-2">
+                            <div class="flex flex-wrap gap-1.5 text-[11px] text-slate-300">
+                                <span class="rounded-md bg-slate-800 px-2.5 py-0.5">Python</span>
+                                <span class="rounded-md bg-slate-800 px-2.5 py-0.5">LSTM</span>
+                                <span class="rounded-md bg-slate-800 px-2.5 py-0.5">VECM</span>
+                            </div>
+                            <div class="flex items-center gap-3">
+                                <a href="https://itiis.org/digital-library/106258" target="_blank" rel="noreferrer" class="text-xs font-semibold text-emerald-300 hover:text-white transition">
+                                    Read Paper ↗
+                                </a>
+                                <button type="button" data-paper="lstm" class="paper-modal-btn text-xs font-semibold text-violet-300 hover:text-white transition">
+                                    Abstract &amp; Cite →
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Paper 2 -->
+                    <div class="spotlight-card rounded-2xl border border-slate-800/90 bg-slate-900/55 p-5 flex flex-col justify-between hover:border-cyan-500/40 transition">
+                        <div>
+                            <div class="flex flex-wrap items-center justify-between gap-2 mb-2.5">
+                                <span class="rounded-full bg-cyan-500/15 border border-cyan-500/30 px-3 py-0.5 text-xs font-semibold text-cyan-300">IEEE Publication • Nov 2025</span>
+                                <span class="text-xs text-slate-400">Decentralized Systems</span>
+                            </div>
+                            <h4 class="text-lg font-bold text-white leading-snug">A Decentralized Crypto Launchpad on Binance Smart Chain</h4>
+                            <p class="text-slate-300 text-sm mt-2.5 leading-relaxed">
+                                Designed and audited a low-gas decentralized token launchpad (IDO) architecture on Binance Smart Chain (BSC), integrating automated liquidity locking, tiered whitelist verification smart contracts, and Web3 wallet state management.
+                            </p>
+                        </div>
+                        <div class="mt-4 pt-3 border-t border-slate-800/80 flex flex-wrap items-center justify-between gap-2">
+                            <div class="flex flex-wrap gap-1.5 text-[11px] text-slate-300">
+                                <span class="rounded-md bg-slate-800 px-2.5 py-0.5">Solidity</span>
+                                <span class="rounded-md bg-slate-800 px-2.5 py-0.5">BNB Chain</span>
+                                <span class="rounded-md bg-slate-800 px-2.5 py-0.5">Web3.js</span>
+                            </div>
+                            <div class="flex items-center gap-3">
+                                <a href="https://ieeexplore.ieee.org/document/11495701" target="_blank" rel="noreferrer" class="text-xs font-semibold text-emerald-300 hover:text-white transition">
+                                    Read on IEEE ↗
+                                </a>
+                                <button type="button" data-paper="bsc" class="paper-modal-btn text-xs font-semibold text-cyan-300 hover:text-white transition">
+                                    Abstract &amp; Cite →
+                                </button>
+                            </div>
+                        </div>
                     </div>
                 </div>
             </div>
         </section>
 
-        <section id="case-studies" class="reveal max-w-6xl mx-auto px-6 py-16 md:py-24">
-            <div class="mb-10">
-                <p class="section-kicker text-violet-300">Featured work</p>
-                <h3 class="mt-3 text-3xl md:text-4xl font-black text-white">Case studies that blend systems thinking with real community growth.</h3>
+        <!-- CASE STUDIES SECTION -->
+        <section id="case-studies" class="reveal max-w-6xl mx-auto px-4 sm:px-6 py-14 md:py-20">
+            <div class="flex flex-col md:flex-row md:items-end justify-between gap-6 mb-8">
+                <div>
+                    <p class="section-kicker text-violet-300">Featured Work</p>
+                    <h3 class="mt-2 text-2xl sm:text-3xl md:text-4xl font-bold text-white">Case studies blending systems thinking with real growth.</h3>
+                </div>
+
+                <!-- Interactive Filter Tabs -->
+                <div class="flex items-center gap-2 overflow-x-auto no-scrollbar pb-1" role="tablist" aria-label="Filter case studies">
+                    <button type="button" data-filter="all" class="filter-tab active shrink-0 rounded-full border border-slate-700 bg-slate-900/80 px-4 py-2 text-xs font-semibold text-slate-300 transition">
+                        All Work (6)
+                    </button>
+                    <button type="button" data-filter="community" class="filter-tab shrink-0 rounded-full border border-slate-700 bg-slate-900/80 px-4 py-2 text-xs font-semibold text-slate-300 transition hover:text-white">
+                        Community &amp; Creator Hubs
+                    </button>
+                    <button type="button" data-filter="esports" class="filter-tab shrink-0 rounded-full border border-slate-700 bg-slate-900/80 px-4 py-2 text-xs font-semibold text-slate-300 transition hover:text-white">
+                        Esports &amp; Tournaments
+                    </button>
+                    <button type="button" data-filter="ai" class="filter-tab shrink-0 rounded-full border border-slate-700 bg-slate-900/80 px-4 py-2 text-xs font-semibold text-slate-300 transition hover:text-white">
+                        AI &amp; Automation
+                    </button>
+                </div>
             </div>
 
-            <div class="space-y-8">
-                <!-- Case 1: NODWIN Gaming x HoK -->
-                <article class="case-card glass rounded-[28px] p-6 md:p-8">
-                    <div class="flex items-center gap-3 mb-5">
-                        <span class="rounded-full border border-violet-500/30 bg-violet-500/10 px-3 py-1 text-xs font-bold uppercase tracking-[0.2em] text-violet-300">01. Esports Operations</span>
+            <div class="space-y-6 md:space-y-8" id="caseStudiesGrid">
+                <!-- Case 01: Gangstar Mirage City India (37,823 Members) -->
+                <article data-category="community" class="case-card spotlight-card hud-corners glass rounded-[28px] p-6 sm:p-8">
+                    <div class="flex flex-wrap items-center justify-between gap-3 mb-4">
+                        <span class="rounded-full border border-emerald-500/30 bg-emerald-500/10 px-3.5 py-1 text-xs font-bold uppercase tracking-wider text-emerald-300">
+                            01 • Flagship Community Architecture
+                        </span>
+                        <span class="text-sm font-bold text-emerald-300">37,823 Members • IN &amp; PK Creator Ops</span>
                     </div>
-                    <h4 class="text-2xl md:text-3xl font-bold text-white mb-5">NODWIN Gaming × Honor of Kings: EWC Qualifiers</h4>
-                    <div class="grid lg:grid-cols-[1.6fr_0.8fr] gap-8">
-                        <div class="space-y-5 text-slate-300">
+
+                    <h4 class="text-2xl sm:text-3xl font-bold text-white mb-5">Gangstar Mirage City (GST) India &amp; Regional Creator Ecosystem</h4>
+
+                    <div class="grid grid-cols-1 lg:grid-cols-12 gap-6 lg:gap-8 items-start">
+                        <div class="lg:col-span-8 space-y-4 text-sm sm:text-base text-slate-300">
                             <div>
-                                <div class="font-semibold text-white mb-2">Scope</div>
-                                <p>Executed multi-stage competitive pipelines and official Esports World Cup (EWC) qualifier events for Honor of Kings in direct partnership with NODWIN Gaming.</p>
+                                <div class="font-semibold text-white mb-1">Server Architecture &amp; Hyper-Growth (37,823 Members)</div>
+                                <p>
+                                    Architected the official Gangstar Mirage City (GST) India Discord server from the ground up—designing localized category permissions, automated verification gates, and anti-raid AutoMod protocols that scaled cleanly to <strong class="text-white">37,823 community members</strong>.
+                                </p>
                             </div>
                             <div>
-                                <div class="font-semibold text-white mb-2">Highlights</div>
-                                <p>Standardized tournament rulebooks, bracket operations, match coordination, and real-time community moderation for seamless competitive execution.</p>
+                                <div class="font-semibold text-white mb-1">India &amp; Pakistan Creator Hub Operations</div>
+                                <p>
+                                    Built the dedicated <strong class="text-white">GSTM Creator Hubs for India &amp; Pakistan</strong>, onboarding and managing hundreds of regional creators (part of <strong class="text-white">500+ total creators managed</strong> across GST &amp; HoK), running regional invite drives, content campaigns, and daily engagement loops.
+                                </p>
                             </div>
                         </div>
-                        <div class="rounded-2xl border border-slate-700 bg-slate-900/60 p-5 h-fit">
-                            <div class="text-xs uppercase tracking-[0.2em] text-slate-400 mb-4">Role</div>
-                            <div class="text-sm font-semibold text-white mb-4">Tournament & Operations Lead</div>
-                            <div class="text-xs uppercase tracking-[0.2em] text-slate-400 mb-2">Stack</div>
-                            <div class="flex flex-wrap gap-2">
-                                <span class="rounded-full bg-slate-800 px-3 py-1 text-sm text-slate-200">Tournament Ops</span>
-                                <span class="rounded-full bg-slate-800 px-3 py-1 text-sm text-slate-200">Bracket Ops</span>
-                                <span class="rounded-full bg-slate-800 px-3 py-1 text-sm text-slate-200">EWC Qualifiers</span>
+
+                        <div class="lg:col-span-4 rounded-2xl border border-slate-800 bg-slate-900/75 p-5 space-y-4">
+                            <div>
+                                <div class="text-xs uppercase tracking-wider text-slate-400 font-semibold">Role</div>
+                                <div class="text-sm font-semibold text-white mt-0.5">Senior Community &amp; Creator Ops Lead</div>
                             </div>
+                            <div class="grid grid-cols-2 gap-2 pt-2 border-t border-slate-800/80">
+                                <div>
+                                    <div class="text-lg font-bold text-emerald-300 font-display">37,823</div>
+                                    <div class="text-xs text-slate-400">Discord Members</div>
+                                </div>
+                                <div>
+                                    <div class="text-lg font-bold text-cyan-300 font-display">IN &amp; PK</div>
+                                    <div class="text-xs text-slate-400">Creator Ecosystems</div>
+                                </div>
+                            </div>
+                            <div>
+                                <div class="text-xs uppercase tracking-wider text-slate-400 font-semibold mb-2">Stack &amp; Systems</div>
+                                <div class="flex flex-wrap gap-1.5">
+                                    <span class="rounded-full bg-slate-800 px-3 py-1 text-xs text-slate-200">Discord Architecture</span>
+                                    <span class="rounded-full bg-slate-800 px-3 py-1 text-xs text-slate-200">500+ Creator Ops</span>
+                                    <span class="rounded-full bg-slate-800 px-3 py-1 text-xs text-slate-200">Retention Events</span>
+                                </div>
+                            </div>
+                            <a href="https://discord.gg/4Z7Fzdf5Vy" target="_blank" rel="noreferrer" class="inline-flex w-full items-center justify-center rounded-xl border border-emerald-500/40 bg-emerald-500/15 px-4 py-2.5 text-xs font-semibold text-emerald-200 hover:bg-emerald-500/25 hover:text-white transition">
+                                Visit GST India Discord ↗
+                            </a>
                         </div>
                     </div>
                 </article>
 
-                <!-- Case 2: Gangstar Mirage City India -->
-                <article class="case-card glass rounded-[28px] p-6 md:p-8">
-                    <div class="flex items-center gap-3 mb-5">
-                        <span class="rounded-full border border-emerald-500/30 bg-emerald-500/10 px-3 py-1 text-xs font-bold uppercase tracking-[0.2em] text-emerald-300">02. Server Building & Growth</span>
+                <!-- Case 02: Honor of Kings India (9,018 Members + KIC Mumbai LAN + NODWIN EWC) -->
+                <article data-category="esports" class="case-card spotlight-card hud-corners glass rounded-[28px] p-6 sm:p-8">
+                    <div class="flex flex-wrap items-center justify-between gap-3 mb-4">
+                        <span class="rounded-full border border-violet-500/30 bg-violet-500/10 px-3.5 py-1 text-xs font-bold uppercase tracking-wider text-violet-300">
+                            02 • Esports LeagueOps &amp; Official Launch
+                        </span>
+                        <span class="text-sm font-bold text-violet-300">9,018 Members • KIC Mumbai LAN &amp; EWC</span>
                     </div>
-                    <h4 class="text-2xl md:text-3xl font-bold text-white mb-5">Gangstar Mirage City (GST) India Community Engine</h4>
-                    <div class="grid lg:grid-cols-[1.6fr_0.8fr] gap-8">
-                        <div class="space-y-5 text-slate-300">
+
+                    <h4 class="text-2xl sm:text-3xl font-bold text-white mb-5">Honor of Kings India: KIC Mumbai LAN, NODWIN EWC Qualifiers &amp; Community Launch</h4>
+
+                    <div class="grid grid-cols-1 lg:grid-cols-12 gap-6 lg:gap-8 items-start">
+                        <div class="lg:col-span-8 space-y-4 text-sm sm:text-base text-slate-300">
                             <div>
-                                <div class="font-semibold text-white mb-2">Server Creation & Infrastructure</div>
-                                <p>Built and architected the official Discord server for Gangstar Mirage City (GST) India, implementing localized channel structures, custom onboarding flows, and automated role permission systems. Scaled the server to a massive <strong>29,000+ members</strong>.</p>
+                                <div class="font-semibold text-white mb-1">KIC India Qualifier: Sept Online Ops &amp; Oct Sponsored Mumbai LAN</div>
+                                <p>
+                                    Served as <strong class="text-white">LeagueOps Admin</strong> for the Honor of Kings India KIC Qualifier—managing all online qualifier brackets and matchrooms in September, then traveling to <strong class="text-white">Mumbai (sponsored)</strong> in October for the LAN Finals to coordinate directly with the live broadcast production crew and on-site referee team.
+                                </p>
                             </div>
                             <div>
-                                <div class="font-semibold text-white mb-2">Community Events & Engagement</div>
-                                <p>Ran <strong>multiple community events</strong>, regional invite drives, and content campaigns to maximize daily active engagement and long-term retention.</p>
+                                <div class="font-semibold text-white mb-1">Official Discord Launch (9,018 Players) &amp; NODWIN EWC Qualifiers</div>
+                                <p>
+                                    Built the official HoK India Discord server from zero to <strong class="text-white">9,018 active members</strong> and executed official <strong class="text-white">Esports World Cup (EWC)</strong> qualifiers with <strong class="text-white">NODWIN Gaming</strong> plus the Blossom Cup—standardizing rulebooks, brackets, and live dispute resolution.
+                                </p>
                             </div>
                         </div>
-                        <div class="rounded-2xl border border-slate-700 bg-slate-900/60 p-5 h-fit">
-                            <div class="text-xs uppercase tracking-[0.2em] text-slate-400 mb-4">Role</div>
-                            <div class="text-sm font-semibold text-white mb-4">Senior Community Lead & Builder</div>
-                            <div class="text-xs uppercase tracking-[0.2em] text-slate-400 mb-2">Key Stats</div>
-                            <div class="text-2xl font-black text-emerald-300 mb-4">29,000+ Members</div>
-                            <div class="text-xs uppercase tracking-[0.2em] text-slate-400 mb-2">Stack</div>
-                            <div class="flex flex-wrap gap-2">
-                                <span class="rounded-full bg-slate-800 px-3 py-1 text-sm text-slate-200">Discord Architecture</span>
-                                <span class="rounded-full bg-slate-800 px-3 py-1 text-sm text-slate-200">Event Management</span>
-                                <span class="rounded-full bg-slate-800 px-3 py-1 text-sm text-slate-200">Community Growth</span>
+
+                        <div class="lg:col-span-4 rounded-2xl border border-slate-800 bg-slate-900/75 p-5 space-y-4">
+                            <div>
+                                <div class="text-xs uppercase tracking-wider text-slate-400 font-semibold">Role</div>
+                                <div class="text-sm font-semibold text-white mt-0.5">LeagueOps Admin &amp; Senior Community Lead</div>
                             </div>
+                            <div class="grid grid-cols-2 gap-2 pt-2 border-t border-slate-800/80">
+                                <div>
+                                    <div class="text-lg font-bold text-violet-300 font-display">9,018</div>
+                                    <div class="text-xs text-slate-400">HoK India Members</div>
+                                </div>
+                                <div>
+                                    <div class="text-lg font-bold text-amber-300 font-display">Mumbai LAN</div>
+                                    <div class="text-xs text-slate-400">Broadcast &amp; Stage Ops</div>
+                                </div>
+                            </div>
+                            <div>
+                                <div class="text-xs uppercase tracking-wider text-slate-400 font-semibold mb-2">Stack &amp; Systems</div>
+                                <div class="flex flex-wrap gap-1.5">
+                                    <span class="rounded-full bg-slate-800 px-3 py-1 text-xs text-slate-200">KIC Mumbai LAN</span>
+                                    <span class="rounded-full bg-slate-800 px-3 py-1 text-xs text-slate-200">Broadcast Sync</span>
+                                    <span class="rounded-full bg-slate-800 px-3 py-1 text-xs text-slate-200">EWC Qualifiers</span>
+                                </div>
+                            </div>
+                            <a href="https://discord.gg/mENDtYjtvG" target="_blank" rel="noreferrer" class="inline-flex w-full items-center justify-center rounded-xl border border-violet-500/40 bg-violet-500/15 px-4 py-2.5 text-xs font-semibold text-violet-200 hover:bg-violet-500/25 hover:text-white transition">
+                                Visit HoK India Discord ↗
+                            </a>
                         </div>
                     </div>
                 </article>
 
-                <!-- Case 3: Honor of Kings India Community & Esports -->
-                <article class="case-card glass rounded-[28px] p-6 md:p-8">
-                    <div class="flex items-center gap-3 mb-5">
-                        <span class="rounded-full border border-violet-500/30 bg-violet-500/10 px-3 py-1 text-xs font-bold uppercase tracking-[0.2em] text-violet-300">03. Esports & Community Ops</span>
+                <!-- Case 03: Automated Match Ops & Verification Bot (Readable Impact Card instead of raw terminal) -->
+                <article data-category="ai" class="case-card spotlight-card hud-corners glass rounded-[28px] p-6 sm:p-8">
+                    <div class="flex flex-wrap items-center justify-between gap-3 mb-4">
+                        <span class="rounded-full border border-cyan-500/30 bg-cyan-500/10 px-3.5 py-1 text-xs font-bold uppercase tracking-wider text-cyan-300">
+                            03 • Tournament Automation Engineering
+                        </span>
+                        <span class="text-sm font-bold text-cyan-300">15 Min → Under 60 Sec Setup</span>
                     </div>
-                    <h4 class="text-2xl md:text-3xl font-bold text-white mb-5">Official Honor of Kings (HoK) India Launch & Tournaments</h4>
-                    <div class="grid lg:grid-cols-[1.6fr_0.8fr] gap-8">
-                        <div class="space-y-5 text-slate-300">
-                            <div>
-                                <div class="font-semibold text-white mb-2">Execution & Server Architecture</div>
-                                <p>Built the official Honor of Kings India Discord server ground-up—architecting complete channel layouts, role hierarchies, onboarding flows, and automated security triggers. Scaled the community to over <strong>8,600+ active members</strong>.</p>
-                            </div>
-                            <div>
-                                <div class="font-semibold text-white mb-2">Events & Tournament Operations</div>
-                                <p>Organized and executed <strong>multiple community events and competitive esports pipelines</strong> (including the Blossom Cup and official EWC Qualifiers in partnership with NODWIN Gaming), managing rulebooks, bracket operations, live refereeing, and real-time player moderation.</p>
-                            </div>
-                        </div>
-                        <div class="rounded-2xl border border-slate-700 bg-slate-900/60 p-5 h-fit">
-                            <div class="text-xs uppercase tracking-[0.2em] text-slate-400 mb-4">Role</div>
-                            <div class="text-sm font-semibold text-white mb-4">Senior Community & Operations Lead</div>
-                            <div class="text-xs uppercase tracking-[0.2em] text-slate-400 mb-2">Key Stats</div>
-                            <div class="text-2xl font-black text-violet-300 mb-4">8,600+ Members</div>
-                            <div class="text-xs uppercase tracking-[0.2em] text-slate-400 mb-2">Stack</div>
-                            <div class="flex flex-wrap gap-2">
-                                <span class="rounded-full bg-slate-800 px-3 py-1 text-sm text-slate-200">Server Architecture</span>
-                                <span class="rounded-full bg-slate-800 px-3 py-1 text-sm text-slate-200">Community Events</span>
-                                <span class="rounded-full bg-slate-800 px-3 py-1 text-sm text-slate-200">Tournament Ops</span>
-                            </div>
-                        </div>
-                    </div>
-                </article>
 
-                <!-- Case 4: HOK India Creators Hub -->
-                <article class="case-card glass rounded-[28px] p-6 md:p-8">
-                    <div class="flex items-center gap-3 mb-5">
-                        <span class="rounded-full border border-cyan-500/30 bg-cyan-500/10 px-3 py-1 text-xs font-bold uppercase tracking-[0.2em] text-cyan-300">04. Creator Infrastructure</span>
-                    </div>
-                    <h4 class="text-2xl md:text-3xl font-bold text-white mb-5">HOK India Creators Hub</h4>
-                    <div class="grid lg:grid-cols-[1.6fr_0.8fr] gap-8">
-                        <div class="space-y-5 text-slate-300">
-                            <div>
-                                <div class="font-semibold text-white mb-2">Execution</div>
-                                <p>Designed custom Discord architecture tailored for regional content creators, featuring automated role verification, private brand asset drops, and tiered creator access.</p>
-                            </div>
-                            <div>
-                                <div class="font-semibold text-white mb-2">Impact</div>
-                                <p>Streamlined publisher-to-creator communication and established a centralized ecosystem for Indian HoK influencers.</p>
-                            </div>
-                        </div>
-                        <div class="rounded-2xl border border-slate-700 bg-slate-900/60 p-5 h-fit">
-                            <div class="text-xs uppercase tracking-[0.2em] text-slate-400 mb-4">Scope</div>
-                            <div class="text-sm font-semibold text-white mb-4">Discord Architecture & Influencer Ops</div>
-                            <div class="text-xs uppercase tracking-[0.2em] text-slate-400 mb-2">Stack</div>
-                            <div class="flex flex-wrap gap-2">
-                                <span class="rounded-full bg-slate-800 px-3 py-1 text-sm text-slate-200">Discord API</span>
-                                <span class="rounded-full bg-slate-800 px-3 py-1 text-sm text-slate-200">Creator Hub</span>
-                                <span class="rounded-full bg-slate-800 px-3 py-1 text-sm text-slate-200">Influencer Ops</span>
-                            </div>
-                        </div>
-                    </div>
-                </article>
+                    <h4 class="text-2xl sm:text-3xl font-bold text-white mb-5">Automated Match Ops, Lobby &amp; Roster Verification Bot</h4>
 
-                <!-- Case 5: GST Creator Hub for India & Pakistan -->
-                <article class="case-card glass rounded-[28px] p-6 md:p-8">
-                    <div class="flex items-center gap-3 mb-5">
-                        <span class="rounded-full border border-emerald-500/30 bg-emerald-500/10 px-3 py-1 text-xs font-bold uppercase tracking-[0.2em] text-emerald-300">05. Regional Expansion</span>
-                    </div>
-                    <h4 class="text-2xl md:text-3xl font-bold text-white mb-5">GSTM Creator Hub India & Pakistan</h4>
-                    <div class="grid lg:grid-cols-[1.6fr_0.8fr] gap-8">
-                        <div class="space-y-5 text-slate-300">
+                    <div class="grid grid-cols-1 lg:grid-cols-12 gap-6 lg:gap-8 items-start">
+                        <div class="lg:col-span-8 space-y-4 text-sm sm:text-base text-slate-300">
                             <div>
-                                <div class="font-semibold text-white mb-2">Execution</div>
-                                <p>Built a localized Discord ecosystem from scratch, implementing structured category permissions, automated onboarding flows, and engagement loops specifically optimized for regional creators.</p>
+                                <div class="font-semibold text-white mb-1">The Operational Bottleneck</div>
+                                <p>
+                                    High-volume esports brackets suffered from manual referee delays when verifying player IDs, checking rosters, and creating private team voice and text channels between tournament rounds.
+                                </p>
                             </div>
                             <div>
-                                <div class="font-semibold text-white mb-2">Impact</div>
-                                <p>Standardized creator onboarding, enhanced localized retention, and created a scalable hub for regional collaborations.</p>
-                            </div>
-                        </div>
-                        <div class="rounded-2xl border border-slate-700 bg-slate-900/60 p-5 h-fit">
-                            <div class="text-xs uppercase tracking-[0.2em] text-slate-400 mb-4">Scope</div>
-                            <div class="text-sm font-semibold text-white mb-4">Community Architecture & Infrastructure</div>
-                            <div class="text-xs uppercase tracking-[0.2em] text-slate-400 mb-2">Stack</div>
-                            <div class="flex flex-wrap gap-2">
-                                <span class="rounded-full bg-slate-800 px-3 py-1 text-sm text-slate-200">Community Ops</span>
-                                <span class="rounded-full bg-slate-800 px-3 py-1 text-sm text-slate-200">Localization</span>
-                                <span class="rounded-full bg-slate-800 px-3 py-1 text-sm text-slate-200">Engagement</span>
-                            </div>
-                        </div>
-                    </div>
-                </article>
-
-                <!-- Case 6: Smart Academic Assessor (AI Project) -->
-                <article class="case-card glass rounded-[28px] p-6 md:p-8">
-                    <div class="flex items-center gap-3 mb-5">
-                        <span class="rounded-full border border-amber-500/30 bg-amber-500/10 px-3 py-1 text-xs font-bold uppercase tracking-[0.2em] text-amber-300">06. AI Engineering</span>
-                    </div>
-                    <h4 class="text-2xl md:text-3xl font-bold text-white mb-5">Smart Academic Assessor (Gemini API & OCR)</h4>
-                    <div class="grid lg:grid-cols-[1.6fr_0.8fr] gap-8">
-                        <div class="space-y-5 text-slate-300">
-                            <div>
-                                <div class="font-semibold text-white mb-2">Goal</div>
-                                <p>Automate end-to-end evaluation and transcription of handwritten academic answer scripts.</p>
-                            </div>
-                            <div>
-                                <div class="font-semibold text-white mb-2">Execution</div>
-                                <p>Engineered an automated pipeline leveraging Gemini Flash for multimodal OCR and reasoning to digitize handwritten submissions into structured digital scoring outputs.</p>
-                            </div>
-                        </div>
-                        <div class="rounded-2xl border border-slate-700 bg-slate-900/60 p-5 h-fit">
-                            <div class="text-xs uppercase tracking-[0.2em] text-slate-400 mb-4">Stack</div>
-                            <div class="flex flex-wrap gap-2">
-                                <span class="rounded-full bg-slate-800 px-3 py-1 text-sm text-slate-200">Python</span>
-                                <span class="rounded-full bg-slate-800 px-3 py-1 text-sm text-slate-200">Gemini Flash</span>
-                                <span class="rounded-full bg-slate-800 px-3 py-1 text-sm text-slate-200">Multimodal OCR</span>
-                            </div>
-                        </div>
-                    </div>
-                </article>
-
-                <!-- Case 7: Tournament Automation Bot -->
-                <article class="case-card glass rounded-[28px] p-6 md:p-8">
-                    <div class="flex items-center gap-3 mb-5">
-                        <span class="rounded-full border border-violet-500/30 bg-violet-500/10 px-3 py-1 text-xs font-bold uppercase tracking-[0.2em] text-violet-300">07. Tournament Automation</span>
-                    </div>
-                    <h4 class="text-2xl md:text-3xl font-bold text-white mb-5">Automated Match Ops & Verification Bot</h4>
-                    <div class="grid lg:grid-cols-[1.6fr_0.8fr] gap-8">
-                        <div class="space-y-5 text-slate-300">
-                            <div>
-                                <div class="font-semibold text-white mb-2">The Challenge</div>
-                                <p>Eliminate manual operational bottlenecks during high-volume match rounds, ID verification, and player management during competitive esports tournaments.</p>
-                            </div>
-                            <div>
-                                <div class="font-semibold text-white mb-2">The Solution</div>
-                                <ul class="list-disc pl-5 space-y-2">
-                                    <li>Engineered a custom Discord automation bot that dynamically creates match lobbies, private team rooms, and permission gates on the fly.</li>
-                                    <li>Automated player ID and roster verification workflows to streamline pre-match referee checks.</li>
-                                    <li>Reduced pre-game setup times and minimized referee overhead during tournament operations.</li>
+                                <div class="font-semibold text-white mb-1">Automated Discord Solution</div>
+                                <ul class="list-disc pl-5 space-y-1.5 text-slate-300">
+                                    <li>Built a custom Python Discord bot that automatically creates match lobbies, private team voice rooms, and role-gated channels on command.</li>
+                                    <li>Automated pre-match player ID and roster verification checks with anti-cheat validation logs.</li>
+                                    <li>Cut pre-game lobby setup time from <strong class="text-white">15 minutes to under 60 seconds</strong>, drastically reducing referee workload during peak qualifiers.</li>
                                 </ul>
                             </div>
                         </div>
-                        <div class="rounded-2xl border border-slate-700 bg-slate-900/60 p-5 h-fit">
-                            <div class="text-xs uppercase tracking-[0.2em] text-slate-400 mb-4">Role</div>
-                            <div class="text-sm font-semibold text-white mb-4">Automation Engineer & League Ops</div>
-                            <div class="text-xs uppercase tracking-[0.2em] text-slate-400 mb-2">Stack</div>
-                            <div class="flex flex-wrap gap-2">
-                                <span class="rounded-full bg-slate-800 px-3 py-1 text-sm text-slate-200">Python</span>
-                                <span class="rounded-full bg-slate-800 px-3 py-1 text-sm text-slate-200">Discord API</span>
-                                <span class="rounded-full bg-slate-800 px-3 py-1 text-sm text-slate-200">Match Ops</span>
-                                <span class="rounded-full bg-slate-800 px-3 py-1 text-sm text-slate-200">Anti-Cheat Protocols</span>
+
+                        <div class="lg:col-span-4 rounded-2xl border border-slate-800 bg-slate-900/75 p-5 space-y-4">
+                            <div class="flex items-center justify-between border-b border-slate-800 pb-2.5">
+                                <span class="text-xs font-semibold uppercase tracking-wider text-slate-300">Before vs. After Impact</span>
+                                <span class="text-xs font-semibold text-emerald-400">● Verified</span>
+                            </div>
+                            <div class="space-y-2.5 text-xs sm:text-sm">
+                                <div class="flex items-center justify-between rounded-xl bg-slate-950/80 border border-slate-800 px-3 py-2">
+                                    <span class="text-slate-400">Manual Setup</span>
+                                    <span class="font-semibold text-rose-300 line-through">~15 Minutes</span>
+                                </div>
+                                <div class="flex items-center justify-between rounded-xl bg-emerald-500/10 border border-emerald-500/30 px-3 py-2">
+                                    <span class="text-emerald-200">Automated Bot</span>
+                                    <span class="font-bold text-emerald-300">&lt; 60 Seconds</span>
+                                </div>
+                                <div class="text-xs text-slate-300 pt-1">
+                                    ✓ Auto-creates team voice/text rooms &amp; pings referees in &lt;1 second.
+                                </div>
+                            </div>
+                            <div class="pt-1 flex flex-wrap gap-1.5">
+                                <span class="rounded-full bg-slate-800 px-2.5 py-1 text-xs text-slate-200">Python</span>
+                                <span class="rounded-full bg-slate-800 px-2.5 py-1 text-xs text-slate-200">Discord API</span>
+                                <span class="rounded-full bg-slate-800 px-2.5 py-1 text-xs text-slate-200">Anti-Cheat Ops</span>
                             </div>
                         </div>
                     </div>
                 </article>
 
-                <!-- Case 08: Kings Arise India City LAN -->
-                <article class="case-card glass rounded-[28px] p-6 md:p-8">
-                    <div class="flex items-center gap-3 mb-5">
-                        <span class="rounded-full border border-violet-500/30 bg-violet-500/10 px-3 py-1 text-xs font-bold uppercase tracking-[0.2em] text-violet-300">08. Operations & Refereeing</span>
-                    </div>
-                    <h4 class="text-2xl md:text-3xl font-bold text-white mb-5">Kings Arise India City Tour Operations</h4>
-                    <div class="grid lg:grid-cols-[1.6fr_0.8fr] gap-8">
-                        <div class="space-y-5 text-slate-300">
-                            <div>
-                                <div class="font-semibold text-white mb-2">Discord Architecture & Channel Setup</div>
-                                <p>Configured and built dedicated Discord channels, referee command centers, and team coordination hubs tailored specifically for the Kings Arise India City Tour event.</p>
+                <!-- Compact 3-Card Row -->
+                <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+                    <!-- Case 04: Smart Academic Assessor -->
+                    <article data-category="ai" class="case-card spotlight-card hud-corners glass rounded-[26px] p-6 flex flex-col justify-between">
+                        <div>
+                            <div class="flex items-center justify-between gap-2 mb-3">
+                                <span class="rounded-full border border-amber-500/30 bg-amber-500/10 px-3 py-1 text-[11px] font-bold uppercase tracking-wider text-amber-300">04 • AI Engineering</span>
+                                <span class="text-xs font-bold text-amber-300">Gemini Flash OCR</span>
                             </div>
-                            <div>
-                                <div class="font-semibold text-white mb-2">Live Tournament Refereeing & Match Ops</div>
-                                <p>Handled remote referee duties, enforcing tournament rules, managing player disputes, maintaining live match schedules, and ensuring smooth lobby setups throughout the competition.</p>
-                            </div>
+                            <h4 class="text-xl font-bold text-white mb-2.5">Smart Academic Assessor</h4>
+                            <p class="text-sm text-slate-300 leading-relaxed">
+                                Built an automated evaluation pipeline using <strong class="text-white">Gemini Flash multimodal OCR</strong> and structured rubric reasoning to transcribe and score handwritten academic answer scripts with instant structured feedback.
+                            </p>
                         </div>
-                        <div class="rounded-2xl border border-slate-700 bg-slate-900/60 p-5 h-fit">
-                            <div class="text-xs uppercase tracking-[0.2em] text-slate-400 mb-4">Role</div>
-                            <div class="text-sm font-semibold text-white mb-4">Tournament Referee & Operations Admin</div>
-                            <div class="text-xs uppercase tracking-[0.2em] text-slate-400 mb-2">Stack</div>
-                            <div class="flex flex-wrap gap-2">
-                                <span class="rounded-full bg-slate-800 px-3 py-1 text-sm text-slate-200">Match Refereeing</span>
-                                <span class="rounded-full bg-slate-800 px-3 py-1 text-sm text-slate-200">Discord Setup</span>
-                            </div>
+                        <div class="mt-5 pt-4 border-t border-slate-800/80 flex flex-wrap gap-1.5">
+                            <span class="rounded-full bg-slate-800 px-2.5 py-1 text-xs text-slate-200">Python</span>
+                            <span class="rounded-full bg-slate-800 px-2.5 py-1 text-xs text-slate-200">Gemini API</span>
+                            <span class="rounded-full bg-slate-800 px-2.5 py-1 text-xs text-slate-200">Multimodal OCR</span>
                         </div>
-                    </div>
-                </article>
+                    </article>
 
+                    <!-- Case 05: 500+ Creator Ecosystems -->
+                    <article data-category="community" class="case-card spotlight-card hud-corners glass rounded-[26px] p-6 flex flex-col justify-between">
+                        <div>
+                            <div class="flex items-center justify-between gap-2 mb-3">
+                                <span class="rounded-full border border-cyan-500/30 bg-cyan-500/10 px-3 py-1 text-[11px] font-bold uppercase tracking-wider text-cyan-300">05 • Creator Systems</span>
+                                <span class="text-xs font-bold text-cyan-300">500+ Creators Managed</span>
+                            </div>
+                            <h4 class="text-xl font-bold text-white mb-2.5">HoK India &amp; GST (IN/PK) Creator Hubs</h4>
+                            <p class="text-sm text-slate-300 leading-relaxed">
+                                Architected and managed dedicated creator ecosystems for <strong class="text-white">500+ content creators</strong> across <strong class="text-white">Honor of Kings India</strong>, <strong class="text-white">GST India</strong>, and <strong class="text-white">GST Pakistan</strong>—automating tiered verification, campaign brief drops, and deliverable tracking.
+                            </p>
+                        </div>
+                        <div class="mt-5 pt-4 border-t border-slate-800/80 flex flex-wrap gap-1.5">
+                            <span class="rounded-full bg-slate-800 px-2.5 py-1 text-xs text-slate-200">500+ Creators</span>
+                            <span class="rounded-full bg-slate-800 px-2.5 py-1 text-xs text-slate-200">IN &amp; PK Ops</span>
+                            <span class="rounded-full bg-slate-800 px-2.5 py-1 text-xs text-slate-200">Campaign Tracking</span>
+                        </div>
+                    </article>
+
+                    <!-- Case 06: Kings Arise India City Tour -->
+                    <article data-category="esports" class="case-card spotlight-card hud-corners glass rounded-[26px] p-6 flex flex-col justify-between">
+                        <div>
+                            <div class="flex items-center justify-between gap-2 mb-3">
+                                <span class="rounded-full border border-violet-500/30 bg-violet-500/10 px-3 py-1 text-[11px] font-bold uppercase tracking-wider text-violet-300">06 • LAN &amp; City Tour</span>
+                                <span class="text-xs font-bold text-violet-300">Live Refereeing</span>
+                            </div>
+                            <h4 class="text-xl font-bold text-white mb-2.5">Kings Arise India City Tour</h4>
+                            <p class="text-sm text-slate-300 leading-relaxed">
+                                Built dedicated referee command centers and team coordination channels for the multi-city tournament tour, handling live remote refereeing, rulebook enforcement, dispute adjudication, and lobby scheduling.
+                            </p>
+                        </div>
+                        <div class="mt-5 pt-4 border-t border-slate-800/80 flex flex-wrap gap-1.5">
+                            <span class="rounded-full bg-slate-800 px-2.5 py-1 text-xs text-slate-200">Match Refereeing</span>
+                            <span class="rounded-full bg-slate-800 px-2.5 py-1 text-xs text-slate-200">Command Hubs</span>
+                            <span class="rounded-full bg-slate-800 px-2.5 py-1 text-xs text-slate-200">Dispute Ops</span>
+                        </div>
+                    </article>
+                </div>
             </div>
         </section>
 
-        <section id="contact" class="reveal max-w-6xl mx-auto px-6 pb-20 pt-8">
-            <div class="cta-box glass rounded-[32px] p-8 md:p-10">
-                <div class="grid md:grid-cols-[1.3fr_0.7fr] gap-8 items-center">
-                    <div>
-                        <p class="section-kicker text-violet-300">Let’s build</p>
-                        <h3 class="mt-3 text-3xl md:text-4xl font-black text-white">Need a better community system, launch engine, or AI-powered workflow?</h3>
+        <!-- CONTACT CTA SECTION -->
+        <section id="contact" class="reveal max-w-6xl mx-auto px-4 sm:px-6 pb-16 pt-6">
+            <div class="cta-box spotlight-card hud-corners glass rounded-[32px] p-6 sm:p-10">
+                <div class="grid grid-cols-1 lg:grid-cols-12 gap-8 items-center">
+                    <div class="lg:col-span-7">
+                        <p class="section-kicker text-violet-300">Get in Touch</p>
+                        <h3 class="mt-2 text-2xl sm:text-4xl font-bold text-white leading-tight">
+                            Let’s build your next community or tournament together.
+                        </h3>
+                        <p class="mt-3 text-sm sm:text-base text-slate-300 max-w-xl">
+                            Available for full-time Community Lead &amp; LeagueOps roles, LAN tournament administration, creator ecosystem management, and custom Discord or AI automation builds.
+                        </p>
                     </div>
-                    <div class="flex flex-col gap-3 md:items-end">
-                        <a href="mailto:dewanhabib2004@gmail.com" class="inline-flex w-full md:w-auto items-center justify-center rounded-xl bg-gradient-to-r from-violet-600 to-cyan-500 px-6 py-3 text-base font-semibold text-white shadow-lg shadow-violet-900/30 transition hover:brightness-110">Reach Out</a>
-                        <div class="flex gap-3 text-sm text-slate-300">
-                            <a href="https://www.linkedin.com/in/dewan-habib-701a5b320" target="_blank" rel="noreferrer" class="hover:text-violet-300">LinkedIn</a>
-                            <a href="https://github.com/DewanHabib10" target="_blank" rel="noreferrer" class="hover:text-cyan-300">GitHub</a>
+
+                    <div class="lg:col-span-5 flex flex-col sm:flex-row lg:flex-col gap-3 lg:items-end">
+                        <div class="flex flex-col sm:flex-row gap-3 w-full lg:w-auto">
+                            <a href="mailto:dewanhabib2004@gmail.com" class="inline-flex items-center justify-center rounded-xl bg-gradient-to-r from-violet-600 to-cyan-500 px-6 py-3.5 text-sm sm:text-base font-semibold text-white shadow-lg shadow-violet-900/30 transition hover:brightness-110">
+                                Reach Out via Email
+                            </a>
+                            <button id="copyEmailBtn" type="button" class="inline-flex items-center justify-center gap-2 rounded-xl border border-slate-700 bg-slate-900/80 px-5 py-3.5 text-sm font-semibold text-slate-200 transition hover:border-violet-400 hover:text-white">
+                                <span id="copyEmailText">Copy Email</span>
+                            </button>
+                        </div>
+
+                        <div class="flex flex-wrap items-center justify-center sm:justify-start lg:justify-end gap-4 pt-2 text-sm font-medium text-slate-300">
+                            <a href="https://www.linkedin.com/in/dewan-habib-701a5b320" target="_blank" rel="noreferrer" class="hover:text-cyan-300 transition">LinkedIn ↗</a>
+                            <span class="text-slate-700">•</span>
+                            <a href="https://github.com/DewanHabib10" target="_blank" rel="noreferrer" class="hover:text-emerald-300 transition">GitHub ↗</a>
+                            <span class="text-slate-700">•</span>
+                            <a href="https://drive.google.com/file/d/1IK5kgFQMdu9rG-lsqg4vIf26Iizu_sT1/view?usp=sharing" target="_blank" rel="noreferrer" class="hover:text-violet-300 transition">Resume (PDF) ↗</a>
                         </div>
                     </div>
                 </div>
@@ -908,27 +1313,724 @@
         </section>
     </main>
 
-    <footer class="border-t border-slate-800 bg-slate-950/60 py-8">
-        <div class="max-w-6xl mx-auto px-6 flex flex-col md:flex-row items-center justify-between gap-4 text-sm text-slate-400">
-            <p>Designed and built for high-performance community systems.</p>
-            <p>© 2026 Dewan Habib</p>
+    <!-- FLOATING BOTTOM INTERACTIVE CONTROL DOCK -->
+    <div class="fixed bottom-4 left-1/2 -translate-x-1/2 z-40 w-[94%] max-w-lg">
+        <div class="glass rounded-full border border-slate-700/80 bg-slate-950/90 px-3.5 sm:px-4 py-2 shadow-2xl flex items-center justify-between gap-2 text-xs font-medium">
+            <div class="flex items-center gap-2">
+                <span class="h-2 w-2 rounded-full bg-emerald-400 animate-pulse"></span>
+                <button id="toggleConstellationModeBtn" type="button" class="rounded-full bg-violet-500/20 border border-violet-500/40 px-3 py-1 text-violet-200 hover:bg-violet-500/35 hover:text-white transition">
+                    Bg: <span id="constellationModeLabel">Mesh</span>
+                </button>
+            </div>
+
+            <div class="flex items-center gap-1.5 sm:gap-2">
+                <button id="pulseShockwaveBtn" type="button" class="rounded-full bg-cyan-500/15 border border-cyan-500/35 px-3 py-1 text-cyan-200 hover:bg-cyan-500/30 hover:text-white transition">
+                    💥 Pulse
+                </button>
+                <button id="toggleMusicBtn" type="button" class="rounded-full bg-slate-800/90 border border-slate-700 px-3 py-1 text-slate-300 hover:text-white transition">
+                    🎵 Music: <span id="musicStateLabel">Off</span>
+                </button>
+                <button id="toggleSoundBtn" type="button" class="rounded-full bg-slate-800/90 border border-slate-700 px-3 py-1 text-slate-300 hover:text-white transition">
+                    🔊 <span id="soundStateLabel">Off</span>
+                </button>
+                <button id="dockCmdBtn" type="button" class="rounded-full bg-emerald-500/15 border border-emerald-500/35 px-3 py-1 text-emerald-200 hover:bg-emerald-500/30 hover:text-white transition">
+                    ⚡ Menu
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <!-- QUICK NAVIGATION & PREVIEW MODAL -->
+    <div id="cmdPaletteModal" class="fixed inset-0 z-50 hidden items-center justify-center bg-slate-950/80 backdrop-blur-md p-4" role="dialog" aria-modal="true" aria-labelledby="cmdPaletteTitle">
+        <div class="glass hud-corners max-w-lg w-full rounded-3xl p-5 sm:p-6 border border-slate-700/90 shadow-2xl">
+            <div class="flex items-center justify-between border-b border-slate-800 pb-3">
+                <div class="flex items-center gap-2 text-sm font-bold text-white">
+                    <span>⚡ Quick Navigation &amp; Previews</span>
+                </div>
+                <button id="closeCmdPaletteBtn" type="button" aria-label="Close Quick Menu" class="rounded-lg border border-slate-700 bg-slate-900 px-2.5 py-1 text-xs text-slate-300 hover:text-white">
+                    Close
+                </button>
+            </div>
+
+            <h4 id="cmdPaletteTitle" class="sr-only">Quick Menu</h4>
+
+            <div class="mt-4 space-y-2.5 text-xs sm:text-sm">
+                <div class="text-xs font-semibold uppercase tracking-wider text-slate-400 px-1">Interactive Previews</div>
+                <button type="button" data-cmd="sim-kic" class="cmd-item w-full text-left rounded-xl border border-slate-800 bg-slate-900/70 px-4 py-2.5 text-slate-200 hover:border-amber-400/50 hover:text-white flex items-center justify-between transition">
+                    <span>🏆 Preview KIC Mumbai LAN Match Setup</span>
+                    <span class="text-amber-300 font-semibold">Run →</span>
+                </button>
+                <button type="button" data-cmd="sim-gst" class="cmd-item w-full text-left rounded-xl border border-slate-800 bg-slate-900/70 px-4 py-2.5 text-slate-200 hover:border-emerald-400/50 hover:text-white flex items-center justify-between transition">
+                    <span>🚀 Preview 500+ Creator Campaign Drop</span>
+                    <span class="text-emerald-300 font-semibold">Run →</span>
+                </button>
+                <button type="button" data-cmd="copy-email" class="cmd-item w-full text-left rounded-xl border border-slate-800 bg-slate-900/70 px-4 py-2.5 text-slate-200 hover:border-violet-400/50 hover:text-white flex items-center justify-between transition">
+                    <span>📋 Copy Email (dewanhabib2004@gmail.com)</span>
+                    <span class="text-violet-300 font-semibold">Copy →</span>
+                </button>
+
+                <div class="text-xs font-semibold uppercase tracking-wider text-slate-400 px-1 pt-2">Jump to Section</div>
+                <div class="grid grid-cols-2 gap-2">
+                    <a href="#architecture-stack" class="cmd-nav rounded-xl border border-slate-800 bg-slate-900/60 px-3.5 py-2.5 text-slate-200 hover:border-cyan-400 hover:text-white">6-Step Playbook</a>
+                    <a href="#experience" class="cmd-nav rounded-xl border border-slate-800 bg-slate-900/60 px-3.5 py-2.5 text-slate-200 hover:border-cyan-400 hover:text-white">KIC &amp; GST Timeline</a>
+                    <a href="#case-studies" class="cmd-nav rounded-xl border border-slate-800 bg-slate-900/60 px-3.5 py-2.5 text-slate-200 hover:border-cyan-400 hover:text-white">Case Studies</a>
+                    <a href="#publications" class="cmd-nav rounded-xl border border-slate-800 bg-slate-900/60 px-3.5 py-2.5 text-slate-200 hover:border-cyan-400 hover:text-white">Research Papers</a>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Research Abstract & Citation Modal -->
+    <div id="paperModal" class="fixed inset-0 z-50 hidden items-center justify-center bg-slate-950/80 backdrop-blur-md p-4" role="dialog" aria-modal="true" aria-labelledby="paperModalTitle">
+        <div class="glass hud-corners max-w-lg w-full rounded-3xl p-6 sm:p-7 border border-slate-700/80 shadow-2xl relative">
+            <div class="flex items-start justify-between gap-4">
+                <div>
+                    <span id="paperModalVenue" class="rounded-full bg-violet-500/15 border border-violet-500/30 px-3 py-0.5 text-xs font-semibold text-violet-300">Publication</span>
+                    <h4 id="paperModalTitle" class="mt-2 text-xl font-bold text-white">Paper Title</h4>
+                </div>
+                <button id="closePaperModal" type="button" aria-label="Close modal" class="rounded-xl border border-slate-700 bg-slate-900 p-2 text-slate-300 hover:text-white">
+                    ✕
+                </button>
+            </div>
+            <p id="paperModalSummary" class="mt-4 text-sm text-slate-300 leading-relaxed"></p>
+            <div class="mt-4 rounded-2xl bg-slate-950/90 border border-slate-800 p-3.5 text-xs text-slate-300" id="paperModalCite"></div>
+            <div class="mt-5 flex flex-wrap justify-between items-center gap-3">
+                <a id="paperModalLink" href="#" target="_blank" rel="noreferrer" class="rounded-xl border border-emerald-500/40 bg-emerald-500/15 px-4 py-2 text-xs font-semibold text-emerald-200 hover:bg-emerald-500/25 transition">
+                    Open Full Paper ↗
+                </a>
+                <div class="flex gap-2">
+                    <button id="copyCiteBtn" type="button" class="rounded-xl border border-violet-500/40 bg-violet-500/15 px-4 py-2 text-xs font-semibold text-violet-200 hover:bg-violet-500/25 transition">
+                        Copy Citation
+                    </button>
+                    <button id="closePaperModalBottom" type="button" class="rounded-xl bg-slate-800 px-4 py-2 text-xs font-semibold text-white hover:bg-slate-700 transition">
+                        Done
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <footer class="border-t border-slate-800/80 bg-slate-950/80 py-8 relative z-10">
+        <div class="max-w-6xl mx-auto px-4 sm:px-6 flex flex-col sm:flex-row items-center justify-between gap-4 text-xs sm:text-sm text-slate-400 text-center sm:text-left">
+            <p>Designed and built for high-performance community &amp; esports systems.</p>
+            <p>© 2026 Dewan Habib • All rights reserved.</p>
         </div>
     </footer>
 
     <script>
+        // =========================================================================
+        // 0. OPTIONAL SUBTLE UI SOUND EFFECTS
+        // =========================================================================
+        let soundEnabled = false;
+        let audioCtx = null;
+
+        function playTone(freq = 520, duration = 0.045, type = 'sine', gainVal = 0.03) {
+            if (!soundEnabled) return;
+            try {
+                if (!audioCtx) {
+                    const AudioContextClass = window.AudioContext || window.webkitAudioContext;
+                    if (AudioContextClass) audioCtx = new AudioContextClass();
+                }
+                if (!audioCtx) return;
+                if (audioCtx.state === 'suspended') audioCtx.resume();
+                const osc = audioCtx.createOscillator();
+                const gain = audioCtx.createGain();
+                osc.type = type;
+                osc.frequency.setValueAtTime(freq, audioCtx.currentTime);
+                gain.gain.setValueAtTime(gainVal, audioCtx.currentTime);
+                gain.gain.exponentialRampToValueAtTime(0.0001, audioCtx.currentTime + duration);
+                osc.connect(gain);
+                gain.connect(audioCtx.destination);
+                osc.start();
+                osc.stop(audioCtx.currentTime + duration);
+            } catch (e) {}
+        }
+
+        const toggleSoundBtn = document.getElementById('toggleSoundBtn');
+        const soundStateLabel = document.getElementById('soundStateLabel');
+        if (toggleSoundBtn && soundStateLabel) {
+            toggleSoundBtn.addEventListener('click', () => {
+                soundEnabled = !soundEnabled;
+                soundStateLabel.textContent = soundEnabled ? 'On' : 'Off';
+                toggleSoundBtn.classList.toggle('border-emerald-400', soundEnabled);
+                toggleSoundBtn.classList.toggle('text-emerald-300', soundEnabled);
+                if (soundEnabled) playTone(660, 0.07, 'triangle', 0.05);
+            });
+        }
+
+        // Ambient Synth Background Music (Web Audio API — zero external audio dependencies)
+        let musicPlaying = false;
+        let musicTimer = null;
+        let padOsc1 = null;
+        let padOsc2 = null;
+        let masterMusicGain = null;
+
+        const arpNotes = [220.0, 261.63, 329.63, 392.0, 440.0, 392.0, 329.63, 293.66]; // A minor / chill synth
+        let arpStep = 0;
+
+        function startAmbientMusic() {
+            try {
+                if (!audioCtx) {
+                    const AudioContextClass = window.AudioContext || window.webkitAudioContext;
+                    if (AudioContextClass) audioCtx = new AudioContextClass();
+                }
+                if (!audioCtx) return;
+                if (audioCtx.state === 'suspended') audioCtx.resume();
+
+                masterMusicGain = audioCtx.createGain();
+                masterMusicGain.gain.setValueAtTime(0.001, audioCtx.currentTime);
+                masterMusicGain.gain.exponentialRampToValueAtTime(0.14, audioCtx.currentTime + 1.2);
+
+                const filter = audioCtx.createBiquadFilter();
+                filter.type = 'lowpass';
+                filter.frequency.setValueAtTime(750, audioCtx.currentTime);
+
+                masterMusicGain.connect(filter);
+                filter.connect(audioCtx.destination);
+
+                // Warm low drone pad (A2 + E3)
+                padOsc1 = audioCtx.createOscillator();
+                padOsc2 = audioCtx.createOscillator();
+                const padGain = audioCtx.createGain();
+                padGain.gain.setValueAtTime(0.18, audioCtx.currentTime);
+
+                padOsc1.type = 'triangle';
+                padOsc1.frequency.setValueAtTime(110.0, audioCtx.currentTime);
+                padOsc2.type = 'sine';
+                padOsc2.frequency.setValueAtTime(164.81, audioCtx.currentTime);
+
+                padOsc1.connect(padGain);
+                padOsc2.connect(padGain);
+                padGain.connect(masterMusicGain);
+
+                padOsc1.start();
+                padOsc2.start();
+
+                if (musicTimer) clearInterval(musicTimer);
+                musicTimer = setInterval(() => {
+                    if (!musicPlaying || !audioCtx || !masterMusicGain) return;
+                    const now = audioCtx.currentTime;
+                    const osc = audioCtx.createOscillator();
+                    const noteGain = audioCtx.createGain();
+                    osc.type = 'sine';
+                    osc.frequency.setValueAtTime(arpNotes[arpStep % arpNotes.length], now);
+                    arpStep++;
+
+                    noteGain.gain.setValueAtTime(0.001, now);
+                    noteGain.gain.linearRampToValueAtTime(0.16, now + 0.06);
+                    noteGain.gain.exponentialRampToValueAtTime(0.0001, now + 0.75);
+
+                    osc.connect(noteGain);
+                    noteGain.connect(masterMusicGain);
+                    osc.start(now);
+                    osc.stop(now + 0.8);
+                }, 460);
+            } catch (e) {}
+        }
+
+        function stopAmbientMusic() {
+            if (musicTimer) {
+                clearInterval(musicTimer);
+                musicTimer = null;
+            }
+            try {
+                if (padOsc1) { padOsc1.stop(); padOsc1.disconnect(); padOsc1 = null; }
+                if (padOsc2) { padOsc2.stop(); padOsc2.disconnect(); padOsc2 = null; }
+                if (masterMusicGain) { masterMusicGain.disconnect(); masterMusicGain = null; }
+            } catch (e) {}
+        }
+
+        const toggleMusicBtn = document.getElementById('toggleMusicBtn');
+        const musicStateLabel = document.getElementById('musicStateLabel');
+        if (toggleMusicBtn && musicStateLabel) {
+            toggleMusicBtn.addEventListener('click', () => {
+                musicPlaying = !musicPlaying;
+                musicStateLabel.textContent = musicPlaying ? 'On' : 'Off';
+                toggleMusicBtn.classList.toggle('border-violet-400', musicPlaying);
+                toggleMusicBtn.classList.toggle('bg-violet-500/25', musicPlaying);
+                toggleMusicBtn.classList.toggle('text-violet-200', musicPlaying);
+                if (musicPlaying) {
+                    startAmbientMusic();
+                } else {
+                    stopAmbientMusic();
+                }
+            });
+        }
+
+        // =========================================================================
+        // 1. INTERACTIVE CONSTELLATION CANVAS (Clean Visual Nodes, No Text Clutter)
+        // =========================================================================
+        const canvas = document.getElementById('constellationCanvas');
+        const ctx = canvas ? canvas.getContext('2d') : null;
+        let nodes = [];
+        let packets = [];
+        let constellationMode = 0; // 0: Mesh, 1: Swarm, 2: Pulse
+        const modeNames = ['Mesh', 'Swarm', 'Pulse'];
+        let pointer = { x: window.innerWidth / 2, y: window.innerHeight / 2, active: false };
+
+        function initConstellation() {
+            if (!canvas) return;
+            canvas.width = window.innerWidth;
+            canvas.height = window.innerHeight;
+            const count = window.innerWidth < 768 ? 26 : 50;
+            const palette = ['#8b5cf6', '#22d3ee', '#34d399', '#c084fc'];
+
+            nodes = Array.from({ length: count }, (_, i) => ({
+                x: Math.random() * canvas.width,
+                y: Math.random() * canvas.height,
+                vx: (Math.random() - 0.5) * 0.55,
+                vy: (Math.random() - 0.5) * 0.55,
+                r: i % 8 === 0 ? 3 : 1.8,
+                color: palette[i % palette.length]
+            }));
+        }
+
+        function triggerShockwave(cx = window.innerWidth / 2, cy = window.innerHeight / 2) {
+            playTone(360, 0.1, 'triangle', 0.04);
+            nodes.forEach((n) => {
+                const dx = n.x - cx;
+                const dy = n.y - cy;
+                const dist = Math.hypot(dx, dy) || 1;
+                const force = Math.min(12, 380 / dist);
+                n.vx += (dx / dist) * force;
+                n.vy += (dy / dist) * force;
+            });
+            for (let i = 0; i < 8; i++) {
+                if (nodes.length > 2) {
+                    const a = nodes[Math.floor(Math.random() * nodes.length)];
+                    const b = nodes[Math.floor(Math.random() * nodes.length)];
+                    if (a !== b) packets.push({ a, b, p: 0, speed: 0.024 + Math.random() * 0.02 });
+                }
+            }
+        }
+
+        function drawConstellation() {
+            if (!ctx || !canvas) return;
+            ctx.clearRect(0, 0, canvas.width, canvas.height);
+
+            const maxDist = window.innerWidth < 768 ? 115 : 150;
+
+            for (let i = 0; i < nodes.length; i++) {
+                const n = nodes[i];
+
+                if (constellationMode === 1 && pointer.active) {
+                    const dx = pointer.x - n.x;
+                    const dy = pointer.y - n.y;
+                    const dist = Math.hypot(dx, dy) || 1;
+                    if (dist < 280) {
+                        n.vx += (dx / dist) * 0.08;
+                        n.vy += (dy / dist) * 0.08;
+                    }
+                } else if (constellationMode === 2) {
+                    n.vx *= 1.002;
+                    n.vy *= 1.002;
+                }
+
+                const speed = Math.hypot(n.vx, n.vy);
+                const maxSpeed = constellationMode === 2 ? 2.0 : 1.0;
+                if (speed > maxSpeed) {
+                    n.vx = (n.vx / speed) * maxSpeed;
+                    n.vy = (n.vy / speed) * maxSpeed;
+                }
+
+                n.x += n.vx;
+                n.y += n.vy;
+
+                if (n.x < 0 || n.x > canvas.width) n.vx *= -1;
+                if (n.y < 0 || n.y > canvas.height) n.vy *= -1;
+
+                for (let j = i + 1; j < nodes.length; j++) {
+                    const m = nodes[j];
+                    const dx = n.x - m.x;
+                    const dy = n.y - m.y;
+                    const dist = Math.hypot(dx, dy);
+                    if (dist < maxDist) {
+                        const alpha = (1 - dist / maxDist) * 0.18;
+                        ctx.strokeStyle = `rgba(139, 92, 246, ${alpha})`;
+                        ctx.lineWidth = 1;
+                        ctx.beginPath();
+                        ctx.moveTo(n.x, n.y);
+                        ctx.lineTo(m.x, m.y);
+                        ctx.stroke();
+                    }
+                }
+
+                ctx.fillStyle = n.color;
+                ctx.beginPath();
+                ctx.arc(n.x, n.y, n.r, 0, Math.PI * 2);
+                ctx.fill();
+            }
+
+            for (let i = packets.length - 1; i >= 0; i--) {
+                const pkt = packets[i];
+                pkt.p += pkt.speed;
+                if (pkt.p >= 1) {
+                    packets.splice(i, 1);
+                    continue;
+                }
+                const px = pkt.a.x + (pkt.b.x - pkt.a.x) * pkt.p;
+                const py = pkt.a.y + (pkt.b.y - pkt.a.y) * pkt.p;
+                ctx.fillStyle = '#22d3ee';
+                ctx.beginPath();
+                ctx.arc(px, py, 2.5, 0, Math.PI * 2);
+                ctx.fill();
+            }
+
+            requestAnimationFrame(drawConstellation);
+        }
+
+        const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+        if (!prefersReducedMotion) {
+            initConstellation();
+            requestAnimationFrame(drawConstellation);
+            window.addEventListener('resize', initConstellation);
+        }
+
+        const toggleConstellationModeBtn = document.getElementById('toggleConstellationModeBtn');
+        const constellationModeLabel = document.getElementById('constellationModeLabel');
+        if (toggleConstellationModeBtn && constellationModeLabel) {
+            toggleConstellationModeBtn.addEventListener('click', () => {
+                constellationMode = (constellationMode + 1) % modeNames.length;
+                constellationModeLabel.textContent = modeNames[constellationMode];
+                triggerShockwave();
+            });
+        }
+
+        const pulseShockwaveBtn = document.getElementById('pulseShockwaveBtn');
+        if (pulseShockwaveBtn) {
+            pulseShockwaveBtn.addEventListener('click', () => triggerShockwave());
+        }
+
+        // =========================================================================
+        // 2. SPOTLIGHT GLARE, WATERMARK PARALLAX & 3D CARD TILT
+        // =========================================================================
+        const heroWatermark = document.getElementById('heroWatermark');
+        const tiltCommandCard = document.getElementById('tiltCommandCard');
+        const hasFinePointer = window.matchMedia('(hover: hover) and (pointer: fine)').matches;
+
+        document.addEventListener('pointermove', (e) => {
+            pointer.x = e.clientX;
+            pointer.y = e.clientY;
+            pointer.active = true;
+
+            if (heroWatermark) {
+                const pct = Math.max(10, Math.min(95, (e.clientX / window.innerWidth) * 100));
+                heroWatermark.style.setProperty('--scan-x', pct + '%');
+            }
+        });
+
+        document.querySelectorAll('.spotlight-card').forEach((card) => {
+            card.addEventListener('pointermove', (e) => {
+                const rect = card.getBoundingClientRect();
+                card.style.setProperty('--mouse-x', `${e.clientX - rect.left}px`);
+                card.style.setProperty('--mouse-y', `${e.clientY - rect.top}px`);
+            });
+        });
+
+        if (hasFinePointer && !prefersReducedMotion && tiltCommandCard) {
+            tiltCommandCard.addEventListener('pointermove', (e) => {
+                const rect = tiltCommandCard.getBoundingClientRect();
+                const x = (e.clientX - rect.left) / rect.width - 0.5;
+                const y = (e.clientY - rect.top) / rect.height - 0.5;
+                tiltCommandCard.style.transform = `perspective(1000px) rotateY(${x * 6}deg) rotateX(${-y * 6}deg)`;
+            });
+            tiltCommandCard.addEventListener('pointerleave', () => {
+                tiltCommandCard.style.transform = 'perspective(1000px) rotateY(0deg) rotateX(0deg)';
+            });
+        }
+
+        // =========================================================================
+        // 3. INTERACTIVE 6-STEP PLAYBOOK SWITCHER (Plain-English & Easy to Scan)
+        // =========================================================================
+        const archLayers = [
+            {
+                code: 'Stage 01 • First Impressions',
+                metric: '46,841+ Members Onboarded',
+                title: 'Localized Onboarding & Clear Role Structure',
+                desc: 'Designed welcoming, clutter-free onboarding flows and regional channel layouts for Gangstar Mirage City India (37,823 members) and Honor of Kings India (9,018 members)—so new players immediately find teammates, rules, and events.',
+                pills: ['GST India: 37,823 Members', 'HoK India: 9,018 Members', 'Clear Role Permissions'],
+                file: 'How It Works',
+                nodes: ['Player Joins', 'Auto-Roles', 'Active Hub'],
+                logs: [
+                    'Players verify in seconds without getting overwhelmed.',
+                    'Regional & tournament roles unlock automatically.',
+                    'Higher daily engagement and long-term retention.'
+                ]
+            },
+            {
+                code: 'Stage 02 • Community Safety',
+                metric: 'Zero Raid Downtime',
+                title: 'Smart AutoMod & Anti-Raid Protection',
+                desc: 'Set up multi-layered spam filters, link-phishing protection, and automated raid lockdowns across official publisher servers—keeping high-traffic tournament chats welcoming and safe 24/7.',
+                pills: ['Spam & Link Shield', 'Anti-Raid Lockdown', '24/7 Mod Support'],
+                file: 'Protection Flow',
+                nodes: ['New Message', 'Safety Check', 'Clean Chat'],
+                logs: [
+                    'Suspicious links and spam bursts are blocked instantly.',
+                    'Moderators receive clean alerts for quick review.',
+                    'Zero security disruptions across 7+ major launches.'
+                ]
+            },
+            {
+                code: 'Stage 03 • Creator Growth',
+                metric: '500+ Creators Managed',
+                title: 'India & Pakistan Tiered Creator Ecosystems',
+                desc: 'Built and operated dedicated Creator Hubs for 500+ content creators across GST India, GST Pakistan, and HoK India—making it easy for publishers to share briefs, track deliverables, and reward top creators.',
+                pills: ['500+ Creators', 'GST IN & PK Hubs', 'HoK Creators Hub'],
+                file: 'Creator Flywheel',
+                nodes: ['Creator Joins', 'Campaign Brief', 'Content Live'],
+                logs: [
+                    'Tiered verification gives creators instant access to assets.',
+                    'Localized briefs for India & Pakistan boost participation.',
+                    'Streamlined deliverable tracking for publisher teams.'
+                ]
+            },
+            {
+                code: 'Stage 04 • Tournament Speed',
+                metric: '15 Min → Under 60 Sec',
+                title: 'Automated Match Lobbies & Player Verification',
+                desc: 'Built a custom Discord bot that removes manual referee delays by creating private team rooms, checking all 10 player game IDs against rosters, and notifying referees in under a minute.',
+                pills: ['Under 60s Setup', 'Private Team Rooms', 'Player ID Checks'],
+                file: 'Match Automation',
+                nodes: ['Round Starts', 'ID Check', 'Lobby Ready'],
+                logs: [
+                    'Private text and voice rooms open automatically per match.',
+                    'Player UIDs and rosters are verified before kickoff.',
+                    'Cuts pre-match setup from 15 minutes to under 60 seconds.'
+                ]
+            },
+            {
+                code: 'Stage 05 • Live Events & LAN',
+                metric: 'Sponsored Mumbai LAN',
+                title: 'KIC Online Qualifiers, Mumbai LAN & EWC Ops',
+                desc: 'Directed September online qualifiers and traveled to Mumbai (sponsored) in October for the Honor of Kings KIC LAN Finals—working alongside the live broadcast crew and on-site referees for seamless stage matches.',
+                pills: ['KIC Mumbai LAN', 'Broadcast Sync', 'NODWIN × EWC Ops'],
+                file: 'Live Event Sync',
+                nodes: ['Online Quals', 'Mumbai LAN', 'Live Broadcast'],
+                logs: [
+                    'Managed online qualifier brackets & disputes in September.',
+                    'Coordinated stage timing with broadcast crew in Mumbai.',
+                    'Led on-site referees for smooth, on-schedule LAN finals.'
+                ]
+            },
+            {
+                code: 'Stage 06 • AI & Academic Work',
+                metric: '2 Published Papers',
+                title: 'Gemini Flash AI Grading & Quantitative Research',
+                desc: 'Combines practical AI tools (Smart Academic Assessor for grading handwritten answer sheets) with peer-reviewed publications in KSII Transactions (stock forecasting with LSTM & VECM) and IEEE (Binance Smart Chain launchpad).',
+                pills: ['Gemini Flash OCR', 'KSII Transactions', 'IEEE Publication'],
+                file: 'AI & Research',
+                nodes: ['Data Input', 'AI Analysis', 'Verified Output'],
+                logs: [
+                    'Digitizes and scores handwritten academic papers with Gemini.',
+                    'Published hybrid LSTM-VECM forecasting research in KSII.',
+                    'Published decentralized BSC launchpad architecture in IEEE.'
+                ]
+            }
+        ];
+
+        const archButtons = document.querySelectorAll('.arch-layer-btn');
+        const archLayerCode = document.getElementById('archLayerCode');
+        const archLayerMetric = document.getElementById('archLayerMetric');
+        const archLayerTitle = document.getElementById('archLayerTitle');
+        const archLayerDesc = document.getElementById('archLayerDesc');
+        const archLayerPills = document.getElementById('archLayerPills');
+        const archTerminalHeader = document.getElementById('archTerminalHeader');
+        const archTerminalCode = document.getElementById('archTerminalCode');
+        const svgNode1 = document.getElementById('svgNode1');
+        const svgNode2 = document.getElementById('svgNode2');
+        const svgNode3 = document.getElementById('svgNode3');
+
+        archButtons.forEach((btn) => {
+            btn.addEventListener('click', () => {
+                const idx = Number(btn.dataset.layer || 0);
+                const data = archLayers[idx];
+                if (!data) return;
+
+                playTone(580 + idx * 45, 0.05, 'sine', 0.035);
+                archButtons.forEach((b) => b.classList.remove('active'));
+                btn.classList.add('active');
+
+                archLayerCode.textContent = data.code;
+                archLayerMetric.textContent = data.metric;
+                archLayerTitle.textContent = data.title;
+                archLayerDesc.textContent = data.desc;
+                archTerminalHeader.textContent = data.file;
+
+                archLayerPills.innerHTML = data.pills
+                    .map((p) => `<span class="rounded-lg bg-slate-900 border border-slate-700 px-3 py-1 text-xs font-medium text-cyan-300">${p}</span>`)
+                    .join('');
+
+                if (svgNode1 && svgNode2 && svgNode3) {
+                    svgNode1.textContent = data.nodes[0];
+                    svgNode2.textContent = data.nodes[1];
+                    svgNode3.textContent = data.nodes[2];
+                }
+
+                archTerminalCode.innerHTML = data.logs
+                    .map((l, i) => {
+                        const colors = ['text-violet-400', 'text-cyan-400', 'text-emerald-400'];
+                        return `<div class="flex items-start gap-2"><span class="${colors[i % 3]} font-bold">${i + 1}.</span><span>${l}</span></div>`;
+                    })
+                    .join('');
+            });
+        });
+
+        // =========================================================================
+        // 4. HERO WORKFLOW PREVIEW BUTTONS (Readable Plain English)
+        // =========================================================================
+        const liveConsoleLog = document.getElementById('liveConsoleLog');
+        const simStatusBadge = document.getElementById('simStatusBadge');
+        const simMatchBtn = document.getElementById('simMatchBtn');
+        const simCreatorBtn = document.getElementById('simCreatorBtn');
+
+        function runConsoleSimulation(lines, badgeText) {
+            if (!liveConsoleLog || !simStatusBadge) return;
+            triggerShockwave();
+            simStatusBadge.textContent = '● Running...';
+            simStatusBadge.className = 'text-amber-300 font-semibold text-xs';
+            liveConsoleLog.innerHTML = '';
+
+            lines.forEach((line, index) => {
+                setTimeout(() => {
+                    const div = document.createElement('div');
+                    div.innerHTML = line;
+                    liveConsoleLog.appendChild(div);
+                    playTone(480 + index * 90, 0.04, 'triangle', 0.03);
+                    if (index === lines.length - 1) {
+                        simStatusBadge.textContent = badgeText;
+                        simStatusBadge.className = 'text-emerald-400 font-semibold text-xs';
+                    }
+                }, index * 240);
+            });
+        }
+
+        if (simMatchBtn) {
+            simMatchBtn.addEventListener('click', () => {
+                runConsoleSimulation([
+                    '<span class="text-violet-400 font-semibold">1. Lobby Created:</span> Private match channels opened for KIC Finals',
+                    '<span class="text-cyan-400 font-semibold">2. Rosters Verified:</span> All 10 player game IDs checked automatically',
+                    '<span class="text-emerald-400 font-semibold">3. Ready to Play:</span> Broadcast desk &amp; stage referees notified in &lt;1s'
+                ], '● Match Ready');
+            });
+        }
+
+        if (simCreatorBtn) {
+            simCreatorBtn.addEventListener('click', () => {
+                runConsoleSimulation([
+                    '<span class="text-cyan-400 font-semibold">1. Brief Shared:</span> Sent campaign assets to <strong class="text-white">500+ creators</strong>',
+                    '<span class="text-violet-400 font-semibold">2. Hubs Synced:</span> GST India (37,823) &amp; HoK India (9,018) updated',
+                    '<span class="text-emerald-400 font-semibold">3. Live Tracking:</span> India &amp; Pakistan creator submissions active'
+                ], '● 500+ Active');
+            });
+        }
+
+        // =========================================================================
+        // 5. QUICK MENU MODAL
+        // =========================================================================
+        const cmdPaletteModal = document.getElementById('cmdPaletteModal');
+        const openCmdPaletteBtn = document.getElementById('openCmdPaletteBtn');
+        const openCmdPaletteMobileBtn = document.getElementById('openCmdPaletteMobileBtn');
+        const dockCmdBtn = document.getElementById('dockCmdBtn');
+        const closeCmdPaletteBtn = document.getElementById('closeCmdPaletteBtn');
+
+        function toggleCmdPalette(show) {
+            if (!cmdPaletteModal) return;
+            const shouldShow = typeof show === 'boolean' ? show : cmdPaletteModal.classList.contains('hidden');
+            if (shouldShow) {
+                cmdPaletteModal.classList.remove('hidden');
+                cmdPaletteModal.classList.add('flex');
+                playTone(620, 0.05);
+            } else {
+                cmdPaletteModal.classList.add('hidden');
+                cmdPaletteModal.classList.remove('flex');
+            }
+        }
+
+        [openCmdPaletteBtn, openCmdPaletteMobileBtn, dockCmdBtn].forEach((btn) => {
+            if (btn) btn.addEventListener('click', () => toggleCmdPalette(true));
+        });
+        if (closeCmdPaletteBtn) closeCmdPaletteBtn.addEventListener('click', () => toggleCmdPalette(false));
+
+        if (cmdPaletteModal) {
+            cmdPaletteModal.addEventListener('click', (e) => {
+                if (e.target === cmdPaletteModal) toggleCmdPalette(false);
+            });
+        }
+
+        document.addEventListener('keydown', (e) => {
+            if ((e.metaKey || e.ctrlKey) && e.key.toLowerCase() === 'k') {
+                e.preventDefault();
+                toggleCmdPalette();
+            } else if (e.key === 'Escape') {
+                toggleCmdPalette(false);
+                hidePaperModal();
+            }
+        });
+
+        document.querySelectorAll('.cmd-nav').forEach((link) => {
+            link.addEventListener('click', () => toggleCmdPalette(false));
+        });
+
+        document.querySelectorAll('.cmd-item').forEach((item) => {
+            item.addEventListener('click', () => {
+                const cmd = item.dataset.cmd;
+                toggleCmdPalette(false);
+                if (cmd === 'sim-kic' && simMatchBtn) {
+                    document.getElementById('about').scrollIntoView({ behavior: 'smooth' });
+                    simMatchBtn.click();
+                } else if (cmd === 'sim-gst' && simCreatorBtn) {
+                    document.getElementById('about').scrollIntoView({ behavior: 'smooth' });
+                    simCreatorBtn.click();
+                } else if (cmd === 'copy-email' && copyEmailBtn) {
+                    copyEmailBtn.click();
+                }
+            });
+        });
+
+        // =========================================================================
+        // 6. MOBILE NAVIGATION DRAWER, CURSOR, REVEAL, COUNTERS & MODALS
+        // =========================================================================
+        const mobileMenuBtn = document.getElementById('mobileMenuBtn');
+        const mobileMenu = document.getElementById('mobileMenu');
+        const menuIconOpen = document.getElementById('menuIconOpen');
+        const menuIconClose = document.getElementById('menuIconClose');
+
+        function toggleMobileMenu(forceClose = false) {
+            if (!mobileMenu || !mobileMenuBtn) return;
+            const isOpen = !mobileMenu.classList.contains('hidden');
+            const shouldClose = forceClose || isOpen;
+
+            if (shouldClose) {
+                mobileMenu.classList.add('hidden');
+                menuIconOpen.classList.remove('hidden');
+                menuIconClose.classList.add('hidden');
+                mobileMenuBtn.setAttribute('aria-expanded', 'false');
+            } else {
+                mobileMenu.classList.remove('hidden');
+                menuIconOpen.classList.add('hidden');
+                menuIconClose.classList.remove('hidden');
+                mobileMenuBtn.setAttribute('aria-expanded', 'true');
+            }
+        }
+
+        if (mobileMenuBtn) {
+            mobileMenuBtn.addEventListener('click', () => toggleMobileMenu());
+        }
+
+        document.querySelectorAll('.mobile-nav-link').forEach((link) => {
+            link.addEventListener('click', () => toggleMobileMenu(true));
+        });
+
         const cursorDot = document.getElementById('cursorDot');
         const cursorRing = document.getElementById('cursorRing');
 
-        let mouseX = window.innerWidth / 2;
-        let mouseY = window.innerHeight / 2;
-        let ringX = mouseX;
-        let ringY = mouseY;
+        if (hasFinePointer && !prefersReducedMotion && cursorDot && cursorRing) {
+            let mouseX = window.innerWidth / 2;
+            let mouseY = window.innerHeight / 2;
+            let ringX = mouseX;
+            let ringY = mouseY;
 
-        const interactiveSelectors = 'a, button, .feature-card, .case-card, .stat-box, .profile-panel, .cta-box, .chip';
-
-        const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
-
-        if (window.innerWidth > 768 && !prefersReducedMotion) {
             document.addEventListener('pointermove', (event) => {
                 mouseX = event.clientX;
                 mouseY = event.clientY;
@@ -937,29 +2039,19 @@
             });
 
             function animateCursor() {
-                ringX += (mouseX - ringX) * 0.18;
-                ringY += (mouseY - ringY) * 0.18;
+                ringX += (mouseX - ringX) * 0.22;
+                ringY += (mouseY - ringY) * 0.22;
                 cursorRing.style.left = ringX + 'px';
                 cursorRing.style.top = ringY + 'px';
                 requestAnimationFrame(animateCursor);
             }
-            animateCursor();
+            requestAnimationFrame(animateCursor);
 
+            const interactiveSelectors = 'a, button, .feature-card, .case-card, .stat-box, .profile-panel, .cta-box, .chip';
             document.querySelectorAll(interactiveSelectors).forEach((element) => {
-                element.addEventListener('pointerenter', () => {
-                    cursorRing.classList.add('active');
-                    cursorRing.style.transform = 'translate(-50%, -50%) scale(1.08)';
-                });
-
-                element.addEventListener('pointerleave', () => {
-                    cursorRing.classList.remove('active');
-                    cursorRing.style.transform = 'translate(-50%, -50%) scale(1)';
-                });
+                element.addEventListener('pointerenter', () => cursorRing.classList.add('active'));
+                element.addEventListener('pointerleave', () => cursorRing.classList.remove('active'));
             });
-        } else {
-            document.body.classList.remove('pointer-hidden');
-            cursorDot.style.display = 'none';
-            cursorRing.style.display = 'none';
         }
 
         const revealElements = document.querySelectorAll('.reveal');
@@ -970,7 +2062,7 @@
                     revealObserver.unobserve(entry.target);
                 }
             });
-        }, { threshold: 0.15 });
+        }, { threshold: 0.1 });
 
         revealElements.forEach((element) => revealObserver.observe(element));
 
@@ -982,29 +2074,153 @@
                 const el = entry.target;
                 const target = Number(el.dataset.target || 0);
                 const suffix = el.dataset.suffix || '';
-                const duration = 1300;
+                const duration = 1200;
                 let start = null;
+
+                const formatNum = (n) => n >= 1000 ? n.toLocaleString('en-US') : String(n);
 
                 const step = (timestamp) => {
                     if (!start) start = timestamp;
                     const progress = Math.min((timestamp - start) / duration, 1);
                     const eased = 1 - Math.pow(1 - progress, 3);
                     const value = Math.floor(target * eased);
-                    el.textContent = value + suffix;
+                    el.textContent = formatNum(value) + suffix;
 
                     if (progress < 1) {
                         requestAnimationFrame(step);
                     } else {
-                        el.textContent = target + suffix;
+                        el.textContent = formatNum(target) + suffix;
                     }
                 };
 
                 requestAnimationFrame(step);
                 counterObserver.unobserve(el);
             });
-        }, { threshold: 0.5 });
+        }, { threshold: 0.4 });
 
         counters.forEach((counter) => counterObserver.observe(counter));
+
+        const filterTabs = document.querySelectorAll('.filter-tab');
+        const caseCards = document.querySelectorAll('#caseStudiesGrid [data-category]');
+
+        filterTabs.forEach((tab) => {
+            tab.addEventListener('click', () => {
+                playTone(540, 0.04);
+                const selected = tab.dataset.filter || 'all';
+                filterTabs.forEach((t) => t.classList.remove('active'));
+                tab.classList.add('active');
+
+                caseCards.forEach((card) => {
+                    const category = card.dataset.category;
+                    if (selected === 'all' || category === selected) {
+                        card.classList.remove('hidden');
+                    } else {
+                        card.classList.add('hidden');
+                    }
+                });
+            });
+        });
+
+        const copyEmailBtn = document.getElementById('copyEmailBtn');
+        const copyEmailText = document.getElementById('copyEmailText');
+
+        function copyTextSafe(text) {
+            if (navigator.clipboard && navigator.clipboard.writeText) {
+                return navigator.clipboard.writeText(text).catch(() => fallbackCopy(text));
+            }
+            return Promise.resolve(fallbackCopy(text));
+        }
+
+        function fallbackCopy(text) {
+            const ta = document.createElement('textarea');
+            ta.value = text;
+            ta.style.position = 'fixed';
+            ta.style.opacity = '0';
+            document.body.appendChild(ta);
+            ta.select();
+            try { document.execCommand('copy'); } catch (e) {}
+            document.body.removeChild(ta);
+        }
+
+        if (copyEmailBtn && copyEmailText) {
+            copyEmailBtn.addEventListener('click', () => {
+                copyTextSafe('dewanhabib2004@gmail.com').then(() => {
+                    playTone(720, 0.06);
+                    copyEmailText.textContent = '✓ Copied dewanhabib2004@gmail.com';
+                    copyEmailBtn.classList.add('border-emerald-400', 'text-emerald-300');
+                    setTimeout(() => {
+                        copyEmailText.textContent = 'Copy Email';
+                        copyEmailBtn.classList.remove('border-emerald-400', 'text-emerald-300');
+                    }, 2400);
+                });
+            });
+        }
+
+        const papers = {
+            lstm: {
+                venue: 'KSII Transactions on Internet and Information Systems • April 2026',
+                title: 'Building a Robust Stock Price Prediction Using LSTM and VECM',
+                summary: 'This study introduces a hybrid econometric and deep learning pipeline that pairs Vector Error Correction Models (VECM)—capturing long-run equilibrium relationships across cointegrated market indices—with Long Short-Term Memory (LSTM) networks trained on short-term residual volatility.',
+                cite: 'Habib, D. et al. (2026). "Building a Robust Stock Price Prediction Using LSTM and VECM." KSII Transactions on Internet and Information Systems. https://itiis.org/digital-library/106258',
+                url: 'https://itiis.org/digital-library/106258'
+            },
+            bsc: {
+                venue: 'IEEE Conference Publication • November 2025',
+                title: 'A Decentralized Crypto Launchpad on Binance Smart Chain',
+                summary: 'Presents a decentralized initial dex offering (IDO) launchpad built on BNB Smart Chain (BSC). Implements Solidity smart contracts for automated tier-based allocation, liquidity pool locking, and low-latency Web3 wallet verification.',
+                cite: 'Habib, D. et al. (2025). "A Decentralized Crypto Launchpad on Binance Smart Chain." IEEE. https://ieeexplore.ieee.org/document/11495701',
+                url: 'https://ieeexplore.ieee.org/document/11495701'
+            }
+        };
+
+        const paperModal = document.getElementById('paperModal');
+        const paperModalVenue = document.getElementById('paperModalVenue');
+        const paperModalTitle = document.getElementById('paperModalTitle');
+        const paperModalSummary = document.getElementById('paperModalSummary');
+        const paperModalCite = document.getElementById('paperModalCite');
+        const paperModalLink = document.getElementById('paperModalLink');
+        const closePaperModal = document.getElementById('closePaperModal');
+        const closePaperModalBottom = document.getElementById('closePaperModalBottom');
+        const copyCiteBtn = document.getElementById('copyCiteBtn');
+
+        function hidePaperModal() {
+            if (!paperModal) return;
+            paperModal.classList.add('hidden');
+            paperModal.classList.remove('flex');
+        }
+
+        document.querySelectorAll('.paper-modal-btn').forEach((btn) => {
+            btn.addEventListener('click', () => {
+                const key = btn.dataset.paper;
+                const data = papers[key];
+                if (!data || !paperModal) return;
+                playTone(600, 0.05);
+                paperModalVenue.textContent = data.venue;
+                paperModalTitle.textContent = data.title;
+                paperModalSummary.textContent = data.summary;
+                paperModalCite.textContent = data.cite;
+                if (paperModalLink && data.url) paperModalLink.href = data.url;
+                copyCiteBtn.textContent = 'Copy Citation';
+                paperModal.classList.remove('hidden');
+                paperModal.classList.add('flex');
+            });
+        });
+
+        if (closePaperModal) closePaperModal.addEventListener('click', hidePaperModal);
+        if (closePaperModalBottom) closePaperModalBottom.addEventListener('click', hidePaperModal);
+        if (paperModal) {
+            paperModal.addEventListener('click', (e) => {
+                if (e.target === paperModal) hidePaperModal();
+            });
+        }
+        if (copyCiteBtn && paperModalCite) {
+            copyCiteBtn.addEventListener('click', () => {
+                copyTextSafe(paperModalCite.textContent || '').then(() => {
+                    playTone(760, 0.06);
+                    copyCiteBtn.textContent = '✓ Citation Copied';
+                });
+            });
+        }
     </script>
 </body>
 </html>
